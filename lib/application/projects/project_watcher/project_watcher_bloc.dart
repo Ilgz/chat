@@ -21,7 +21,6 @@ class ProjectWatcherBloc
       : super(ProjectWatcherState.initial()) {
     on<ProjectWatcherEvent>((event, emit) {
       event.map(startWatchAll: (e) {
-        print("startWatchAll");
         emit(ProjectWatcherState.loadInProgress());
         iProjectRepository.watchAllProjects().listen((projects) {
           add(ProjectWatcherEvent.receiveProjects(projects));
