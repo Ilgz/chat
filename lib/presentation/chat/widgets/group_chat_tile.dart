@@ -3,9 +3,9 @@ import 'package:chat/domain/projects/project.dart';
 import 'package:chat/presentation/core/routes/router.dart';
 import 'package:intl/intl.dart';
 
-class ChatCard extends StatelessWidget {
+class GroupChatCard extends StatelessWidget {
 
-  const ChatCard({Key? key, required this.project}) : super(key: key);
+  const GroupChatCard({Key? key, required this.project}) : super(key: key);
   final Project project;
   @override
   Widget build(BuildContext context) {

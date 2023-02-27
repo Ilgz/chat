@@ -76,8 +76,10 @@ extension GetItInjectableX on _i1.GetIt {
           gh<_i4.FirebaseAuth>(),
           gh<_i5.FirebaseFirestore>(),
         ));
-    gh.lazySingleton<_i9.IChatFacade>(
-        () => _i10.ChatFacade(gh<_i5.FirebaseFirestore>()));
+    gh.lazySingleton<_i9.IChatFacade>(() => _i10.ChatFacade(
+          gh<_i5.FirebaseFirestore>(),
+          gh<_i7.IAuthFacade>(),
+        ));
     gh.lazySingleton<_i11.IProjectRepository>(() => _i12.ProjectRepository(
           gh<_i5.FirebaseFirestore>(),
           gh<_i7.IAuthFacade>(),

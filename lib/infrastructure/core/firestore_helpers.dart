@@ -11,7 +11,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 extension FireStoreX on FirebaseFirestore{
   CollectionReference get projectCollection => collection("projects");
   CollectionReference get userCollection => collection("users");
-  CollectionReference get chatCollection => collection("chat");
+  CollectionReference get chatCollection => collection("chats");
   DocumentReference get dummyRef => doc("test/test");
 }
 

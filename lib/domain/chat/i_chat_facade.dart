@@ -6,6 +6,6 @@ import 'package:chat/domain/projects/project_failure.dart';
 
 abstract class IChatFacade{
   Future<Either<FirebaseFirestoreFailure, Unit>> sendMessageForProject(Project project,MessageChat messageChat);
-  Stream<Either<FirebaseFirestoreFailure,List<Chat>>> getChatRooms();
+  Stream<Either<FirebaseFirestoreFailure,List<Chat>>> watchChatRooms();
 
 }

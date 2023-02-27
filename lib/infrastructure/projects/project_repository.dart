@@ -16,10 +16,10 @@ import 'package:chat/infrastructure/projects/project_dto.dart';
 import 'package:chat/infrastructure/users/user_dto.dart';
 @LazySingleton(as: IProjectRepository)
 class ProjectRepository implements IProjectRepository {
-  final FirebaseFirestore firebaseFirestore;
+  final FirebaseFirestore _firebaseFirestore;
   final IAuthFacade _authFacade;
   final bool isTest;
-  ProjectRepository(this.firebaseFirestore, this._authFacade,{this.isTest=false});
+  ProjectRepository(this._firebaseFirestore, this._authFacade,{this.isTest=false});
 
   @override
   Stream<Either<FirebaseFirestoreFailure, List<Project>>> watchAllProjects() async* {
@@ -27,9 +27,9 @@ class ProjectRepository implements IProjectRepository {
     final userId =
         "users/${userOption.getOrElse(() => throw NotAuthenticatedError())}";
     Stream<Either<FirebaseFirestoreFailure, List<ProjectDto>>> dtoStream =
-    firebaseFirestore.projectCollection
+    _firebaseFirestore.projectCollection
         .where("members",
-        arrayContains: firebaseFirestore.doc(userId))
+        arrayContains: _firebaseFirestore.doc(userId))
         .snapshots()
         .map((projects) => right<FirebaseFirestoreFailure, List<ProjectDto>>(
         projects.docs.map((project) {
@@ -122,17 +122,17 @@ class ProjectRepository implements IProjectRepository {
           .getOrElse(() => throw NotAuthenticatedError())
           ;
       project = project.copyWith(
-          owner: User.empty(firebaseFirestore: firebaseFirestore)
-              .copyWith(reference: firebaseFirestore.doc("users/$userId")));
+          owner: User.empty(firebaseFirestore: _firebaseFirestore)
+              .copyWith(reference: _firebaseFirestore.doc("users/$userId")));
       project = project.copyWith(members: [
-        User.empty(firebaseFirestore: firebaseFirestore)
-            .copyWith(reference: firebaseFirestore.doc("users/$userId"))
+        User.empty(firebaseFirestore: _firebaseFirestore)
+            .copyWith(reference: _firebaseFirestore.doc("users/$userId"))
       ]);
       final projectDto=ProjectDto.fromDomain(project).copyWith(reference: null).toJson();
       if(documentId==null){
-        await firebaseFirestore.projectCollection.add(projectDto);
+        await _firebaseFirestore.projectCollection.add(projectDto);
       }else{
-        await firebaseFirestore.projectCollection.doc(documentId).set(projectDto);
+        await _firebaseFirestore.projectCollection.doc(documentId).set(projectDto);
       }
 
       return right(unit);
@@ -309,7 +309,7 @@ class ProjectRepository implements IProjectRepository {
       final userId = "users/${userOption
           .getOrElse(() => throw NotAuthenticatedError())
           }";
-      final data = (await firebaseFirestore
+      final data = (await _firebaseFirestore
           .projectCollection
           .where("members", arrayContains: user.reference)
           .where("isPublic", isEqualTo: true)
@@ -396,7 +396,7 @@ class ProjectRepository implements IProjectRepository {
       }
       await project.reference.update({
         "members": FieldValue.arrayRemove([
-          firebaseFirestore.doc("users/$userId")
+          _firebaseFirestore.doc("users/$userId")
         ])
       });
       return right(unit);

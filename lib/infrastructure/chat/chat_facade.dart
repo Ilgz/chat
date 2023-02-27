@@ -1,4 +1,8 @@
 import 'package:chat/domain/chat/chat.dart';
+import 'package:chat/domain/users/user.dart';
+import 'package:chat/infrastructure/chat/chat_dto.dart';
+import 'package:chat/infrastructure/core/firestore_helpers.dart';
+import 'package:chat/infrastructure/users/user_dto.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
@@ -13,7 +17,8 @@ import 'package:chat/injection.dart';
 @LazySingleton(as: IChatFacade)
 class ChatFacade implements IChatFacade{
   final FirebaseFirestore _firebaseFirestore;
-  ChatFacade(this._firebaseFirestore);
+  final IAuthFacade _authFacade;
+  ChatFacade(this._firebaseFirestore,this._authFacade);
   @override
   Future<Either<FirebaseFirestoreFailure, Unit>> sendMessageForProject(Project project, MessageChat messageChat) async{
     try {
@@ -34,8 +39,65 @@ class ChatFacade implements IChatFacade{
   }
 
   @override
-  Stream<Either<FirebaseFirestoreFailure, List<Chat>>> getChatRooms() {
-    throw Error();
+  Stream<Either<FirebaseFirestoreFailure, List<Chat>>> watchChatRooms() async*{
+    final userOption =  _authFacade.getSignedInUserId();
+    final userId =
+        "users/${userOption.getOrElse(() => throw NotAuthenticatedError())}";
+    Stream<Either<FirebaseFirestoreFailure, List<ChatDto>>> dtoStream =
+    _firebaseFirestore.chatCollection
+        .where("members",
+        arrayContains: _firebaseFirestore.doc(userId))
+        .snapshots()
+        .map((projects) => right<FirebaseFirestoreFailure, List<ChatDto>>(
+        projects.docs.map((querySnapshot) {
+          return ChatDto.fromFirestore(querySnapshot);
+        }).toList()));
+    await for (final dtoProject in dtoStream) {
+      final a=await Future.wait((await Future.wait(dtoProject
+          .getOrElse(() => [])
+          .map((chatDto) async => await toDomain(chatDto))))
+          .map((chat)  async => chat.copyWith(messages: await getUsersForMessages(chat.copyWith(messages: setMessagesInColumn(chat)))))
+          .toList());
+      yield right(a);
+    }
+  }
+  List<MessageChat> setMessagesInColumn(Chat chat)
+  {
+    List<MessageChat> list=[];
+    final messages=chat.messages;
+    final userOption = _authFacade.getSignedInUserId();
+    final uid = userOption.getOrElse(() => throw NotAuthenticatedError());
+    if(messages.isNotEmpty){
+      for(int i=0;i<messages.length-1;i++){
+        list.add(messages[i].copyWith(isLastMessageInColumn:messages[i+1].sentFrom!=messages[i].sentFrom));
+      }
+      list.add(messages.last);
+      list=list.map((message) => message.copyWith(sentByMe: message.sentFrom.reference.id==uid)).toList();
+    }
+    return list;
+  }
+  Future<Chat> toDomain(ChatDto chatDto) async {
+    List<User> memberList = await getUsersFromReference(chatDto.members);
+    final chat = chatDto.toDomain(memberList);
+    return chat;
+  }
+  Future<List<MessageChat>> getUsersForMessages(Chat chat)async{
+    if(chat.messages.isEmpty){return [];}
+    //print(project.messages);
+    try{
+      final messages=await Future.wait(chat.messages.map((message)async =>  message.copyWith(sentFrom: UserDto.fromFirestore(await message.sentFrom.reference.get()).toDomain())).toList());
+      return messages;
+    }catch(e){
+      return [];
+    }
+  }
+
+  Future<List<User>> getUsersFromReference(
+      List<DocumentReference> userReferences) async {
+    return Future.wait(userReferences.map((userRef) async {
+      final user = UserDto.fromFirestore((await userRef.get())).toDomain();
+      return user;
+    }).toList());
   }
 
 

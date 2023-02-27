@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:chat/application/projects/project_watcher/project_watcher_bloc.dart';
 import 'package:chat/domain/projects/project.dart';
-import 'package:chat/presentation/chat/widgets/chat_card.dart';
+import 'package:chat/presentation/chat/widgets/group_chat_tile.dart';
 import 'package:chat/presentation/core/widgets/custom_scaffold.dart';
 import 'package:chat/presentation/core/widgets/no_result_card.dart';
 
@@ -38,7 +38,7 @@ Widget build(BuildContext context) {
                                           child: Text("Error"),
                                         );
                                       } else {
-                                        return ChatCard(project: project);
+                                        return GroupChatCard(project: project);
                                       }
                                     });
                               });
