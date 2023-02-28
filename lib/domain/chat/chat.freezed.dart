@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Chat {
-  List<User> get members => throw _privateConstructorUsedError;
+  User get chattingWith => throw _privateConstructorUsedError;
   Timestamp get date => throw _privateConstructorUsedError;
   List<MessageChat> get messages => throw _privateConstructorUsedError;
   DocumentReference<Object?> get documentReference =>
@@ -32,10 +32,12 @@ abstract class $ChatCopyWith<$Res> {
       _$ChatCopyWithImpl<$Res, Chat>;
   @useResult
   $Res call(
-      {List<User> members,
+      {User chattingWith,
       Timestamp date,
       List<MessageChat> messages,
       DocumentReference<Object?> documentReference});
+
+  $UserCopyWith<$Res> get chattingWith;
 }
 
 /// @nodoc
@@ -51,16 +53,16 @@ class _$ChatCopyWithImpl<$Res, $Val extends Chat>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? members = null,
+    Object? chattingWith = null,
     Object? date = null,
     Object? messages = null,
     Object? documentReference = null,
   }) {
     return _then(_value.copyWith(
-      members: null == members
-          ? _value.members
-          : members // ignore: cast_nullable_to_non_nullable
-              as List<User>,
+      chattingWith: null == chattingWith
+          ? _value.chattingWith
+          : chattingWith // ignore: cast_nullable_to_non_nullable
+              as User,
       date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -75,6 +77,14 @@ class _$ChatCopyWithImpl<$Res, $Val extends Chat>
               as DocumentReference<Object?>,
     ) as $Val);
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get chattingWith {
+    return $UserCopyWith<$Res>(_value.chattingWith, (value) {
+      return _then(_value.copyWith(chattingWith: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -84,10 +94,13 @@ abstract class _$$_ChatCopyWith<$Res> implements $ChatCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {List<User> members,
+      {User chattingWith,
       Timestamp date,
       List<MessageChat> messages,
       DocumentReference<Object?> documentReference});
+
+  @override
+  $UserCopyWith<$Res> get chattingWith;
 }
 
 /// @nodoc
@@ -99,16 +112,16 @@ class __$$_ChatCopyWithImpl<$Res> extends _$ChatCopyWithImpl<$Res, _$_Chat>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? members = null,
+    Object? chattingWith = null,
     Object? date = null,
     Object? messages = null,
     Object? documentReference = null,
   }) {
     return _then(_$_Chat(
-      members: null == members
-          ? _value._members
-          : members // ignore: cast_nullable_to_non_nullable
-              as List<User>,
+      chattingWith: null == chattingWith
+          ? _value.chattingWith
+          : chattingWith // ignore: cast_nullable_to_non_nullable
+              as User,
       date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -129,22 +142,15 @@ class __$$_ChatCopyWithImpl<$Res> extends _$ChatCopyWithImpl<$Res, _$_Chat>
 
 class _$_Chat extends _Chat {
   _$_Chat(
-      {required final List<User> members,
+      {required this.chattingWith,
       required this.date,
       required final List<MessageChat> messages,
       required this.documentReference})
-      : _members = members,
-        _messages = messages,
+      : _messages = messages,
         super._();
 
-  final List<User> _members;
   @override
-  List<User> get members {
-    if (_members is EqualUnmodifiableListView) return _members;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_members);
-  }
-
+  final User chattingWith;
   @override
   final Timestamp date;
   final List<MessageChat> _messages;
@@ -160,7 +166,7 @@ class _$_Chat extends _Chat {
 
   @override
   String toString() {
-    return 'Chat(members: $members, date: $date, messages: $messages, documentReference: $documentReference)';
+    return 'Chat(chattingWith: $chattingWith, date: $date, messages: $messages, documentReference: $documentReference)';
   }
 
   @override
@@ -168,7 +174,8 @@ class _$_Chat extends _Chat {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Chat &&
-            const DeepCollectionEquality().equals(other._members, _members) &&
+            (identical(other.chattingWith, chattingWith) ||
+                other.chattingWith == chattingWith) &&
             (identical(other.date, date) || other.date == date) &&
             const DeepCollectionEquality().equals(other._messages, _messages) &&
             (identical(other.documentReference, documentReference) ||
@@ -176,12 +183,8 @@ class _$_Chat extends _Chat {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_members),
-      date,
-      const DeepCollectionEquality().hash(_messages),
-      documentReference);
+  int get hashCode => Object.hash(runtimeType, chattingWith, date,
+      const DeepCollectionEquality().hash(_messages), documentReference);
 
   @JsonKey(ignore: true)
   @override
@@ -192,14 +195,14 @@ class _$_Chat extends _Chat {
 
 abstract class _Chat extends Chat {
   factory _Chat(
-      {required final List<User> members,
+      {required final User chattingWith,
       required final Timestamp date,
       required final List<MessageChat> messages,
       required final DocumentReference<Object?> documentReference}) = _$_Chat;
   _Chat._() : super._();
 
   @override
-  List<User> get members;
+  User get chattingWith;
   @override
   Timestamp get date;
   @override

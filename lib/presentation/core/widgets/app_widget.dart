@@ -1,3 +1,4 @@
+import 'package:chat/application/chat/chat_watcher_bloc/chat_watcher_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:chat/application/auth/auth_bloc.dart';
@@ -20,7 +21,10 @@ class AppWidget extends StatelessWidget {
         providers: [
           BlocProvider(create: (context) => getIt<ThemeSwitcherCubit>()..initializeTheme()),
           BlocProvider(
-            create: (context) => getIt<ProjectWatcherBloc>()..add(ProjectWatcherEvent.startWatchAll()),
+            create: (context) => getIt<ProjectWatcherBloc>()..add(const ProjectWatcherEvent.startWatchAll()),
+          ),
+          BlocProvider(
+            create: (context) => getIt<ChatWatcherCubit>()..startWatchAll(),
           ),
           BlocProvider(
             create: (context) => getIt<UserWatcherBloc>(),

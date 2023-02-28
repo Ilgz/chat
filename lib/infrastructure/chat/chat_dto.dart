@@ -1,3 +1,4 @@
+import 'package:chat/application/auth/auth_bloc.dart';
 import 'package:chat/domain/chat/chat.dart';
 import 'package:chat/infrastructure/chat/message_chat_dto.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -19,17 +20,20 @@ abstract class ChatDto implements  _$ChatDto {
         required Timestamp date,
         required List<MessageChatDto> messages,
         @DocumentReferenceConverter()
-        required DocumentReference documentReference,
+        @JsonKey(ignore: true)
+        DocumentReference? documentReference,
       }) = _ChatDto;
   factory ChatDto.fromJson(Map<String, dynamic> json) =>
       _$ChatDtoFromJson(json);
-  factory ChatDto.fromDomain(Chat  chat) => ChatDto(members: chat.members.map((member) => member.reference).toList(),      date: chat.date,messages:chat.messages.map((message) => MessageChatDto.fromDomain(message)).toList(),documentReference: chat.documentReference
+  factory ChatDto.fromDomain(Chat  chat,List<DocumentReference> members) => ChatDto(members: members,      date: chat.date,messages:chat.messages.map((message) => MessageChatDto.fromDomain(message)).toList(),documentReference: chat.documentReference
   );
   factory ChatDto.fromFirestore(DocumentSnapshot doc) {
-    return ChatDto.fromJson(doc.data()! as Map<String, dynamic>);
+    return ChatDto.fromJson(doc.data()! as Map<String, dynamic>).copyWith(
+      documentReference: doc.reference,
+    );
   }
-  Chat toDomain(List<User> members) {
-    return Chat(members: members, date: date, messages: messages.map((messageDto) => messageDto.toDomain()).toList(), documentReference: documentReference);
+  Chat toDomain(User chattingWith) {
+    return Chat(chattingWith: chattingWith, date: date, messages: messages.map((messageDto) => messageDto.toDomain()).toList(), documentReference: documentReference!);
   }
 }
 

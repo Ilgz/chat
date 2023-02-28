@@ -1,3 +1,5 @@
+import 'package:chat/domain/chat/chat.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:chat/domain/projects/project.dart';
@@ -39,7 +41,7 @@ final goRouter =
               parentNavigatorKey: _rootNavigatorKey,
               path: PageRoutes.chatPage,
               pageBuilder: (context, state) =>  NoTransitionPage(
-                child: ChatPage(initialProject: state.extra as Project,),
+                child: ChatPage(projectOrChat: state.extra as Either<Project,Chat>,),
               ),
             ),
           ]
@@ -75,7 +77,7 @@ void goToSignInPage(BuildContext context) =>
     context.pushReplacement(PageRoutes.signInPage,);
 void goToChatsOverviewPage(BuildContext context) =>
     context.pushReplacement(PageRoutes.chatsOverviewPage);
-void goToChatPage(BuildContext context,Project project) =>
-    context.push("${PageRoutes.chatsOverviewPage}/${PageRoutes.chatPage}",extra: project);
+void goToChatPage(BuildContext context,Either<Project,Chat> projectOrChat) =>
+    context.push("${PageRoutes.chatsOverviewPage}/${PageRoutes.chatPage}",extra: projectOrChat);
 void goToSignUpPage(BuildContext context) =>
     context.pushReplacement(PageRoutes.signUpPage);

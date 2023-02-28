@@ -27,7 +27,8 @@ mixin _$ChatDto {
   Timestamp get date => throw _privateConstructorUsedError;
   List<MessageChatDto> get messages => throw _privateConstructorUsedError;
   @DocumentReferenceConverter()
-  DocumentReference<Object?> get documentReference =>
+  @JsonKey(ignore: true)
+  DocumentReference<Object?>? get documentReference =>
       throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -47,7 +48,8 @@ abstract class $ChatDtoCopyWith<$Res> {
           Timestamp date,
       List<MessageChatDto> messages,
       @DocumentReferenceConverter()
-          DocumentReference<Object?> documentReference});
+      @JsonKey(ignore: true)
+          DocumentReference<Object?>? documentReference});
 }
 
 /// @nodoc
@@ -66,7 +68,7 @@ class _$ChatDtoCopyWithImpl<$Res, $Val extends ChatDto>
     Object? members = null,
     Object? date = null,
     Object? messages = null,
-    Object? documentReference = null,
+    Object? documentReference = freezed,
   }) {
     return _then(_value.copyWith(
       members: null == members
@@ -81,10 +83,10 @@ class _$ChatDtoCopyWithImpl<$Res, $Val extends ChatDto>
           ? _value.messages
           : messages // ignore: cast_nullable_to_non_nullable
               as List<MessageChatDto>,
-      documentReference: null == documentReference
+      documentReference: freezed == documentReference
           ? _value.documentReference
           : documentReference // ignore: cast_nullable_to_non_nullable
-              as DocumentReference<Object?>,
+              as DocumentReference<Object?>?,
     ) as $Val);
   }
 }
@@ -103,7 +105,8 @@ abstract class _$$_ChatDtoCopyWith<$Res> implements $ChatDtoCopyWith<$Res> {
           Timestamp date,
       List<MessageChatDto> messages,
       @DocumentReferenceConverter()
-          DocumentReference<Object?> documentReference});
+      @JsonKey(ignore: true)
+          DocumentReference<Object?>? documentReference});
 }
 
 /// @nodoc
@@ -119,7 +122,7 @@ class __$$_ChatDtoCopyWithImpl<$Res>
     Object? members = null,
     Object? date = null,
     Object? messages = null,
-    Object? documentReference = null,
+    Object? documentReference = freezed,
   }) {
     return _then(_$_ChatDto(
       members: null == members
@@ -134,10 +137,10 @@ class __$$_ChatDtoCopyWithImpl<$Res>
           ? _value._messages
           : messages // ignore: cast_nullable_to_non_nullable
               as List<MessageChatDto>,
-      documentReference: null == documentReference
+      documentReference: freezed == documentReference
           ? _value.documentReference
           : documentReference // ignore: cast_nullable_to_non_nullable
-              as DocumentReference<Object?>,
+              as DocumentReference<Object?>?,
     ));
   }
 }
@@ -152,7 +155,8 @@ class _$_ChatDto extends _ChatDto {
           required this.date,
       required final List<MessageChatDto> messages,
       @DocumentReferenceConverter()
-          required this.documentReference})
+      @JsonKey(ignore: true)
+          this.documentReference})
       : _members = members,
         _messages = messages,
         super._();
@@ -182,7 +186,8 @@ class _$_ChatDto extends _ChatDto {
 
   @override
   @DocumentReferenceConverter()
-  final DocumentReference<Object?> documentReference;
+  @JsonKey(ignore: true)
+  final DocumentReference<Object?>? documentReference;
 
   @override
   String toString() {
@@ -226,14 +231,14 @@ class _$_ChatDto extends _ChatDto {
 
 abstract class _ChatDto extends ChatDto {
   factory _ChatDto(
-          {@DocumentReferenceConverter()
-              required final List<DocumentReference<Object?>> members,
-          @ServerTimestampConverter()
-              required final Timestamp date,
-          required final List<MessageChatDto> messages,
-          @DocumentReferenceConverter()
-              required final DocumentReference<Object?> documentReference}) =
-      _$_ChatDto;
+      {@DocumentReferenceConverter()
+          required final List<DocumentReference<Object?>> members,
+      @ServerTimestampConverter()
+          required final Timestamp date,
+      required final List<MessageChatDto> messages,
+      @DocumentReferenceConverter()
+      @JsonKey(ignore: true)
+          final DocumentReference<Object?>? documentReference}) = _$_ChatDto;
   _ChatDto._() : super._();
 
   factory _ChatDto.fromJson(Map<String, dynamic> json) = _$_ChatDto.fromJson;
@@ -248,7 +253,8 @@ abstract class _ChatDto extends ChatDto {
   List<MessageChatDto> get messages;
   @override
   @DocumentReferenceConverter()
-  DocumentReference<Object?> get documentReference;
+  @JsonKey(ignore: true)
+  DocumentReference<Object?>? get documentReference;
   @override
   @JsonKey(ignore: true)
   _$$_ChatDtoCopyWith<_$_ChatDto> get copyWith =>

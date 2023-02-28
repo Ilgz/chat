@@ -18,9 +18,7 @@ import 'package:chat/infrastructure/users/user_dto.dart';
 class ProjectRepository implements IProjectRepository {
   final FirebaseFirestore _firebaseFirestore;
   final IAuthFacade _authFacade;
-  final bool isTest;
-  ProjectRepository(this._firebaseFirestore, this._authFacade,{this.isTest=false});
-
+  ProjectRepository(this._firebaseFirestore, this._authFacade);
   @override
   Stream<Either<FirebaseFirestoreFailure, List<Project>>> watchAllProjects() async* {
     final userOption =  _authFacade.getSignedInUserId();
@@ -50,6 +48,7 @@ class ProjectRepository implements IProjectRepository {
       )
           .map((project)  async => project.copyWith(messages: await getUsersForMessages(project.copyWith(messages: setMessagesInColumn(project)))))
           .toList());
+
       yield right(a);
     }
   }
