@@ -11,16 +11,15 @@ import 'package:chat/presentation/core/widgets/no_result_card.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
 class ChatPage extends StatelessWidget {
   const ChatPage({Key? key, required this.projectOrChat}) : super(key: key);
   final Either<Project, Chat> projectOrChat;
-
   @override
   Widget build(BuildContext context) {
-    final messageTextController = TextEditingController();
-    // final messageScrollController = ScrollController();
-    final messageTextFocus = FocusNode();
+    final _focus = FocusNode();
+    final _controller = TextEditingController();
     return BlocListener<ChatFormBloc, ChatFormState>(
       listener: (context, state) {
         state.sendMessageFailureSuccessOption.fold(() {}, (either) {
@@ -187,17 +186,17 @@ class ChatPage extends StatelessWidget {
                       Flexible(
                         child: TextField(
                           cursorColor: Theme.of(context).primaryColor,
-                          focusNode: messageTextFocus,
+                          focusNode: _focus,
                           onChanged: (text) {
                             context
                                 .read<ChatFormBloc>()
                                 .add(ChatFormEvent.messageContentChanged(text));
                           },
                           onSubmitted: (text) {
-                            sendMessage(context);
+                            _sendMessage(context,_controller,_focus,projectOrChat);
                           },
+                          controller: _controller,
                           style: Theme.of(context).textTheme.bodyText1,
-                          controller: messageTextController,
                           decoration: const InputDecoration.collapsed(
                             hintText: 'Type your message...',
                             hintStyle: TextStyle(color: Colors.grey),
@@ -211,8 +210,7 @@ class ChatPage extends StatelessWidget {
                         child: IconButton(
                           icon: const Icon(Icons.send),
                           onPressed: () {
-                            messageTextController.text="fkldsjlkf";
-                            sendMessage(context);
+                            _sendMessage(context,_controller,_focus,projectOrChat);
                           },
                           color: Theme.of(context).primaryColor,
                         ),
@@ -226,12 +224,14 @@ class ChatPage extends StatelessWidget {
     );
   }
 
-  void sendMessage(BuildContext context) {
+  void _sendMessage(BuildContext context,TextEditingController controller,FocusNode focusNode,Either<Project,Chat> projectOrChat) {
+    projectOrChat.fold((project) =>  context
+        .read<ChatFormBloc>()
+        .add(ChatFormEvent.sendProjectMessage(project)), (chat) => context
+        .read<ChatFormBloc>()
+        .add(ChatFormEvent.sendDirectMessage(chat)));
 
-    // context
-    //     .read<ChatFormBloc>()
-    //     .add(ChatFormEvent.sendMessage(initialProject));
-    // messageTextController.clear();
-    // messageTextFocus.unfocus();
+    controller.clear();
+    focusNode.unfocus();
   }
 }

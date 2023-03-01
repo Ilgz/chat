@@ -14,7 +14,6 @@ class ChatWatcherCubit extends Cubit<ChatWatcherState> {
   final IChatFacade _chatFacade;
   ChatWatcherCubit(this._chatFacade) : super(const ChatWatcherState.initial());
   void startWatchAll(){
-    print("started");
   emit(const ChatWatcherState.loadInProgress());
   _chatFacade.watchChatRooms().listen((chats) {
   receiveChats(chats);

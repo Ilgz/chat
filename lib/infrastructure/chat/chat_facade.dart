@@ -23,7 +23,7 @@ class ChatFacade implements IChatFacade {
   ChatFacade(this._firebaseFirestore, this._authFacade);
 
   @override
-  Future<Either<FirebaseFirestoreFailure, Unit>> sendMessageForProject(
+  Future<Either<FirebaseFirestoreFailure, Unit>> sendProjectMessage(
       Project project, MessageChat messageChat) async {
     try {
       final userOption = getIt<IAuthFacade>().getSignedInUserId();
@@ -127,5 +127,30 @@ class ChatFacade implements IChatFacade {
         members.firstWhere((userReference) => userReference.path != userId);
     final user = UserDto.fromFirestore((await userRef.get())).toDomain();
     return user;
+  }
+
+  @override
+  Future<Either<FirebaseFirestoreFailure, Unit>> sendDirectMessage(Chat chat, MessageChat messageChat) async{
+    try {
+      final userOption = getIt<IAuthFacade>().getSignedInUserId();
+      final userId =
+          "users/${userOption.getOrElse(() => throw NotAuthenticatedError())}";
+      await chat.documentReference.update({
+        "messages": FieldValue.arrayUnion([
+          MessageChatDto.fromDomain(messageChat.copyWith(
+              date: Timestamp.now(),
+              sentFrom: messageChat.sentFrom.copyWith(
+                  reference: FirebaseFirestore.instance.doc(userId))))
+              .toJson()
+        ])
+      });
+      return right(unit);
+    } on FirebaseException catch (e) {
+      if (e.message!.contains('PERMISSION_DENIED')) {
+        return left(const FirebaseFirestoreFailure.insufficientPermission());
+      } else {
+        return left(const FirebaseFirestoreFailure.unexpected());
+      }
+    }
   }
 }

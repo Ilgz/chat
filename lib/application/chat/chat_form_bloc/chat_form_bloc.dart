@@ -1,4 +1,5 @@
 
+import 'package:chat/domain/chat/chat.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -19,11 +20,20 @@ class ChatFormBloc extends Bloc<ChatFormEvent, ChatFormState> {
     on<ChatFormEvent>((event, emit) async{
      await event.map(messageContentChanged: (e){
         emit(state.copyWith(messageChat: state.messageChat.copyWith(messageContent: MessageContent(e.messageContent)),sendMessageFailureSuccessOption: none()));
-      }, sendMessage: (e)async {
+      },
+         sendDirectMessage: (e)async {
+           final isMessageValid=state.messageChat.messageContent.isValid();
+           if(isMessageValid) {
+             emit(state.copyWith(sendMessageFailureSuccessOption: some(
+                 (await _iChatFacade.sendDirectMessage(
+                     e.chat, state.messageChat)))));
+           }
+         },
+         sendProjectMessage: (e)async {
       final isMessageValid=state.messageChat.messageContent.isValid();
       if(isMessageValid) {
       emit(state.copyWith(sendMessageFailureSuccessOption: some(
-      (await _iChatFacade.sendMessageForProject(
+      (await _iChatFacade.sendProjectMessage(
       e.project, state.messageChat)))));
       }
       });

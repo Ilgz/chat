@@ -1,4 +1,5 @@
 import 'package:chat/domain/chat/chat.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:chat/domain/projects/project.dart';
 import 'package:chat/presentation/core/routes/router.dart';
@@ -11,7 +12,7 @@ class DirectChatTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       onTap: () {
-        //goToChatPage(context, project);
+        goToChatPage(context, right(chat));
       },
       leading: CircleAvatar(
         backgroundColor: Colors.grey.shade400,

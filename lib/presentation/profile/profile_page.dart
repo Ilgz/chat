@@ -10,7 +10,6 @@ import 'package:chat/presentation/users/users_overview/widgets/user_icon.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     context.read<ProfileWatcherCubit>().getSignedInUser();
