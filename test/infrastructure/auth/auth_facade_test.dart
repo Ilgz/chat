@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -31,7 +32,7 @@ void main() async {
   setUp(() {
     firestore = MockFirebaseFirestore();
     firebaseAuth = MockFirebaseAuth();
-    authFacade = FirebaseAuthFacade(firebaseAuth, firestore);
+    authFacade = FirebaseAuthFacade(firebaseAuth, firestore,FirebaseMessaging.instance);
     userCredential = MockUserCredential();
     collectionReference = MockCollectionReference();
     documentReference = MockDocumentReference();

@@ -84,7 +84,7 @@ class LocalAuthFacade implements IAuthFacade {
   }
 
   @override
-  String getFcmToken() {
+  Future<String> getFcmToken() {
     // TODO: implement getFcmToken
     throw UnimplementedError();
   }

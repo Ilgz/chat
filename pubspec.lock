@@ -50,20 +50,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.9.0"
-  awesome_notifications:
-    dependency: transitive
-    description:
-      name: awesome_notifications
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.7.4+1"
-  awesome_notifications_fcm:
-    dependency: "direct main"
-    description:
-      name: awesome_notifications_fcm
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.7.4+1"
   bloc:
     dependency: transitive
     description:
@@ -337,6 +323,27 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.2.1"
+  firebase_messaging:
+    dependency: "direct main"
+    description:
+      name: firebase_messaging
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "14.2.5"
+  firebase_messaging_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_messaging_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.2.14"
+  firebase_messaging_web:
+    dependency: transitive
+    description:
+      name: firebase_messaging_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.2.15"
   fixnum:
     dependency: transitive
     description:
