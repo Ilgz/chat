@@ -12,6 +12,8 @@ _$_UserDto _$$_UserDtoFromJson(Map<String, dynamic> json) => _$_UserDto(
       nameSearch: (json['nameSearch'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
+      fcmTokens:
+          (json['fcmTokens'] as List<dynamic>).map((e) => e as String).toList(),
     );
 
 Map<String, dynamic> _$$_UserDtoToJson(_$_UserDto instance) =>
@@ -19,4 +21,5 @@ Map<String, dynamic> _$$_UserDtoToJson(_$_UserDto instance) =>
       'name': instance.name,
       'email': instance.email,
       'nameSearch': instance.nameSearch,
+      'fcmTokens': instance.fcmTokens,
     };

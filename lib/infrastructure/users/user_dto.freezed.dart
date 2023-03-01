@@ -23,6 +23,7 @@ mixin _$UserDto {
   String get name => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   List<String> get nameSearch => throw _privateConstructorUsedError;
+  List<String> get fcmTokens => throw _privateConstructorUsedError;
   @DocumentReferenceConverter()
   @JsonKey(ignore: true)
   DocumentReference<Object?>? get reference =>
@@ -42,6 +43,7 @@ abstract class $UserDtoCopyWith<$Res> {
       {String name,
       String email,
       List<String> nameSearch,
+      List<String> fcmTokens,
       @DocumentReferenceConverter()
       @JsonKey(ignore: true)
           DocumentReference<Object?>? reference});
@@ -63,6 +65,7 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
     Object? name = null,
     Object? email = null,
     Object? nameSearch = null,
+    Object? fcmTokens = null,
     Object? reference = freezed,
   }) {
     return _then(_value.copyWith(
@@ -77,6 +80,10 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
       nameSearch: null == nameSearch
           ? _value.nameSearch
           : nameSearch // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      fcmTokens: null == fcmTokens
+          ? _value.fcmTokens
+          : fcmTokens // ignore: cast_nullable_to_non_nullable
               as List<String>,
       reference: freezed == reference
           ? _value.reference
@@ -97,6 +104,7 @@ abstract class _$$_UserDtoCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
       {String name,
       String email,
       List<String> nameSearch,
+      List<String> fcmTokens,
       @DocumentReferenceConverter()
       @JsonKey(ignore: true)
           DocumentReference<Object?>? reference});
@@ -115,6 +123,7 @@ class __$$_UserDtoCopyWithImpl<$Res>
     Object? name = null,
     Object? email = null,
     Object? nameSearch = null,
+    Object? fcmTokens = null,
     Object? reference = freezed,
   }) {
     return _then(_$_UserDto(
@@ -129,6 +138,10 @@ class __$$_UserDtoCopyWithImpl<$Res>
       nameSearch: null == nameSearch
           ? _value._nameSearch
           : nameSearch // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      fcmTokens: null == fcmTokens
+          ? _value._fcmTokens
+          : fcmTokens // ignore: cast_nullable_to_non_nullable
               as List<String>,
       reference: freezed == reference
           ? _value.reference
@@ -145,8 +158,10 @@ class _$_UserDto extends _UserDto {
       {required this.name,
       required this.email,
       required final List<String> nameSearch,
+      required final List<String> fcmTokens,
       @DocumentReferenceConverter() @JsonKey(ignore: true) this.reference})
       : _nameSearch = nameSearch,
+        _fcmTokens = fcmTokens,
         super._();
 
   factory _$_UserDto.fromJson(Map<String, dynamic> json) =>
@@ -164,6 +179,14 @@ class _$_UserDto extends _UserDto {
     return EqualUnmodifiableListView(_nameSearch);
   }
 
+  final List<String> _fcmTokens;
+  @override
+  List<String> get fcmTokens {
+    if (_fcmTokens is EqualUnmodifiableListView) return _fcmTokens;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_fcmTokens);
+  }
+
   @override
   @DocumentReferenceConverter()
   @JsonKey(ignore: true)
@@ -171,7 +194,7 @@ class _$_UserDto extends _UserDto {
 
   @override
   String toString() {
-    return 'UserDto(name: $name, email: $email, nameSearch: $nameSearch, reference: $reference)';
+    return 'UserDto(name: $name, email: $email, nameSearch: $nameSearch, fcmTokens: $fcmTokens, reference: $reference)';
   }
 
   @override
@@ -183,14 +206,21 @@ class _$_UserDto extends _UserDto {
             (identical(other.email, email) || other.email == email) &&
             const DeepCollectionEquality()
                 .equals(other._nameSearch, _nameSearch) &&
+            const DeepCollectionEquality()
+                .equals(other._fcmTokens, _fcmTokens) &&
             (identical(other.reference, reference) ||
                 other.reference == reference));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, name, email,
-      const DeepCollectionEquality().hash(_nameSearch), reference);
+  int get hashCode => Object.hash(
+      runtimeType,
+      name,
+      email,
+      const DeepCollectionEquality().hash(_nameSearch),
+      const DeepCollectionEquality().hash(_fcmTokens),
+      reference);
 
   @JsonKey(ignore: true)
   @override
@@ -211,6 +241,7 @@ abstract class _UserDto extends UserDto {
       {required final String name,
       required final String email,
       required final List<String> nameSearch,
+      required final List<String> fcmTokens,
       @DocumentReferenceConverter()
       @JsonKey(ignore: true)
           final DocumentReference<Object?>? reference}) = _$_UserDto;
@@ -224,6 +255,8 @@ abstract class _UserDto extends UserDto {
   String get email;
   @override
   List<String> get nameSearch;
+  @override
+  List<String> get fcmTokens;
   @override
   @DocumentReferenceConverter()
   @JsonKey(ignore: true)

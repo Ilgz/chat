@@ -1,6 +1,8 @@
+import 'package:chat/infrastructure/notification/notification_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
+import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:chat/domain/auth/auth_failure.dart';
 import 'package:chat/domain/auth/i_auth_facade.dart';
@@ -29,7 +31,7 @@ class FirebaseAuthFacade implements IAuthFacade {
         temp = temp + nameStr[i].toLowerCase();
         caseSearchList.add(nameStr.toLowerCase().substring(0,2)+temp);
       }
-      await _firebaseFirestore.userCollection.doc(userId).set(UserDto(name: nameStr, email: emailAddressStr,nameSearch: caseSearchList).toJson());
+      await _firebaseFirestore.userCollection.doc(userId).set(UserDto(name: nameStr, email: emailAddressStr,nameSearch: caseSearchList,fcmTokens: [getFcmToken()].where((fcm) => fcm.isNotEmpty).toList()).toJson());
       return right(unit);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'email-already-in-use') {
@@ -48,7 +50,8 @@ class FirebaseAuthFacade implements IAuthFacade {
     try {
     await _firebaseAuth.signInWithEmailAndPassword(
           email: emailAddressStr, password: passwordStr);
-      return right(unit);
+    await _firebaseFirestore.userCollection.doc(getSignedInUserId().getOrElse(() => throw NotAuthenticatedError())).update({"fcmTokens":FieldValue.arrayUnion([getFcmToken()].where((fcmToken) => fcmToken.isNotEmpty).toList())});
+    return right(unit);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found' || e.code == 'wrong-password') {
         return left(AuthFailure.invalidEmailAndPassword());
@@ -79,6 +82,14 @@ class FirebaseAuthFacade implements IAuthFacade {
   @override
   Option<String> getSignedInUserId() {
     return optionOf(_firebaseAuth.currentUser?.uid);
+  }
+  @override
+  String getFcmToken(){
+    if (!kIsWeb) {
+      return NotificationController().firebaseToken;
+    }else{
+      return "";
+    }
   }
 }
 

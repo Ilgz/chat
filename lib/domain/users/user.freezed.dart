@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$User {
   UserName get userName => throw _privateConstructorUsedError;
   EmailAddress get emailAddress => throw _privateConstructorUsedError;
+  List<String> get fcmTokens => throw _privateConstructorUsedError;
   DocumentReference<Object?> get reference =>
       throw _privateConstructorUsedError;
 
@@ -33,6 +34,7 @@ abstract class $UserCopyWith<$Res> {
   $Res call(
       {UserName userName,
       EmailAddress emailAddress,
+      List<String> fcmTokens,
       DocumentReference<Object?> reference});
 }
 
@@ -51,6 +53,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   $Res call({
     Object? userName = null,
     Object? emailAddress = null,
+    Object? fcmTokens = null,
     Object? reference = null,
   }) {
     return _then(_value.copyWith(
@@ -62,6 +65,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.emailAddress
           : emailAddress // ignore: cast_nullable_to_non_nullable
               as EmailAddress,
+      fcmTokens: null == fcmTokens
+          ? _value.fcmTokens
+          : fcmTokens // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       reference: null == reference
           ? _value.reference
           : reference // ignore: cast_nullable_to_non_nullable
@@ -79,6 +86,7 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   $Res call(
       {UserName userName,
       EmailAddress emailAddress,
+      List<String> fcmTokens,
       DocumentReference<Object?> reference});
 }
 
@@ -93,6 +101,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
   $Res call({
     Object? userName = null,
     Object? emailAddress = null,
+    Object? fcmTokens = null,
     Object? reference = null,
   }) {
     return _then(_$_User(
@@ -104,6 +113,10 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
           ? _value.emailAddress
           : emailAddress // ignore: cast_nullable_to_non_nullable
               as EmailAddress,
+      fcmTokens: null == fcmTokens
+          ? _value._fcmTokens
+          : fcmTokens // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       reference: null == reference
           ? _value.reference
           : reference // ignore: cast_nullable_to_non_nullable
@@ -118,18 +131,28 @@ class _$_User implements _User {
   _$_User(
       {required this.userName,
       required this.emailAddress,
-      required this.reference});
+      required final List<String> fcmTokens,
+      required this.reference})
+      : _fcmTokens = fcmTokens;
 
   @override
   final UserName userName;
   @override
   final EmailAddress emailAddress;
+  final List<String> _fcmTokens;
+  @override
+  List<String> get fcmTokens {
+    if (_fcmTokens is EqualUnmodifiableListView) return _fcmTokens;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_fcmTokens);
+  }
+
   @override
   final DocumentReference<Object?> reference;
 
   @override
   String toString() {
-    return 'User(userName: $userName, emailAddress: $emailAddress, reference: $reference)';
+    return 'User(userName: $userName, emailAddress: $emailAddress, fcmTokens: $fcmTokens, reference: $reference)';
   }
 
   @override
@@ -141,13 +164,15 @@ class _$_User implements _User {
                 other.userName == userName) &&
             (identical(other.emailAddress, emailAddress) ||
                 other.emailAddress == emailAddress) &&
+            const DeepCollectionEquality()
+                .equals(other._fcmTokens, _fcmTokens) &&
             (identical(other.reference, reference) ||
                 other.reference == reference));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, userName, emailAddress, reference);
+  int get hashCode => Object.hash(runtimeType, userName, emailAddress,
+      const DeepCollectionEquality().hash(_fcmTokens), reference);
 
   @JsonKey(ignore: true)
   @override
@@ -160,12 +185,15 @@ abstract class _User implements User {
   factory _User(
       {required final UserName userName,
       required final EmailAddress emailAddress,
+      required final List<String> fcmTokens,
       required final DocumentReference<Object?> reference}) = _$_User;
 
   @override
   UserName get userName;
   @override
   EmailAddress get emailAddress;
+  @override
+  List<String> get fcmTokens;
   @override
   DocumentReference<Object?> get reference;
   @override

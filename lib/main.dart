@@ -1,3 +1,4 @@
+import 'package:awesome_notifications_fcm/awesome_notifications_fcm.dart';
 import 'package:chat/infrastructure/notification/notification_controller.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -10,12 +11,12 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await configureInjection(Environment.prod);
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  // if (!kIsWeb) {
-  //   await NotificationController.initializeRemoteNotifications(debug: true);
-  //   await NotificationController.getInitialNotificationAction();
-  //   await NotificationController.startListeningNotificationEvents();
-  //   await NotificationController.requestFirebaseToken();
-  // }
+ if (!kIsWeb) {
+    await NotificationController.initializeRemoteNotifications(debug: true);
+    await NotificationController.getInitialNotificationAction();
+    await NotificationController.startListeningNotificationEvents();
+    await NotificationController.requestFirebaseToken();
+ }
   runApp(const AppWidget());
 }
 
