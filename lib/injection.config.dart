@@ -14,6 +14,8 @@ import 'package:chat/application/auth/sign_up_form/sign_up_form_bloc.dart'
     as _i23;
 import 'package:chat/application/chat/chat_form_bloc/chat_form_bloc.dart'
     as _i28;
+import 'package:chat/application/chat/chat_searcher_bloc/chat_searcher_cubit.dart'
+    as _i33;
 import 'package:chat/application/chat/chat_watcher_bloc/chat_watcher_cubit.dart'
     as _i29;
 import 'package:chat/application/core/theme_switcher/theme_switcher_cubit.dart'
@@ -40,7 +42,7 @@ import 'package:chat/domain/projects/i_project_repository.dart' as _i12;
 import 'package:chat/domain/users/i_user_repository.dart' as _i14;
 import 'package:chat/infrastructure/auth/firebase_auth_facade.dart' as _i9;
 import 'package:chat/infrastructure/chat/chat_facade.dart' as _i11;
-import 'package:chat/infrastructure/core/app_injectable_module.dart' as _i33;
+import 'package:chat/infrastructure/core/app_injectable_module.dart' as _i34;
 import 'package:chat/infrastructure/core/theme_switcher/theme_switcher_facade.dart'
     as _i31;
 import 'package:chat/infrastructure/projects/project_repository.dart' as _i13;
@@ -74,7 +76,7 @@ extension GetItInjectableX on _i1.GetIt {
     gh.lazySingleton<_i5.FirebaseFirestore>(
         () => appInjectableProdModule.firebaseFirestoreDev);
     gh.lazySingleton<_i6.FirebaseMessaging>(
-        () => appInjectableProdModule.firebasMessaging);
+        () => appInjectableProdModule.firebaseMessaging);
     gh.lazySingleton<_i7.FlutterSecureStorage>(
         () => appInjectableProdModule.storage);
     gh.lazySingleton<_i8.IAuthFacade>(() => _i9.FirebaseAuthFacade(
@@ -115,19 +117,23 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i24.TaskActorCubit(gh<_i12.IProjectRepository>()));
     gh.factory<_i25.TaskFormBloc>(
         () => _i25.TaskFormBloc(gh<_i12.IProjectRepository>()));
-    gh.factory<_i26.UserWatcherBloc>(
-        () => _i26.UserWatcherBloc(gh<_i14.IUserRepository>()));
+    gh.singleton<_i26.UserWatcherBloc>(
+        _i26.UserWatcherBloc(gh<_i14.IUserRepository>()));
     gh.factory<_i27.AuthBloc>(() => _i27.AuthBloc(gh<_i8.IAuthFacade>()));
     gh.factory<_i28.ChatFormBloc>(
         () => _i28.ChatFormBloc(gh<_i10.IChatFacade>()));
-    gh.factory<_i29.ChatWatcherCubit>(
-        () => _i29.ChatWatcherCubit(gh<_i10.IChatFacade>()));
+    gh.singleton<_i29.ChatWatcherCubit>(
+        _i29.ChatWatcherCubit(gh<_i10.IChatFacade>()));
     gh.lazySingleton<_i30.IThemeSwitcherFacade>(
         () => _i31.ThemeSwitcherFacade(gh<_i21.SharedPreferences>()));
     gh.factory<_i32.ThemeSwitcherCubit>(
         () => _i32.ThemeSwitcherCubit(gh<_i30.IThemeSwitcherFacade>()));
+    gh.factory<_i33.ChatSearcherCubit>(() => _i33.ChatSearcherCubit(
+          gh<_i29.ChatWatcherCubit>(),
+          gh<_i26.UserWatcherBloc>(),
+        ));
     return this;
   }
 }
 
-class _$AppInjectableProdModule extends _i33.AppInjectableProdModule {}
+class _$AppInjectableProdModule extends _i34.AppInjectableProdModule {}

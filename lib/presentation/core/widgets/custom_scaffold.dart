@@ -10,6 +10,7 @@ class CustomScaffold extends StatelessWidget {
   final BottomNavigationBar? bottomNavigationBar;
   final bool useAppBar;
   final List<Widget> actions;
+  final Drawer? drawer;
   const CustomScaffold({
     Key? key,
     required this.body,
@@ -20,11 +21,13 @@ class CustomScaffold extends StatelessWidget {
     this.actions = const [],
     this.isScrolling = false,
     this.appBarTitle = 'Custom Widgets',
+    this.drawer
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer:  drawer,
       appBar: useAppBar
           ? CustomAppBar(
               textTitle: appBarTitle,

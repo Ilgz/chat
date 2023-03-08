@@ -55,7 +55,6 @@ class ProjectRepository implements IProjectRepository {
 
   Future<List<MessageChat>> getUsersForMessages(Project project)async{
       if(project.messages.isEmpty){return [];}
-      //print(project.messages);
       try{
         final messages=await Future.wait(project.messages.map((message)async =>  message.copyWith(sentFrom: UserDto.fromFirestore(await message.sentFrom.reference.get()).toDomain())).toList());
         return messages;
@@ -168,7 +167,6 @@ class ProjectRepository implements IProjectRepository {
       });
       return right(unit);
     } on FirebaseException catch (e) {
-      print(e.message);
       if (e.message!.contains('PERMISSION_DENIED')) {
         return left(const FirebaseFirestoreFailure.insufficientPermission());
       } else if (e.message!.contains('NOT_FOUND')) {

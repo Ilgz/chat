@@ -9,7 +9,7 @@ import 'package:chat/domain/users/user_failure.dart';
 part 'user_watcher_event.dart';
 part 'user_watcher_state.dart';
 part 'user_watcher_bloc.freezed.dart';
-@injectable
+@singleton
 class UserWatcherBloc extends Bloc<UserWatcherEvent, UserWatcherState> {
   IUserRepository iUserRepository;
   UserWatcherBloc(this.iUserRepository) : super(const UserWatcherState.initial()) {

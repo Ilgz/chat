@@ -1,3 +1,4 @@
+import 'package:chat/application/chat/chat_searcher_bloc/chat_searcher_cubit.dart';
 import 'package:chat/application/chat/chat_watcher_bloc/chat_watcher_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,7 +15,6 @@ import 'package:chat/presentation/core/routes/router.dart';
 
 class AppWidget extends StatelessWidget {
   const AppWidget({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -27,11 +27,12 @@ class AppWidget extends StatelessWidget {
             create: (context) => getIt<ChatWatcherCubit>()..startWatchAll(),
           ),
           BlocProvider(
-            create: (context) => getIt<UserWatcherBloc>(),
+            create: (context) => getIt<UserWatcherBloc>()..add(const UserWatcherEvent.startWatchAll()),lazy: false,
           ),
           BlocProvider(create: (context) => getIt<ProjectFilterBloc>()),
           BlocProvider(create: (context) => getIt<ProfileWatcherCubit>()),
           BlocProvider(create: (context) => getIt<ChatFormBloc>()),
+          BlocProvider(create: (context) => getIt<ChatSearcherCubit>()..watchSearchChats(),lazy: false,),
           BlocProvider(
             create: (context) =>
                 getIt<AuthBloc>()..add(AuthEvent.authCheckRequested()),
@@ -42,7 +43,7 @@ class AppWidget extends StatelessWidget {
           builder: (context, state) {
             return MaterialApp.router(
                 routerConfig: goRouter,
-                title: "TaskManager",
+                title: "Chat",
                 debugShowCheckedModeBanner: false,
                 themeMode: state.isDark ? ThemeMode.dark : ThemeMode.light,
                 darkTheme: darkTheme,

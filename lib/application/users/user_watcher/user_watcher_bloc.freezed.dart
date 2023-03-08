@@ -351,7 +351,7 @@ mixin _$UserWatcherState {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_LoadInProgress value) loadInProgress,
-    required TResult Function(_LoadSuccess value) loadSuccess,
+    required TResult Function(UsersLoadSuccess value) loadSuccess,
     required TResult Function(_LoadFailure value) loadFailure,
   }) =>
       throw _privateConstructorUsedError;
@@ -359,7 +359,7 @@ mixin _$UserWatcherState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_LoadInProgress value)? loadInProgress,
-    TResult? Function(_LoadSuccess value)? loadSuccess,
+    TResult? Function(UsersLoadSuccess value)? loadSuccess,
     TResult? Function(_LoadFailure value)? loadFailure,
   }) =>
       throw _privateConstructorUsedError;
@@ -367,7 +367,7 @@ mixin _$UserWatcherState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_LoadInProgress value)? loadInProgress,
-    TResult Function(_LoadSuccess value)? loadSuccess,
+    TResult Function(UsersLoadSuccess value)? loadSuccess,
     TResult Function(_LoadFailure value)? loadFailure,
     required TResult orElse(),
   }) =>
@@ -468,7 +468,7 @@ class _$_Initial implements _Initial {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_LoadInProgress value) loadInProgress,
-    required TResult Function(_LoadSuccess value) loadSuccess,
+    required TResult Function(UsersLoadSuccess value) loadSuccess,
     required TResult Function(_LoadFailure value) loadFailure,
   }) {
     return initial(this);
@@ -479,7 +479,7 @@ class _$_Initial implements _Initial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_LoadInProgress value)? loadInProgress,
-    TResult? Function(_LoadSuccess value)? loadSuccess,
+    TResult? Function(UsersLoadSuccess value)? loadSuccess,
     TResult? Function(_LoadFailure value)? loadFailure,
   }) {
     return initial?.call(this);
@@ -490,7 +490,7 @@ class _$_Initial implements _Initial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_LoadInProgress value)? loadInProgress,
-    TResult Function(_LoadSuccess value)? loadSuccess,
+    TResult Function(UsersLoadSuccess value)? loadSuccess,
     TResult Function(_LoadFailure value)? loadFailure,
     required TResult orElse(),
   }) {
@@ -582,7 +582,7 @@ class _$_LoadInProgress implements _LoadInProgress {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_LoadInProgress value) loadInProgress,
-    required TResult Function(_LoadSuccess value) loadSuccess,
+    required TResult Function(UsersLoadSuccess value) loadSuccess,
     required TResult Function(_LoadFailure value) loadFailure,
   }) {
     return loadInProgress(this);
@@ -593,7 +593,7 @@ class _$_LoadInProgress implements _LoadInProgress {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_LoadInProgress value)? loadInProgress,
-    TResult? Function(_LoadSuccess value)? loadSuccess,
+    TResult? Function(UsersLoadSuccess value)? loadSuccess,
     TResult? Function(_LoadFailure value)? loadFailure,
   }) {
     return loadInProgress?.call(this);
@@ -604,7 +604,7 @@ class _$_LoadInProgress implements _LoadInProgress {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_LoadInProgress value)? loadInProgress,
-    TResult Function(_LoadSuccess value)? loadSuccess,
+    TResult Function(UsersLoadSuccess value)? loadSuccess,
     TResult Function(_LoadFailure value)? loadFailure,
     required TResult orElse(),
   }) {
@@ -620,20 +620,20 @@ abstract class _LoadInProgress implements UserWatcherState {
 }
 
 /// @nodoc
-abstract class _$$_LoadSuccessCopyWith<$Res> {
-  factory _$$_LoadSuccessCopyWith(
-          _$_LoadSuccess value, $Res Function(_$_LoadSuccess) then) =
-      __$$_LoadSuccessCopyWithImpl<$Res>;
+abstract class _$$UsersLoadSuccessCopyWith<$Res> {
+  factory _$$UsersLoadSuccessCopyWith(
+          _$UsersLoadSuccess value, $Res Function(_$UsersLoadSuccess) then) =
+      __$$UsersLoadSuccessCopyWithImpl<$Res>;
   @useResult
   $Res call({List<User> users});
 }
 
 /// @nodoc
-class __$$_LoadSuccessCopyWithImpl<$Res>
-    extends _$UserWatcherStateCopyWithImpl<$Res, _$_LoadSuccess>
-    implements _$$_LoadSuccessCopyWith<$Res> {
-  __$$_LoadSuccessCopyWithImpl(
-      _$_LoadSuccess _value, $Res Function(_$_LoadSuccess) _then)
+class __$$UsersLoadSuccessCopyWithImpl<$Res>
+    extends _$UserWatcherStateCopyWithImpl<$Res, _$UsersLoadSuccess>
+    implements _$$UsersLoadSuccessCopyWith<$Res> {
+  __$$UsersLoadSuccessCopyWithImpl(
+      _$UsersLoadSuccess _value, $Res Function(_$UsersLoadSuccess) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -641,7 +641,7 @@ class __$$_LoadSuccessCopyWithImpl<$Res>
   $Res call({
     Object? users = null,
   }) {
-    return _then(_$_LoadSuccess(
+    return _then(_$UsersLoadSuccess(
       null == users
           ? _value._users
           : users // ignore: cast_nullable_to_non_nullable
@@ -652,8 +652,8 @@ class __$$_LoadSuccessCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_LoadSuccess implements _LoadSuccess {
-  const _$_LoadSuccess(final List<User> users) : _users = users;
+class _$UsersLoadSuccess implements UsersLoadSuccess {
+  const _$UsersLoadSuccess(final List<User> users) : _users = users;
 
   final List<User> _users;
   @override
@@ -672,7 +672,7 @@ class _$_LoadSuccess implements _LoadSuccess {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_LoadSuccess &&
+            other is _$UsersLoadSuccess &&
             const DeepCollectionEquality().equals(other._users, _users));
   }
 
@@ -683,8 +683,8 @@ class _$_LoadSuccess implements _LoadSuccess {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LoadSuccessCopyWith<_$_LoadSuccess> get copyWith =>
-      __$$_LoadSuccessCopyWithImpl<_$_LoadSuccess>(this, _$identity);
+  _$$UsersLoadSuccessCopyWith<_$UsersLoadSuccess> get copyWith =>
+      __$$UsersLoadSuccessCopyWithImpl<_$UsersLoadSuccess>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -728,7 +728,7 @@ class _$_LoadSuccess implements _LoadSuccess {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_LoadInProgress value) loadInProgress,
-    required TResult Function(_LoadSuccess value) loadSuccess,
+    required TResult Function(UsersLoadSuccess value) loadSuccess,
     required TResult Function(_LoadFailure value) loadFailure,
   }) {
     return loadSuccess(this);
@@ -739,7 +739,7 @@ class _$_LoadSuccess implements _LoadSuccess {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_LoadInProgress value)? loadInProgress,
-    TResult? Function(_LoadSuccess value)? loadSuccess,
+    TResult? Function(UsersLoadSuccess value)? loadSuccess,
     TResult? Function(_LoadFailure value)? loadFailure,
   }) {
     return loadSuccess?.call(this);
@@ -750,7 +750,7 @@ class _$_LoadSuccess implements _LoadSuccess {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_LoadInProgress value)? loadInProgress,
-    TResult Function(_LoadSuccess value)? loadSuccess,
+    TResult Function(UsersLoadSuccess value)? loadSuccess,
     TResult Function(_LoadFailure value)? loadFailure,
     required TResult orElse(),
   }) {
@@ -761,12 +761,12 @@ class _$_LoadSuccess implements _LoadSuccess {
   }
 }
 
-abstract class _LoadSuccess implements UserWatcherState {
-  const factory _LoadSuccess(final List<User> users) = _$_LoadSuccess;
+abstract class UsersLoadSuccess implements UserWatcherState {
+  const factory UsersLoadSuccess(final List<User> users) = _$UsersLoadSuccess;
 
   List<User> get users;
   @JsonKey(ignore: true)
-  _$$_LoadSuccessCopyWith<_$_LoadSuccess> get copyWith =>
+  _$$UsersLoadSuccessCopyWith<_$UsersLoadSuccess> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -884,7 +884,7 @@ class _$_LoadFailure implements _LoadFailure {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_LoadInProgress value) loadInProgress,
-    required TResult Function(_LoadSuccess value) loadSuccess,
+    required TResult Function(UsersLoadSuccess value) loadSuccess,
     required TResult Function(_LoadFailure value) loadFailure,
   }) {
     return loadFailure(this);
@@ -895,7 +895,7 @@ class _$_LoadFailure implements _LoadFailure {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_LoadInProgress value)? loadInProgress,
-    TResult? Function(_LoadSuccess value)? loadSuccess,
+    TResult? Function(UsersLoadSuccess value)? loadSuccess,
     TResult? Function(_LoadFailure value)? loadFailure,
   }) {
     return loadFailure?.call(this);
@@ -906,7 +906,7 @@ class _$_LoadFailure implements _LoadFailure {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_LoadInProgress value)? loadInProgress,
-    TResult Function(_LoadSuccess value)? loadSuccess,
+    TResult Function(UsersLoadSuccess value)? loadSuccess,
     TResult Function(_LoadFailure value)? loadFailure,
     required TResult orElse(),
   }) {

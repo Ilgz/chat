@@ -15,6 +15,10 @@ const ChatsOverviewPage({Key? key}) : super(key: key);
 Widget build(BuildContext context) {
   return CustomScaffold(
       appBarTitle: "Чат",
+      actions: [
+        IconButton(onPressed: (){}, icon: Icon(Icons.search))
+      ],
+      drawer: Drawer(),
       isScrolling: true,
       body: BlocBuilder<ProjectWatcherBloc, ProjectWatcherState>(
         builder: (context, state) {

@@ -11,17 +11,15 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await configureInjection(Environment.prod);
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-      final fbm = FirebaseMessaging.instance;
-      //fbm.requestNotificationPermissions();
-     // fbm.requestPermission();
-  FirebaseMessaging.onMessage.listen((_){});
-  FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-    print('A new onMessageOpenedApp event was published!');
-  });
-     //FirebaseMessaging.onBackgroundMessage((message)async{});
-      print((await fbm.getToken()));
+  if(!kIsWeb){
+    final fbm = FirebaseMessaging.instance;
+    FirebaseMessaging.onMessage.listen((_){});
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      print('A new onMessageOpenedApp event was published!');
+    });
+  }
+
   runApp(const AppWidget());
+
 }
-
-
 

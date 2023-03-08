@@ -13,7 +13,7 @@ abstract class AppInjectableProdModule {
   @lazySingleton
   FirebaseAuth get firebaseAuthDev => FirebaseAuth.instance;
   @lazySingleton
-  FirebaseMessaging get firebasMessaging => FirebaseMessaging.instance;
+  FirebaseMessaging get firebaseMessaging => FirebaseMessaging.instance;
   @lazySingleton
   FirebaseFirestore get firebaseFirestoreDev => FirebaseFirestore.instance;
   @lazySingleton

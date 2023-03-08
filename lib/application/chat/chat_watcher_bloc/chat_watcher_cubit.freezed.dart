@@ -45,7 +45,7 @@ mixin _$ChatWatcherState {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_LoadInProgress value) loadInProgress,
-    required TResult Function(_LoadSuccess value) loadSuccess,
+    required TResult Function(ChatsLoadSuccess value) loadSuccess,
     required TResult Function(_LoadFailure value) loadFailure,
   }) =>
       throw _privateConstructorUsedError;
@@ -53,7 +53,7 @@ mixin _$ChatWatcherState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_LoadInProgress value)? loadInProgress,
-    TResult? Function(_LoadSuccess value)? loadSuccess,
+    TResult? Function(ChatsLoadSuccess value)? loadSuccess,
     TResult? Function(_LoadFailure value)? loadFailure,
   }) =>
       throw _privateConstructorUsedError;
@@ -61,7 +61,7 @@ mixin _$ChatWatcherState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_LoadInProgress value)? loadInProgress,
-    TResult Function(_LoadSuccess value)? loadSuccess,
+    TResult Function(ChatsLoadSuccess value)? loadSuccess,
     TResult Function(_LoadFailure value)? loadFailure,
     required TResult orElse(),
   }) =>
@@ -162,7 +162,7 @@ class _$_Initial implements _Initial {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_LoadInProgress value) loadInProgress,
-    required TResult Function(_LoadSuccess value) loadSuccess,
+    required TResult Function(ChatsLoadSuccess value) loadSuccess,
     required TResult Function(_LoadFailure value) loadFailure,
   }) {
     return initial(this);
@@ -173,7 +173,7 @@ class _$_Initial implements _Initial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_LoadInProgress value)? loadInProgress,
-    TResult? Function(_LoadSuccess value)? loadSuccess,
+    TResult? Function(ChatsLoadSuccess value)? loadSuccess,
     TResult? Function(_LoadFailure value)? loadFailure,
   }) {
     return initial?.call(this);
@@ -184,7 +184,7 @@ class _$_Initial implements _Initial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_LoadInProgress value)? loadInProgress,
-    TResult Function(_LoadSuccess value)? loadSuccess,
+    TResult Function(ChatsLoadSuccess value)? loadSuccess,
     TResult Function(_LoadFailure value)? loadFailure,
     required TResult orElse(),
   }) {
@@ -276,7 +276,7 @@ class _$_LoadInProgress implements _LoadInProgress {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_LoadInProgress value) loadInProgress,
-    required TResult Function(_LoadSuccess value) loadSuccess,
+    required TResult Function(ChatsLoadSuccess value) loadSuccess,
     required TResult Function(_LoadFailure value) loadFailure,
   }) {
     return loadInProgress(this);
@@ -287,7 +287,7 @@ class _$_LoadInProgress implements _LoadInProgress {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_LoadInProgress value)? loadInProgress,
-    TResult? Function(_LoadSuccess value)? loadSuccess,
+    TResult? Function(ChatsLoadSuccess value)? loadSuccess,
     TResult? Function(_LoadFailure value)? loadFailure,
   }) {
     return loadInProgress?.call(this);
@@ -298,7 +298,7 @@ class _$_LoadInProgress implements _LoadInProgress {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_LoadInProgress value)? loadInProgress,
-    TResult Function(_LoadSuccess value)? loadSuccess,
+    TResult Function(ChatsLoadSuccess value)? loadSuccess,
     TResult Function(_LoadFailure value)? loadFailure,
     required TResult orElse(),
   }) {
@@ -314,20 +314,20 @@ abstract class _LoadInProgress implements ChatWatcherState {
 }
 
 /// @nodoc
-abstract class _$$_LoadSuccessCopyWith<$Res> {
-  factory _$$_LoadSuccessCopyWith(
-          _$_LoadSuccess value, $Res Function(_$_LoadSuccess) then) =
-      __$$_LoadSuccessCopyWithImpl<$Res>;
+abstract class _$$ChatsLoadSuccessCopyWith<$Res> {
+  factory _$$ChatsLoadSuccessCopyWith(
+          _$ChatsLoadSuccess value, $Res Function(_$ChatsLoadSuccess) then) =
+      __$$ChatsLoadSuccessCopyWithImpl<$Res>;
   @useResult
   $Res call({List<Chat> chats});
 }
 
 /// @nodoc
-class __$$_LoadSuccessCopyWithImpl<$Res>
-    extends _$ChatWatcherStateCopyWithImpl<$Res, _$_LoadSuccess>
-    implements _$$_LoadSuccessCopyWith<$Res> {
-  __$$_LoadSuccessCopyWithImpl(
-      _$_LoadSuccess _value, $Res Function(_$_LoadSuccess) _then)
+class __$$ChatsLoadSuccessCopyWithImpl<$Res>
+    extends _$ChatWatcherStateCopyWithImpl<$Res, _$ChatsLoadSuccess>
+    implements _$$ChatsLoadSuccessCopyWith<$Res> {
+  __$$ChatsLoadSuccessCopyWithImpl(
+      _$ChatsLoadSuccess _value, $Res Function(_$ChatsLoadSuccess) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -335,7 +335,7 @@ class __$$_LoadSuccessCopyWithImpl<$Res>
   $Res call({
     Object? chats = null,
   }) {
-    return _then(_$_LoadSuccess(
+    return _then(_$ChatsLoadSuccess(
       null == chats
           ? _value._chats
           : chats // ignore: cast_nullable_to_non_nullable
@@ -346,8 +346,8 @@ class __$$_LoadSuccessCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_LoadSuccess implements _LoadSuccess {
-  const _$_LoadSuccess(final List<Chat> chats) : _chats = chats;
+class _$ChatsLoadSuccess implements ChatsLoadSuccess {
+  const _$ChatsLoadSuccess(final List<Chat> chats) : _chats = chats;
 
   final List<Chat> _chats;
   @override
@@ -366,7 +366,7 @@ class _$_LoadSuccess implements _LoadSuccess {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_LoadSuccess &&
+            other is _$ChatsLoadSuccess &&
             const DeepCollectionEquality().equals(other._chats, _chats));
   }
 
@@ -377,8 +377,8 @@ class _$_LoadSuccess implements _LoadSuccess {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LoadSuccessCopyWith<_$_LoadSuccess> get copyWith =>
-      __$$_LoadSuccessCopyWithImpl<_$_LoadSuccess>(this, _$identity);
+  _$$ChatsLoadSuccessCopyWith<_$ChatsLoadSuccess> get copyWith =>
+      __$$ChatsLoadSuccessCopyWithImpl<_$ChatsLoadSuccess>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -422,7 +422,7 @@ class _$_LoadSuccess implements _LoadSuccess {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_LoadInProgress value) loadInProgress,
-    required TResult Function(_LoadSuccess value) loadSuccess,
+    required TResult Function(ChatsLoadSuccess value) loadSuccess,
     required TResult Function(_LoadFailure value) loadFailure,
   }) {
     return loadSuccess(this);
@@ -433,7 +433,7 @@ class _$_LoadSuccess implements _LoadSuccess {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_LoadInProgress value)? loadInProgress,
-    TResult? Function(_LoadSuccess value)? loadSuccess,
+    TResult? Function(ChatsLoadSuccess value)? loadSuccess,
     TResult? Function(_LoadFailure value)? loadFailure,
   }) {
     return loadSuccess?.call(this);
@@ -444,7 +444,7 @@ class _$_LoadSuccess implements _LoadSuccess {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_LoadInProgress value)? loadInProgress,
-    TResult Function(_LoadSuccess value)? loadSuccess,
+    TResult Function(ChatsLoadSuccess value)? loadSuccess,
     TResult Function(_LoadFailure value)? loadFailure,
     required TResult orElse(),
   }) {
@@ -455,12 +455,12 @@ class _$_LoadSuccess implements _LoadSuccess {
   }
 }
 
-abstract class _LoadSuccess implements ChatWatcherState {
-  const factory _LoadSuccess(final List<Chat> chats) = _$_LoadSuccess;
+abstract class ChatsLoadSuccess implements ChatWatcherState {
+  const factory ChatsLoadSuccess(final List<Chat> chats) = _$ChatsLoadSuccess;
 
   List<Chat> get chats;
   @JsonKey(ignore: true)
-  _$$_LoadSuccessCopyWith<_$_LoadSuccess> get copyWith =>
+  _$$ChatsLoadSuccessCopyWith<_$ChatsLoadSuccess> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -578,7 +578,7 @@ class _$_LoadFailure implements _LoadFailure {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_LoadInProgress value) loadInProgress,
-    required TResult Function(_LoadSuccess value) loadSuccess,
+    required TResult Function(ChatsLoadSuccess value) loadSuccess,
     required TResult Function(_LoadFailure value) loadFailure,
   }) {
     return loadFailure(this);
@@ -589,7 +589,7 @@ class _$_LoadFailure implements _LoadFailure {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_LoadInProgress value)? loadInProgress,
-    TResult? Function(_LoadSuccess value)? loadSuccess,
+    TResult? Function(ChatsLoadSuccess value)? loadSuccess,
     TResult? Function(_LoadFailure value)? loadFailure,
   }) {
     return loadFailure?.call(this);
@@ -600,7 +600,7 @@ class _$_LoadFailure implements _LoadFailure {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_LoadInProgress value)? loadInProgress,
-    TResult Function(_LoadSuccess value)? loadSuccess,
+    TResult Function(ChatsLoadSuccess value)? loadSuccess,
     TResult Function(_LoadFailure value)? loadFailure,
     required TResult orElse(),
   }) {

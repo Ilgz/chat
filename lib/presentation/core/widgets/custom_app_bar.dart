@@ -27,16 +27,8 @@ class _CustomAppBarState extends State<CustomAppBar> {
         child: SizedBox(
           height: 46,
           child: AppBar(
-
               backgroundColor: Theme.of(context).primaryColor,
             actions: widget.actions,
-            // shape: const RoundedRectangleBorder(
-            //   borderRadius: BorderRadius.all(Radius.circular(8)),
-            // ),
-            // leading: IconButton(
-            //   onPressed: () {},
-            //   icon: Icon(widget.leadingIconData),
-            // ),
             elevation: 0,
             titleTextStyle: widget.textStyle,
             title: Text(widget.textTitle ?? 'Task-manager'),

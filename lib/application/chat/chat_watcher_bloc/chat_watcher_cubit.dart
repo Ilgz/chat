@@ -9,7 +9,7 @@ import 'package:injectable/injectable.dart';
 
 part 'chat_watcher_state.dart';
 part 'chat_watcher_cubit.freezed.dart';
-@injectable
+@singleton
 class ChatWatcherCubit extends Cubit<ChatWatcherState> {
   final IChatFacade _chatFacade;
   ChatWatcherCubit(this._chatFacade) : super(const ChatWatcherState.initial());
