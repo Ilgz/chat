@@ -7,22 +7,28 @@ class ChatSearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      height: 40,
-      child: Center(
-        child: TextField(
-          onChanged: (text){
-            context.read<ChatSearcherCubit>().searchChats(text);
-          },
-          style: TextStyle(color: Colors.white),
-          decoration: const InputDecoration.collapsed(
-            hintStyle: TextStyle(color: Colors.white70),
-            hintText: 'Search for something',
+    return BlocBuilder<ChatSearcherCubit, ChatSearcherState>(
+      buildWhen: (p,c)=>false,
+      builder: (context, state) {
+        return SizedBox(
+          width: double.infinity,
+          height: 40,
+          child: Center(
+            child: TextField(
+              controller: TextEditingController(text: state.query),
+              onChanged: (text) {
+                context.read<ChatSearcherCubit>().searchChats(text);
+              },
+              style: TextStyle(color: Colors.white),
+              decoration: const InputDecoration.collapsed(
+                hintStyle: TextStyle(color: Colors.white70),
+                hintText: 'Search for something',
 
+              ),
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }
