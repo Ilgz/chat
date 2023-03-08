@@ -20,29 +20,12 @@ class ChatCombinerCubit extends Cubit<ChatCombinerState> {
   ChatCombinerCubit(this._chatWatcherCubit, this._userWatcherBloc)
       : super(const ChatCombinerState.initial());
   void watchSearchChats() {
+    emit(const ChatCombinerState.loadInProgress());
+    receiveChats(combineChatsWithUsers(_userWatcherBloc.state, _chatWatcherCubit.state));
     final Stream<List<Chat>> stream =
         Rx.combineLatest2(_userWatcherBloc.stream, _chatWatcherCubit.stream,
             (userState, chatState) {
-      late List<User> users;
-      late List<Chat> chats;
-      if (userState is UsersLoadSuccess) {
-        users = userState.users;
-      } else {
-        users = [];
-      }
-      if (chatState is ChatsLoadSuccess) {
-        chats = chatState.chats;
-      } else {
-        chats = [];
-      }
-      final userChats = users
-          .map((user) => Chat.empty().copyWith(chattingWith: user))
-          .toList();
-      return List.from(chats)
-        ..addAll(userChats.where((userChat) => !chats
-            .map((chat) => chat.chattingWith)
-            .toList()
-            .contains(userChat.chattingWith)));
+           return combineChatsWithUsers(userState, chatState);
     });
     stream.listen((event) {
       receiveChats(event);
@@ -51,5 +34,27 @@ class ChatCombinerCubit extends Cubit<ChatCombinerState> {
 
   void receiveChats(List<Chat> chats) {
     emit(ChatCombinerState.loadSuccess(chats));
+  }
+  List<Chat> combineChatsWithUsers(UserWatcherState userState, ChatWatcherState chatState){
+    late List<User> users;
+    late List<Chat> chats;
+    if (userState is UsersLoadSuccess) {
+      users = userState.users;
+    } else {
+      users = [];
+    }
+    if (chatState is ChatsLoadSuccess) {
+      chats = chatState.chats;
+    } else {
+      chats = [];
+    }
+    final userChats = users
+        .map((user) => Chat.empty().copyWith(chattingWith: user))
+        .toList();
+    return List.from(chats)
+      ..addAll(userChats.where((userChat) => !chats
+          .map((chat) => chat.chattingWith)
+          .toList()
+          .contains(userChat.chattingWith)));
   }
 }

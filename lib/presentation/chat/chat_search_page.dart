@@ -27,7 +27,6 @@ class ChatSearchPage extends StatelessWidget {
                       child: CircularProgressIndicator(),
                     ),
                 loadSuccess: (state) {
-                  print("start");
                   List<Chat> chats = state.chats.toList();
                   chats.sort((a, b) {
                     final aTimeStamp =
@@ -36,11 +35,11 @@ class ChatSearchPage extends StatelessWidget {
                         b.messages.isEmpty ? b.date : b.messages.last.date;
                     return bTimeStamp.compareTo(aTimeStamp);
                   });
-                  if (chats.isNotEmpty) {
                     context.read<ChatSearcherCubit>().updateChats(chats);
                     return BlocBuilder<ChatSearcherCubit, ChatSearcherState>(
                       builder: (context, state) {
                         chats = state.queriedChats;
+                        if (chats.isNotEmpty) {
                         return ListView.builder(
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
@@ -58,12 +57,13 @@ class ChatSearchPage extends StatelessWidget {
                                 //   return GroupChatCard(project: project);
                               }
                             });
+                        } else {
+                          return const NoResultCard(
+                              "No result found", Icons.person_search_outlined);
+                        }
                       },
                     );
-                  } else {
-                    return const NoResultCard(
-                        "No chat found", Icons.account_tree_outlined);
-                  }
+
                 },
                 loadFailure: (_) => const SizedBox());
           })),
