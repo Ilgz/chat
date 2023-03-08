@@ -16,7 +16,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       final userOption=_authFacade.getSignedInUserId();
              emit(userOption.fold(()=>AuthState.unAuthenticated(),(_)=>AuthState.authenticated()));
       }, signedOut: (e)async{
-
            await _authFacade.signOut();
            emit(AuthState.unAuthenticated());
       });

@@ -1,3 +1,4 @@
+import 'package:chat/injection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:chat/application/auth/auth_bloc.dart';
@@ -12,7 +13,6 @@ class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    context.read<ProfileWatcherCubit>().getSignedInUser();
     return CustomScaffold(
       actions: const [
         ThemeSwitcher(),

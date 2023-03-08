@@ -74,10 +74,8 @@ final goRouter =
 void goToSignInPage(BuildContext context) => context.pushReplacement(
       PageRoutes.signInPage,
     );
-
 void goToChatsOverviewPage(BuildContext context) =>
     context.pushReplacement(PageRoutes.chatsOverviewPage);
-
 void goToChatSearchPage(BuildContext context) =>
     context.push("${PageRoutes.chatsOverviewPage}/${PageRoutes.chatSearchPage}",
         );
@@ -88,6 +86,5 @@ void goToProfilePage(BuildContext context) =>
 void goToChatPage(BuildContext context, Either<Project, Chat> projectOrChat) =>
     context.push("${PageRoutes.chatsOverviewPage}/${PageRoutes.chatPage}",
         extra: projectOrChat);
-
 void goToSignUpPage(BuildContext context) =>
     context.pushReplacement(PageRoutes.signUpPage);

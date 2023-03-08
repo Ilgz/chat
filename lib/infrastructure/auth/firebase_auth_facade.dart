@@ -1,4 +1,6 @@
 import 'package:chat/infrastructure/notification/notification_controller.dart';
+import 'package:chat/injection.config.dart';
+import 'package:chat/injection.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
@@ -81,7 +83,8 @@ class FirebaseAuthFacade implements IAuthFacade {
   @override
   Future<void> signOut() async {
     await _firebaseFirestore.userCollection.doc(getSignedInUserId().getOrElse(() => throw NotAuthenticatedError())).update({"fcmTokens":FieldValue.arrayRemove([(await getFcmToken())].where((fcmToken) => fcmToken.isNotEmpty).toList())});
-    await _firebaseAuth.signOut();}
+    await _firebaseAuth.signOut();
+  }
 
   @override
   Option<String> getSignedInUserId() {
