@@ -18,7 +18,7 @@ class UsersOverviewPage extends StatelessWidget {
     return BlocProvider(
       create: (context) => UserSearcherCubit(),
       child: CustomScaffold(
-          appBarTitle: "Пользователи",
+          appBarTitle: Text("Пользователи"),
           body: BlocBuilder<UserWatcherBloc, UserWatcherState>(
             builder: (context, state) {
               return state.map(

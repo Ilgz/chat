@@ -20,7 +20,7 @@ class MembersPage extends HookWidget {
     final isSearching=useState(false);
     return BlocProvider(
   create: (context) => UserSearcherCubit(),
-  child: CustomScaffold(appBarTitle:initialProject.projectName.getOrCrash(),body:
+  child: CustomScaffold(appBarTitle:Text(initialProject.projectName.getOrCrash()),body:
     BlocBuilder<ProjectWatcherBloc, ProjectWatcherState>(
       builder: (context, state) {
         return state.maybeMap(loadSuccess:(state){

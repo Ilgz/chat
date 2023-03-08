@@ -34,9 +34,9 @@ class ChatPage extends StatelessWidget {
         });
       },
       child: CustomScaffold(
-          appBarTitle: projectOrChat.fold(
+          appBarTitle: Text(projectOrChat.fold(
               (project) => project.projectName.getOrCrash(),
-              (chat) => chat.chattingWith.userName.getOrCrash()),
+              (chat) => chat.chattingWith.userName.getOrCrash())),
           body: Column(
             children: [
               projectOrChat.fold((initialProject) {

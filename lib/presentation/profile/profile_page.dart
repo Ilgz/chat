@@ -33,7 +33,7 @@ class ProfilePage extends StatelessWidget {
                     ThemeSwitcher(),
                     SizedBox(width: 10,)
                   ],
-                  appBarTitle: user.userName.getOrCrash(),
+                  appBarTitle: Text(user.userName.getOrCrash()),
                   body: BlocBuilder<ProjectWatcherBloc, ProjectWatcherState>(
                     builder: (context, state) {
                       return state.map(

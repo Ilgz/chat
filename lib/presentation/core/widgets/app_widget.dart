@@ -1,3 +1,4 @@
+import 'package:chat/application/chat/chat_combiner_bloc/chat_combiner_cubit.dart';
 import 'package:chat/application/chat/chat_searcher_bloc/chat_searcher_cubit.dart';
 import 'package:chat/application/chat/chat_watcher_bloc/chat_watcher_cubit.dart';
 import 'package:flutter/material.dart';
@@ -21,18 +22,21 @@ class AppWidget extends StatelessWidget {
         providers: [
           BlocProvider(create: (context) => getIt<ThemeSwitcherCubit>()..initializeTheme()),
           BlocProvider(
-            create: (context) => getIt<ProjectWatcherBloc>()..add(const ProjectWatcherEvent.startWatchAll()),
+            create: (context) => getIt<ProjectWatcherBloc>()
+              ..add(const ProjectWatcherEvent.startWatchAll()),
           ),
           BlocProvider(
-            create: (context) => getIt<ChatWatcherCubit>()..startWatchAll(),
+            create: (context) => getIt<ChatWatcherCubit>()
+              ..startWatchAll(),
           ),
           BlocProvider(
             create: (context) => getIt<UserWatcherBloc>()..add(const UserWatcherEvent.startWatchAll()),lazy: false,
           ),
           BlocProvider(create: (context) => getIt<ProjectFilterBloc>()),
           BlocProvider(create: (context) => getIt<ProfileWatcherCubit>()),
+          BlocProvider(create: (context) => getIt<ChatSearcherCubit>()),
           BlocProvider(create: (context) => getIt<ChatFormBloc>()),
-          BlocProvider(create: (context) => getIt<ChatSearcherCubit>()..watchSearchChats(),lazy: false,),
+         BlocProvider(create: (context) => getIt<ChatCombinerCubit>()..watchSearchChats(),lazy: false,),
           BlocProvider(
             create: (context) =>
                 getIt<AuthBloc>()..add(AuthEvent.authCheckRequested()),

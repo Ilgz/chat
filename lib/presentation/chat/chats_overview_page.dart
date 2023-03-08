@@ -1,6 +1,7 @@
 import 'package:chat/application/chat/chat_watcher_bloc/chat_watcher_cubit.dart';
 import 'package:chat/domain/chat/chat.dart';
 import 'package:chat/presentation/chat/widgets/direct_chat_tile.dart';
+import 'package:chat/presentation/core/routes/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:chat/application/projects/project_watcher/project_watcher_bloc.dart';
@@ -8,15 +9,19 @@ import 'package:chat/domain/projects/project.dart';
 import 'package:chat/presentation/chat/widgets/group_chat_tile.dart';
 import 'package:chat/presentation/core/widgets/custom_scaffold.dart';
 import 'package:chat/presentation/core/widgets/no_result_card.dart';
+import 'package:go_router/go_router.dart';
 
 class ChatsOverviewPage extends StatelessWidget {
 const ChatsOverviewPage({Key? key}) : super(key: key);
 @override
 Widget build(BuildContext context) {
   return CustomScaffold(
-      appBarTitle: "Чат",
+      appBarTitle: Text("Чат"),
       actions: [
-        IconButton(onPressed: (){}, icon: Icon(Icons.search))
+        IconButton(onPressed: (){
+           goToChatSearchPage(context);
+
+        }, icon: Icon(Icons.search))
       ],
       drawer: Drawer(),
       isScrolling: true,

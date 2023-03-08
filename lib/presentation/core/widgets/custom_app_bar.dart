@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends AppBar {
-  final String? textTitle;
+  final Widget? textTitle;
   final TextStyle? textStyle;
   final IconData? leadingIconData;
   @override
@@ -31,7 +31,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
             actions: widget.actions,
             elevation: 0,
             titleTextStyle: widget.textStyle,
-            title: Text(widget.textTitle ?? 'Task-manager'),
+            title: widget.textTitle,
           ),
         ),
       ),

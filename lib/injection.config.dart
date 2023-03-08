@@ -5,57 +5,59 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:chat/application/auth/auth_bloc.dart' as _i27;
+import 'package:chat/application/auth/auth_bloc.dart' as _i28;
 import 'package:chat/application/auth/profile_watcher/profile_watcher_cubit.dart'
-    as _i16;
-import 'package:chat/application/auth/sign_in_form/sign_in_form_bloc.dart'
-    as _i22;
-import 'package:chat/application/auth/sign_up_form/sign_up_form_bloc.dart'
-    as _i23;
-import 'package:chat/application/chat/chat_form_bloc/chat_form_bloc.dart'
-    as _i28;
-import 'package:chat/application/chat/chat_searcher_bloc/chat_searcher_cubit.dart'
-    as _i33;
-import 'package:chat/application/chat/chat_watcher_bloc/chat_watcher_cubit.dart'
-    as _i29;
-import 'package:chat/application/core/theme_switcher/theme_switcher_cubit.dart'
-    as _i32;
-import 'package:chat/application/projects/project_actor/project_actor_cubit.dart'
     as _i17;
-import 'package:chat/application/projects/project_filter/project_filter_bloc.dart'
-    as _i18;
-import 'package:chat/application/projects/project_form/project_form_bloc.dart'
-    as _i19;
-import 'package:chat/application/projects/project_watcher/project_watcher_bloc.dart'
-    as _i20;
-import 'package:chat/application/projects/tasks/task_actor/task_actor_cubit.dart'
+import 'package:chat/application/auth/sign_in_form/sign_in_form_bloc.dart'
+    as _i23;
+import 'package:chat/application/auth/sign_up_form/sign_up_form_bloc.dart'
     as _i24;
-import 'package:chat/application/projects/tasks/task_form/task_form_bloc.dart'
-    as _i25;
-import 'package:chat/application/users/user_watcher/user_watcher_bloc.dart'
-    as _i26;
-import 'package:chat/domain/auth/i_auth_facade.dart' as _i8;
-import 'package:chat/domain/chat/i_chat_facade.dart' as _i10;
-import 'package:chat/domain/core/theme_switcher/i_theme_switcher_facade.dart'
+import 'package:chat/application/chat/chat_combiner_bloc/chat_combiner_cubit.dart'
+    as _i34;
+import 'package:chat/application/chat/chat_form_bloc/chat_form_bloc.dart'
+    as _i29;
+import 'package:chat/application/chat/chat_searcher_bloc/chat_searcher_cubit.dart'
+    as _i3;
+import 'package:chat/application/chat/chat_watcher_bloc/chat_watcher_cubit.dart'
     as _i30;
-import 'package:chat/domain/projects/i_project_repository.dart' as _i12;
-import 'package:chat/domain/users/i_user_repository.dart' as _i14;
-import 'package:chat/infrastructure/auth/firebase_auth_facade.dart' as _i9;
-import 'package:chat/infrastructure/chat/chat_facade.dart' as _i11;
-import 'package:chat/infrastructure/core/app_injectable_module.dart' as _i34;
-import 'package:chat/infrastructure/core/theme_switcher/theme_switcher_facade.dart'
+import 'package:chat/application/core/theme_switcher/theme_switcher_cubit.dart'
+    as _i33;
+import 'package:chat/application/projects/project_actor/project_actor_cubit.dart'
+    as _i18;
+import 'package:chat/application/projects/project_filter/project_filter_bloc.dart'
+    as _i19;
+import 'package:chat/application/projects/project_form/project_form_bloc.dart'
+    as _i20;
+import 'package:chat/application/projects/project_watcher/project_watcher_bloc.dart'
+    as _i21;
+import 'package:chat/application/projects/tasks/task_actor/task_actor_cubit.dart'
+    as _i25;
+import 'package:chat/application/projects/tasks/task_form/task_form_bloc.dart'
+    as _i26;
+import 'package:chat/application/users/user_watcher/user_watcher_bloc.dart'
+    as _i27;
+import 'package:chat/domain/auth/i_auth_facade.dart' as _i9;
+import 'package:chat/domain/chat/i_chat_facade.dart' as _i11;
+import 'package:chat/domain/core/theme_switcher/i_theme_switcher_facade.dart'
     as _i31;
-import 'package:chat/infrastructure/projects/project_repository.dart' as _i13;
-import 'package:chat/infrastructure/users/user_repository.dart' as _i15;
-import 'package:cloud_firestore/cloud_firestore.dart' as _i5;
-import 'package:firebase_auth/firebase_auth.dart' as _i4;
-import 'package:firebase_messaging/firebase_messaging.dart' as _i6;
-import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i7;
+import 'package:chat/domain/projects/i_project_repository.dart' as _i13;
+import 'package:chat/domain/users/i_user_repository.dart' as _i15;
+import 'package:chat/infrastructure/auth/firebase_auth_facade.dart' as _i10;
+import 'package:chat/infrastructure/chat/chat_facade.dart' as _i12;
+import 'package:chat/infrastructure/core/app_injectable_module.dart' as _i35;
+import 'package:chat/infrastructure/core/theme_switcher/theme_switcher_facade.dart'
+    as _i32;
+import 'package:chat/infrastructure/projects/project_repository.dart' as _i14;
+import 'package:chat/infrastructure/users/user_repository.dart' as _i16;
+import 'package:cloud_firestore/cloud_firestore.dart' as _i6;
+import 'package:firebase_auth/firebase_auth.dart' as _i5;
+import 'package:firebase_messaging/firebase_messaging.dart' as _i7;
+import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i8;
 import 'package:get_it/get_it.dart' as _i1;
-import 'package:http/http.dart' as _i3;
+import 'package:http/http.dart' as _i4;
 import 'package:injectable/injectable.dart' as _i2;
 import 'package:shared_preferences/shared_preferences.dart'
-    as _i21; // ignore_for_file: unnecessary_lambdas
+    as _i22; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 extension GetItInjectableX on _i1.GetIt {
@@ -70,70 +72,71 @@ extension GetItInjectableX on _i1.GetIt {
       environmentFilter,
     );
     final appInjectableProdModule = _$AppInjectableProdModule();
-    gh.lazySingleton<_i3.Client>(() => appInjectableProdModule.httpClient);
-    gh.lazySingleton<_i4.FirebaseAuth>(
+    gh.factory<_i3.ChatSearcherCubit>(() => _i3.ChatSearcherCubit());
+    gh.lazySingleton<_i4.Client>(() => appInjectableProdModule.httpClient);
+    gh.lazySingleton<_i5.FirebaseAuth>(
         () => appInjectableProdModule.firebaseAuthDev);
-    gh.lazySingleton<_i5.FirebaseFirestore>(
+    gh.lazySingleton<_i6.FirebaseFirestore>(
         () => appInjectableProdModule.firebaseFirestoreDev);
-    gh.lazySingleton<_i6.FirebaseMessaging>(
+    gh.lazySingleton<_i7.FirebaseMessaging>(
         () => appInjectableProdModule.firebaseMessaging);
-    gh.lazySingleton<_i7.FlutterSecureStorage>(
+    gh.lazySingleton<_i8.FlutterSecureStorage>(
         () => appInjectableProdModule.storage);
-    gh.lazySingleton<_i8.IAuthFacade>(() => _i9.FirebaseAuthFacade(
-          gh<_i4.FirebaseAuth>(),
-          gh<_i5.FirebaseFirestore>(),
-          gh<_i6.FirebaseMessaging>(),
+    gh.lazySingleton<_i9.IAuthFacade>(() => _i10.FirebaseAuthFacade(
+          gh<_i5.FirebaseAuth>(),
+          gh<_i6.FirebaseFirestore>(),
+          gh<_i7.FirebaseMessaging>(),
         ));
-    gh.lazySingleton<_i10.IChatFacade>(() => _i11.ChatFacade(
-          gh<_i5.FirebaseFirestore>(),
-          gh<_i8.IAuthFacade>(),
+    gh.lazySingleton<_i11.IChatFacade>(() => _i12.ChatFacade(
+          gh<_i6.FirebaseFirestore>(),
+          gh<_i9.IAuthFacade>(),
         ));
-    gh.lazySingleton<_i12.IProjectRepository>(() => _i13.ProjectRepository(
-          gh<_i5.FirebaseFirestore>(),
-          gh<_i8.IAuthFacade>(),
+    gh.lazySingleton<_i13.IProjectRepository>(() => _i14.ProjectRepository(
+          gh<_i6.FirebaseFirestore>(),
+          gh<_i9.IAuthFacade>(),
         ));
-    gh.lazySingleton<_i14.IUserRepository>(() => _i15.UserRepository(
-          gh<_i5.FirebaseFirestore>(),
-          gh<_i4.FirebaseAuth>(),
+    gh.lazySingleton<_i15.IUserRepository>(() => _i16.UserRepository(
+          gh<_i6.FirebaseFirestore>(),
+          gh<_i5.FirebaseAuth>(),
         ));
-    gh.factory<_i16.ProfileWatcherCubit>(
-        () => _i16.ProfileWatcherCubit(gh<_i8.IAuthFacade>()));
-    gh.factory<_i17.ProjectActorCubit>(
-        () => _i17.ProjectActorCubit(gh<_i12.IProjectRepository>()));
-    gh.factory<_i18.ProjectFilterBloc>(() => _i18.ProjectFilterBloc());
-    gh.factory<_i19.ProjectFormBloc>(
-        () => _i19.ProjectFormBloc(gh<_i12.IProjectRepository>()));
-    gh.factory<_i20.ProjectWatcherBloc>(
-        () => _i20.ProjectWatcherBloc(gh<_i12.IProjectRepository>()));
-    await gh.factoryAsync<_i21.SharedPreferences>(
+    gh.factory<_i17.ProfileWatcherCubit>(
+        () => _i17.ProfileWatcherCubit(gh<_i9.IAuthFacade>()));
+    gh.factory<_i18.ProjectActorCubit>(
+        () => _i18.ProjectActorCubit(gh<_i13.IProjectRepository>()));
+    gh.factory<_i19.ProjectFilterBloc>(() => _i19.ProjectFilterBloc());
+    gh.factory<_i20.ProjectFormBloc>(
+        () => _i20.ProjectFormBloc(gh<_i13.IProjectRepository>()));
+    gh.factory<_i21.ProjectWatcherBloc>(
+        () => _i21.ProjectWatcherBloc(gh<_i13.IProjectRepository>()));
+    await gh.factoryAsync<_i22.SharedPreferences>(
       () => appInjectableProdModule.sharedPreferences,
       preResolve: true,
     );
-    gh.factory<_i22.SignInFormBloc>(
-        () => _i22.SignInFormBloc(gh<_i8.IAuthFacade>()));
-    gh.factory<_i23.SignUpFormBloc>(
-        () => _i23.SignUpFormBloc(gh<_i8.IAuthFacade>()));
-    gh.factory<_i24.TaskActorCubit>(
-        () => _i24.TaskActorCubit(gh<_i12.IProjectRepository>()));
-    gh.factory<_i25.TaskFormBloc>(
-        () => _i25.TaskFormBloc(gh<_i12.IProjectRepository>()));
-    gh.singleton<_i26.UserWatcherBloc>(
-        _i26.UserWatcherBloc(gh<_i14.IUserRepository>()));
-    gh.factory<_i27.AuthBloc>(() => _i27.AuthBloc(gh<_i8.IAuthFacade>()));
-    gh.factory<_i28.ChatFormBloc>(
-        () => _i28.ChatFormBloc(gh<_i10.IChatFacade>()));
-    gh.singleton<_i29.ChatWatcherCubit>(
-        _i29.ChatWatcherCubit(gh<_i10.IChatFacade>()));
-    gh.lazySingleton<_i30.IThemeSwitcherFacade>(
-        () => _i31.ThemeSwitcherFacade(gh<_i21.SharedPreferences>()));
-    gh.factory<_i32.ThemeSwitcherCubit>(
-        () => _i32.ThemeSwitcherCubit(gh<_i30.IThemeSwitcherFacade>()));
-    gh.factory<_i33.ChatSearcherCubit>(() => _i33.ChatSearcherCubit(
-          gh<_i29.ChatWatcherCubit>(),
-          gh<_i26.UserWatcherBloc>(),
+    gh.factory<_i23.SignInFormBloc>(
+        () => _i23.SignInFormBloc(gh<_i9.IAuthFacade>()));
+    gh.factory<_i24.SignUpFormBloc>(
+        () => _i24.SignUpFormBloc(gh<_i9.IAuthFacade>()));
+    gh.factory<_i25.TaskActorCubit>(
+        () => _i25.TaskActorCubit(gh<_i13.IProjectRepository>()));
+    gh.factory<_i26.TaskFormBloc>(
+        () => _i26.TaskFormBloc(gh<_i13.IProjectRepository>()));
+    gh.lazySingleton<_i27.UserWatcherBloc>(
+        () => _i27.UserWatcherBloc(gh<_i15.IUserRepository>()));
+    gh.factory<_i28.AuthBloc>(() => _i28.AuthBloc(gh<_i9.IAuthFacade>()));
+    gh.factory<_i29.ChatFormBloc>(
+        () => _i29.ChatFormBloc(gh<_i11.IChatFacade>()));
+    gh.lazySingleton<_i30.ChatWatcherCubit>(
+        () => _i30.ChatWatcherCubit(gh<_i11.IChatFacade>()));
+    gh.lazySingleton<_i31.IThemeSwitcherFacade>(
+        () => _i32.ThemeSwitcherFacade(gh<_i22.SharedPreferences>()));
+    gh.factory<_i33.ThemeSwitcherCubit>(
+        () => _i33.ThemeSwitcherCubit(gh<_i31.IThemeSwitcherFacade>()));
+    gh.factory<_i34.ChatCombinerCubit>(() => _i34.ChatCombinerCubit(
+          gh<_i30.ChatWatcherCubit>(),
+          gh<_i27.UserWatcherBloc>(),
         ));
     return this;
   }
 }
 
-class _$AppInjectableProdModule extends _i34.AppInjectableProdModule {}
+class _$AppInjectableProdModule extends _i35.AppInjectableProdModule {}

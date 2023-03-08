@@ -5,6 +5,7 @@ class PageRoutes{
   static const signUpPage="/sign_up_page";
   static const membersPage="members_page";
   static const chatsOverviewPage="/chats_overview_page";
+  static const chatSearchPage="chat_search_page";
   static const chatPage="chat_page";
   static const profilePage="/profile_page";
 }

@@ -6,7 +6,7 @@ class CustomScaffold extends StatelessWidget {
   final Widget body;
   final Widget? floatingActionButton;
   final bool isScrolling;
-  final String? appBarTitle;
+  final Widget? appBarTitle;
   final BottomNavigationBar? bottomNavigationBar;
   final bool useAppBar;
   final List<Widget> actions;
@@ -20,7 +20,7 @@ class CustomScaffold extends StatelessWidget {
     this.bottomNavigationBar,
     this.actions = const [],
     this.isScrolling = false,
-    this.appBarTitle = 'Custom Widgets',
+    this.appBarTitle,
     this.drawer
   }) : super(key: key);
 
