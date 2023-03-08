@@ -30,13 +30,13 @@ class AppWidget extends StatelessWidget {
               ..startWatchAll(),
           ),
           BlocProvider(
-            create: (context) => getIt<UserWatcherBloc>()..add(const UserWatcherEvent.startWatchAll()),lazy: false,
+            create: (context) => getIt<UserWatcherBloc>()..add(const UserWatcherEvent.startWatchAll(),),
           ),
           BlocProvider(create: (context) => getIt<ProjectFilterBloc>()),
           BlocProvider(create: (context) => getIt<ProfileWatcherCubit>()),
           BlocProvider(create: (context) => getIt<ChatSearcherCubit>()),
           BlocProvider(create: (context) => getIt<ChatFormBloc>()),
-         BlocProvider(create: (context) => getIt<ChatCombinerCubit>()..watchSearchChats(),lazy: false,),
+         BlocProvider(create: (context) => getIt<ChatCombinerCubit>()..watchSearchChats(),),
           BlocProvider(
             create: (context) =>
                 getIt<AuthBloc>()..add(AuthEvent.authCheckRequested()),

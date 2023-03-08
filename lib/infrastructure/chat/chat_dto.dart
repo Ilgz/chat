@@ -25,7 +25,7 @@ abstract class ChatDto implements  _$ChatDto {
       }) = _ChatDto;
   factory ChatDto.fromJson(Map<String, dynamic> json) =>
       _$ChatDtoFromJson(json);
-  factory ChatDto.fromDomain(Chat  chat,List<DocumentReference> members) => ChatDto(members: members,      date: chat.date,messages:chat.messages.map((message) => MessageChatDto.fromDomain(message)).toList(),documentReference: chat.documentReference
+  factory ChatDto.fromDomain(Chat  chat,List<DocumentReference> members) => ChatDto(members: members,date: chat.date,messages:chat.messages.map((message) => MessageChatDto.fromDomain(message)).toList()
   );
   factory ChatDto.fromFirestore(DocumentSnapshot doc) {
     return ChatDto.fromJson(doc.data()! as Map<String, dynamic>).copyWith(

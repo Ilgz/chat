@@ -133,17 +133,20 @@ class ChatFacade implements IChatFacade {
   Future<Either<FirebaseFirestoreFailure, Unit>> sendDirectMessage(Chat chat, MessageChat messageChat) async{
     try {
       final userOption = getIt<IAuthFacade>().getSignedInUserId();
-      final userId =
-          "users/${userOption.getOrElse(() => throw NotAuthenticatedError())}";
-      await chat.documentReference.update({
+      final userReference =
+          _firebaseFirestore.doc("users/${userOption.getOrElse(() => throw NotAuthenticatedError())}");
+      if(chat.messages.isEmpty){
+      }
+     await ((chat.messages.isEmpty?(await _firebaseFirestore.chatCollection.add(ChatDto.fromDomain(chat,[chat.chattingWith.reference,userReference]).toJson())
+      ):chat.documentReference).update({
         "messages": FieldValue.arrayUnion([
           MessageChatDto.fromDomain(messageChat.copyWith(
               date: Timestamp.now(),
               sentFrom: messageChat.sentFrom.copyWith(
-                  reference: FirebaseFirestore.instance.doc(userId))))
+                  reference: userReference)))
               .toJson()
         ])
-      });
+      }));
       return right(unit);
     } on FirebaseException catch (e) {
       if (e.message!.contains('PERMISSION_DENIED')) {
