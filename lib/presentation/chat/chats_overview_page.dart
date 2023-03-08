@@ -9,16 +9,15 @@ import 'package:chat/domain/projects/project.dart';
 import 'package:chat/presentation/chat/widgets/group_chat_tile.dart';
 import 'package:chat/presentation/core/widgets/custom_scaffold.dart';
 import 'package:chat/presentation/core/widgets/no_result_card.dart';
-import 'package:go_router/go_router.dart';
 
 class ChatsOverviewPage extends StatelessWidget {
 const ChatsOverviewPage({Key? key}) : super(key: key);
 @override
 Widget build(BuildContext context) {
   return CustomScaffold(
+    hasBackButton: false,
       appBarTitle: Text("Чат"),
       actions: [
-
         IconButton(onPressed: (){
           goToChatSearchPage(context);
         }, icon: Icon(Icons.search)),

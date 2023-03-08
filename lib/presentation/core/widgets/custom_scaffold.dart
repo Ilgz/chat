@@ -11,6 +11,7 @@ class CustomScaffold extends StatelessWidget {
   final bool useAppBar;
   final List<Widget> actions;
   final Drawer? drawer;
+  final bool hasBackButton;
   const CustomScaffold({
     Key? key,
     required this.body,
@@ -20,6 +21,7 @@ class CustomScaffold extends StatelessWidget {
     this.bottomNavigationBar,
     this.actions = const [],
     this.isScrolling = false,
+    this.hasBackButton=true,
     this.appBarTitle,
     this.drawer
   }) : super(key: key);
@@ -30,6 +32,7 @@ class CustomScaffold extends StatelessWidget {
       drawer:  drawer,
       appBar: useAppBar
           ? CustomAppBar(
+        hasBackButton: hasBackButton,
               textTitle: appBarTitle,
               actions: actions,
             )

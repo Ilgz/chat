@@ -4,7 +4,7 @@ class CustomAppBar extends AppBar {
   final Widget? textTitle;
   final TextStyle? textStyle;
   final IconData? leadingIconData;
-  @override
+  final bool hasBackButton;
   final List<Widget> actions;
   CustomAppBar({
     Key? key,
@@ -12,6 +12,7 @@ class CustomAppBar extends AppBar {
     this.actions=const [],
     this.textStyle,
     this.leadingIconData,
+    this.hasBackButton=true
   }) : super(key: key);
 
   @override
@@ -27,9 +28,11 @@ class _CustomAppBarState extends State<CustomAppBar> {
         child: SizedBox(
           height: 46,
           child: AppBar(
+
               backgroundColor: Theme.of(context).primaryColor,
             actions: widget.actions,
             elevation: 0,
+            automaticallyImplyLeading: widget.hasBackButton,
             titleTextStyle: widget.textStyle,
             title: widget.textTitle,
           ),
