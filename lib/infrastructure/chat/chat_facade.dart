@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:chat/domain/auth/i_auth_facade.dart';
 import 'package:chat/domain/chat/chat.dart';
 import 'package:chat/domain/chat/i_chat_facade.dart';
@@ -11,10 +13,11 @@ import 'package:chat/infrastructure/chat/message_chat_dto.dart';
 import 'package:chat/infrastructure/core/firestore_helpers.dart';
 import 'package:chat/infrastructure/users/user_dto.dart';
 import 'package:chat/injection.dart';
+import 'package:chat/presentation/core/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
-
+import 'package:http/http.dart' as http;
 @LazySingleton(as: IChatFacade)
 class ChatFacade implements IChatFacade {
   final FirebaseFirestore _firebaseFirestore;
@@ -138,6 +141,7 @@ class ChatFacade implements IChatFacade {
       if(chat.messages.isEmpty){
         await chat.documentReference.set(ChatDto.fromDomain(chat,[chat.chattingWith.reference,userReference]).toJson());
       }
+      
       await  chat.documentReference.update({
         "messages": FieldValue.arrayUnion([
           MessageChatDto.fromDomain(messageChat.copyWith(
@@ -147,6 +151,19 @@ class ChatFacade implements IChatFacade {
               .toJson()
         ])
       });
+      for (var fcmToken in chat.chattingWith.fcmTokens){
+        Map<String,dynamic> body={"to":fcmToken,"priority":"high","mutable_content":true,"notification":{
+          "badge":32,
+          "title": messageChat.sentFrom.userName.getOrCrash(),
+          "body": messageChat.messageContent.getOrCrash()
+        }};
+        Map<String, String> requestHeaders = {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ${AppConstants.fcmApiToken}',
+        };
+    await http.post(Uri.parse(AppConstants.fcmServer),headers:requestHeaders,body: jsonEncode(body));
+    }
+
       return right(unit);
     } on FirebaseException catch (e) {
       if (e.message!.contains('PERMISSION_DENIED')) {
