@@ -22,8 +22,8 @@ class DirectChatTile extends StatelessWidget {
       subtitle: () {
         final lastMessage=chat.messages.isNotEmpty?chat.messages.last:null;
         return lastMessage==null?null:Text(
-          "${lastMessage.sentByMe ? "You" :lastMessage.sentFrom.userName.getOrCrash()}: ${lastMessage.messageContent
-              .getOrCrash()}", maxLines: 1,style: Theme.of(context).textTheme.caption, overflow: TextOverflow.ellipsis,);
+      lastMessage.messageContent
+              .getOrCrash(), maxLines: 1,style: Theme.of(context).textTheme.caption, overflow: TextOverflow.ellipsis,);
       }(),
       trailing: Text(DateFormat.yMMMMd()
           .format(DateTime.fromMillisecondsSinceEpoch(chat.messages.isEmpty

@@ -124,7 +124,7 @@ class ChatFacade implements IChatFacade {
   Future<User> getChattingWithFromReference(
       String userId, List<DocumentReference> members) async {
     final userRef =
-        members.firstWhere((userReference) => userReference.path != userId);
+        members.firstWhere((userReference) => !userReference.path.contains(userId));
     final user = UserDto.fromFirestore((await userRef.get())).toDomain();
     return user;
   }
@@ -136,8 +136,8 @@ class ChatFacade implements IChatFacade {
       final userReference =
           _firebaseFirestore.doc("users/${userOption.getOrElse(() => throw NotAuthenticatedError())}");
       if(chat.messages.isEmpty){
+        await chat.documentReference.set(ChatDto.fromDomain(chat,[chat.chattingWith.reference,userReference]).toJson());
       }
-      await chat.documentReference.set(ChatDto.fromDomain(chat,[chat.chattingWith.reference,userReference]).toJson());
       await  chat.documentReference.update({
         "messages": FieldValue.arrayUnion([
           MessageChatDto.fromDomain(messageChat.copyWith(
