@@ -40,6 +40,7 @@ class ChatPage extends StatelessWidget {
           body: Column(
             children: [
               projectOrChat.fold((initialProject) {
+                print("project");
                 return Expanded(
                   child: BlocBuilder<ProjectWatcherBloc, ProjectWatcherState>(
                     builder: (context, state) {
@@ -107,6 +108,7 @@ class ChatPage extends StatelessWidget {
                   ),
                 );
               }, (initialChat) {
+                print("chat");
                 return Expanded(
                   child: BlocBuilder<ChatWatcherCubit, ChatWatcherState>(
                     builder: (context, state) {

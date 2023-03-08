@@ -21,12 +21,20 @@ class ChatCombinerCubit extends Cubit<ChatCombinerState> {
       : super(const ChatCombinerState.initial());
   void watchSearchChats() {
     emit(const ChatCombinerState.loadInProgress());
-    receiveChats(combineChatsWithUsers(_userWatcherBloc.state, _chatWatcherCubit.state));
+    final userSubject=BehaviorSubject<UserWatcherState>.seeded(_userWatcherBloc.state);
+    final chatSubject=BehaviorSubject<ChatWatcherState>.seeded(_chatWatcherCubit.state);
     final Stream<List<Chat>> stream =
-        Rx.combineLatest2(_userWatcherBloc.stream, _chatWatcherCubit.stream,
+        Rx.combineLatest2(userSubject, chatSubject,
             (userState, chatState) {
            return combineChatsWithUsers(userState, chatState);
     });
+    _userWatcherBloc.stream.listen((state) {
+      userSubject.add(state);
+    });
+    _chatWatcherCubit.stream.listen((state) {
+      chatSubject.add(state);
+    });
+
     stream.listen((event) {
       receiveChats(event);
     });
@@ -36,6 +44,7 @@ class ChatCombinerCubit extends Cubit<ChatCombinerState> {
     emit(ChatCombinerState.loadSuccess(chats));
   }
   List<Chat> combineChatsWithUsers(UserWatcherState userState, ChatWatcherState chatState){
+    print(userState);
     late List<User> users;
     late List<Chat> chats;
     if (userState is UsersLoadSuccess) {
