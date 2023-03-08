@@ -20,7 +20,6 @@ class ChatWatcherCubit extends Cubit<ChatWatcherState> {
   });
   }
   void receiveChats (Either<FirebaseFirestoreFailure, List<Chat>> chats) {
-    print("received");
   emit(chats.fold((f) => ChatWatcherState.loadFailure(f),
   (notes) => ChatWatcherState.loadSuccess(notes)));
   }

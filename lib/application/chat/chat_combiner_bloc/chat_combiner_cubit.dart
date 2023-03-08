@@ -1,12 +1,18 @@
+import 'dart:convert';
+
 import 'package:bloc/bloc.dart';
 import 'package:chat/application/chat/chat_watcher_bloc/chat_watcher_cubit.dart';
 import 'package:chat/application/users/user_watcher/user_watcher_bloc.dart';
 import 'package:chat/domain/chat/chat.dart';
 import 'package:chat/domain/projects/project_failure.dart';
 import 'package:chat/domain/users/user.dart';
+import 'package:chat/infrastructure/core/firestore_helpers.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:uuid/uuid.dart';
 
 part 'chat_combiner_cubit.freezed.dart';
 
@@ -34,7 +40,6 @@ class ChatCombinerCubit extends Cubit<ChatCombinerState> {
     _chatWatcherCubit.stream.listen((state) {
       chatSubject.add(state);
     });
-
     stream.listen((event) {
       receiveChats(event);
     });
@@ -44,7 +49,6 @@ class ChatCombinerCubit extends Cubit<ChatCombinerState> {
     emit(ChatCombinerState.loadSuccess(chats));
   }
   List<Chat> combineChatsWithUsers(UserWatcherState userState, ChatWatcherState chatState){
-    print(userState);
     late List<User> users;
     late List<Chat> chats;
     if (userState is UsersLoadSuccess) {
@@ -58,7 +62,7 @@ class ChatCombinerCubit extends Cubit<ChatCombinerState> {
       chats = [];
     }
     final userChats = users
-        .map((user) => Chat.empty().copyWith(chattingWith: user))
+        .map((user) => Chat.empty().copyWith(chattingWith: user,documentReference:FirebaseFirestore.instance.chatCollection.doc(const Uuid().v1())))
         .toList();
     return List.from(chats)
       ..addAll(userChats.where((userChat) => !chats

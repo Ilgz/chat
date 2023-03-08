@@ -137,8 +137,8 @@ class ChatFacade implements IChatFacade {
           _firebaseFirestore.doc("users/${userOption.getOrElse(() => throw NotAuthenticatedError())}");
       if(chat.messages.isEmpty){
       }
-     await ((chat.messages.isEmpty?(await _firebaseFirestore.chatCollection.add(ChatDto.fromDomain(chat,[chat.chattingWith.reference,userReference]).toJson())
-      ):chat.documentReference).update({
+      await chat.documentReference.set(ChatDto.fromDomain(chat,[chat.chattingWith.reference,userReference]).toJson());
+      await  chat.documentReference.update({
         "messages": FieldValue.arrayUnion([
           MessageChatDto.fromDomain(messageChat.copyWith(
               date: Timestamp.now(),
@@ -146,9 +146,10 @@ class ChatFacade implements IChatFacade {
                   reference: userReference)))
               .toJson()
         ])
-      }));
+      });
       return right(unit);
     } on FirebaseException catch (e) {
+      print(e.toString());
       if (e.message!.contains('PERMISSION_DENIED')) {
         return left(const FirebaseFirestoreFailure.insufficientPermission());
       } else {

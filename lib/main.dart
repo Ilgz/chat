@@ -15,7 +15,6 @@ void main() async {
     final fbm = FirebaseMessaging.instance;
     FirebaseMessaging.onMessage.listen((_){});
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      print('A new onMessageOpenedApp event was published!');
     });
   }
 
