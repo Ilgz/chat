@@ -18,12 +18,15 @@ Widget build(BuildContext context) {
   return CustomScaffold(
       appBarTitle: Text("Чат"),
       actions: [
-        IconButton(onPressed: (){
-           goToChatSearchPage(context);
 
-        }, icon: Icon(Icons.search))
+        IconButton(onPressed: (){
+          goToChatSearchPage(context);
+        }, icon: Icon(Icons.search)),
+        IconButton(onPressed: (){
+          goToProfilePage(context);
+
+        }, icon: Icon(Icons.person)),
       ],
-      drawer: Drawer(),
       isScrolling: true,
       body: BlocBuilder<ProjectWatcherBloc, ProjectWatcherState>(
         builder: (context, state) {

@@ -149,7 +149,6 @@ class ChatFacade implements IChatFacade {
       });
       return right(unit);
     } on FirebaseException catch (e) {
-      print(e.toString());
       if (e.message!.contains('PERMISSION_DENIED')) {
         return left(const FirebaseFirestoreFailure.insufficientPermission());
       } else {

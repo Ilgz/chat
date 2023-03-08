@@ -7,7 +7,7 @@ class PageRoutes{
   static const chatsOverviewPage="/chats_overview_page";
   static const chatSearchPage="chat_search_page";
   static const chatPage="chat_page";
-  static const profilePage="/profile_page";
+  static const profilePage="profile_page";
 }
 class AppColorConstants{
   static const lightScaffoldBackgroundColor=Color(0xffDCFFD9);
