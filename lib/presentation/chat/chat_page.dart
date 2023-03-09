@@ -69,6 +69,7 @@ class ChatPage extends StatelessWidget {
                                       ],
                                       MessageTile(
                                         messageChat: messages[index],
+                                        isDirectMessage: false,
                                       )
                                     ],
                                   );
@@ -136,6 +137,7 @@ class ChatPage extends StatelessWidget {
                                       ],
                                       MessageTile(
                                         messageChat: messages[index],
+                                        isDirectMessage: true,
                                       )
                                     ],
                                   );

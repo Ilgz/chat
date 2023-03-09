@@ -5,7 +5,8 @@ import 'package:chat/presentation/core/utils/name_color_generator.dart';
 
 class MessageTile extends StatelessWidget {
   final MessageChat messageChat;
-  const MessageTile({super.key, required this.messageChat});
+  final bool isDirectMessage;
+  const MessageTile({super.key, required this.messageChat, required this.isDirectMessage});
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -30,7 +31,7 @@ class MessageTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Visibility(
-                  visible:!messageChat.sentByMe,
+                  visible:(!isDirectMessage&&!messageChat.sentByMe),
                   child: Text(
                     messageChat.sentFrom.userName.getOrCrash(),
                     style: TextStyle(
