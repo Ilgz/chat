@@ -84,7 +84,10 @@ class ChatFacade implements IChatFacade {
       final aTimeStamp=a.messages.isEmpty?a.date:a.messages.last.date;
       final bTimeStamp=b.messages.isEmpty?b.date:b.messages.last.date;
       return  bTimeStamp.compareTo(aTimeStamp);});
-    return newChats;
+    newChats=newChats.map((chat) {
+      return chat.copyWith(unreadMessages:(chat.messages.where((message) => !message.sentByMe).where((message) => !message.hasRead).length));
+    }).toList();
+      return newChats;
   }
 
   List<MessageChat> setMessagesInColumn(Chat chat) {
@@ -113,7 +116,7 @@ class ChatFacade implements IChatFacade {
             .getSignedInUserId()
             .getOrElse(() => throw NotAuthenticatedError()),
         chatDto.members);
-    final chat = chatDto.toDomain(chattingWith);
+    final chat = chatDto.toDomain(chattingWith,);
     return chat;
   }
 
@@ -187,14 +190,9 @@ class ChatFacade implements IChatFacade {
   @override
   Future<Either<FirebaseFirestoreFailure, Unit>> markDirectMessageAsHasRead(Chat chat) async{
     try {
-      final messagesNotSentByMe=chat.messages.where((message) => !message.sentByMe);
-      if(messagesNotSentByMe.isNotEmpty){
-        final lastMessage=messagesNotSentByMe.last;
-        final lastMessageHasRead=lastMessage.hasRead;
-        if(!lastMessageHasRead){
-         await  chat.documentReference.update({"messages":chat.messages.map((message) => MessageChatDto.fromDomain(message.copyWith(hasRead: true)).toJson()).toList()});
-        }
-      }
+         if(chat.unreadMessages!=0){
+           await  chat.documentReference.update({"messages":chat.messages.map((message) => MessageChatDto.fromDomain(message.copyWith(hasRead: true)).toJson()).toList()});
+         }
     return right(unit);
     } on FirebaseException catch (e) {
     if (e.message!.contains('PERMISSION_DENIED')) {

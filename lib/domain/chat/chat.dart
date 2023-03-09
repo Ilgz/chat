@@ -17,6 +17,7 @@ abstract class Chat implements _$Chat {
     required Timestamp date,
     required List<MessageChat> messages,
     required DocumentReference documentReference,
+    required int unreadMessages
   }) = _Chat;
 
   Option<ValueFailure<dynamic>> get failureOption {
@@ -34,6 +35,6 @@ abstract class Chat implements _$Chat {
         chattingWith: User.empty(),
         date: Timestamp.now(),
         messages: [],
-        documentReference: dummyRef);
+        documentReference: dummyRef, unreadMessages: 0);
   }
 }

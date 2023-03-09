@@ -21,6 +21,7 @@ mixin _$Chat {
   List<MessageChat> get messages => throw _privateConstructorUsedError;
   DocumentReference<Object?> get documentReference =>
       throw _privateConstructorUsedError;
+  int get unreadMessages => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ChatCopyWith<Chat> get copyWith => throw _privateConstructorUsedError;
@@ -35,7 +36,8 @@ abstract class $ChatCopyWith<$Res> {
       {User chattingWith,
       Timestamp date,
       List<MessageChat> messages,
-      DocumentReference<Object?> documentReference});
+      DocumentReference<Object?> documentReference,
+      int unreadMessages});
 
   $UserCopyWith<$Res> get chattingWith;
 }
@@ -57,6 +59,7 @@ class _$ChatCopyWithImpl<$Res, $Val extends Chat>
     Object? date = null,
     Object? messages = null,
     Object? documentReference = null,
+    Object? unreadMessages = null,
   }) {
     return _then(_value.copyWith(
       chattingWith: null == chattingWith
@@ -75,6 +78,10 @@ class _$ChatCopyWithImpl<$Res, $Val extends Chat>
           ? _value.documentReference
           : documentReference // ignore: cast_nullable_to_non_nullable
               as DocumentReference<Object?>,
+      unreadMessages: null == unreadMessages
+          ? _value.unreadMessages
+          : unreadMessages // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 
@@ -97,7 +104,8 @@ abstract class _$$_ChatCopyWith<$Res> implements $ChatCopyWith<$Res> {
       {User chattingWith,
       Timestamp date,
       List<MessageChat> messages,
-      DocumentReference<Object?> documentReference});
+      DocumentReference<Object?> documentReference,
+      int unreadMessages});
 
   @override
   $UserCopyWith<$Res> get chattingWith;
@@ -116,6 +124,7 @@ class __$$_ChatCopyWithImpl<$Res> extends _$ChatCopyWithImpl<$Res, _$_Chat>
     Object? date = null,
     Object? messages = null,
     Object? documentReference = null,
+    Object? unreadMessages = null,
   }) {
     return _then(_$_Chat(
       chattingWith: null == chattingWith
@@ -134,6 +143,10 @@ class __$$_ChatCopyWithImpl<$Res> extends _$ChatCopyWithImpl<$Res, _$_Chat>
           ? _value.documentReference
           : documentReference // ignore: cast_nullable_to_non_nullable
               as DocumentReference<Object?>,
+      unreadMessages: null == unreadMessages
+          ? _value.unreadMessages
+          : unreadMessages // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -145,7 +158,8 @@ class _$_Chat extends _Chat {
       {required this.chattingWith,
       required this.date,
       required final List<MessageChat> messages,
-      required this.documentReference})
+      required this.documentReference,
+      required this.unreadMessages})
       : _messages = messages,
         super._();
 
@@ -163,10 +177,12 @@ class _$_Chat extends _Chat {
 
   @override
   final DocumentReference<Object?> documentReference;
+  @override
+  final int unreadMessages;
 
   @override
   String toString() {
-    return 'Chat(chattingWith: $chattingWith, date: $date, messages: $messages, documentReference: $documentReference)';
+    return 'Chat(chattingWith: $chattingWith, date: $date, messages: $messages, documentReference: $documentReference, unreadMessages: $unreadMessages)';
   }
 
   @override
@@ -179,12 +195,19 @@ class _$_Chat extends _Chat {
             (identical(other.date, date) || other.date == date) &&
             const DeepCollectionEquality().equals(other._messages, _messages) &&
             (identical(other.documentReference, documentReference) ||
-                other.documentReference == documentReference));
+                other.documentReference == documentReference) &&
+            (identical(other.unreadMessages, unreadMessages) ||
+                other.unreadMessages == unreadMessages));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, chattingWith, date,
-      const DeepCollectionEquality().hash(_messages), documentReference);
+  int get hashCode => Object.hash(
+      runtimeType,
+      chattingWith,
+      date,
+      const DeepCollectionEquality().hash(_messages),
+      documentReference,
+      unreadMessages);
 
   @JsonKey(ignore: true)
   @override
@@ -198,7 +221,8 @@ abstract class _Chat extends Chat {
       {required final User chattingWith,
       required final Timestamp date,
       required final List<MessageChat> messages,
-      required final DocumentReference<Object?> documentReference}) = _$_Chat;
+      required final DocumentReference<Object?> documentReference,
+      required final int unreadMessages}) = _$_Chat;
   _Chat._() : super._();
 
   @override
@@ -209,6 +233,8 @@ abstract class _Chat extends Chat {
   List<MessageChat> get messages;
   @override
   DocumentReference<Object?> get documentReference;
+  @override
+  int get unreadMessages;
   @override
   @JsonKey(ignore: true)
   _$$_ChatCopyWith<_$_Chat> get copyWith => throw _privateConstructorUsedError;

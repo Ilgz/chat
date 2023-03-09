@@ -33,7 +33,7 @@ abstract class ChatDto implements  _$ChatDto {
     );
   }
   Chat toDomain(User chattingWith) {
-    return Chat(chattingWith: chattingWith, date: date, messages: messages.map((messageDto) => messageDto.toDomain()).toList(), documentReference: documentReference!);
+    return Chat(chattingWith: chattingWith, date: date, messages: messages.map((messageDto) => messageDto.toDomain()).toList(), documentReference: documentReference!, unreadMessages: 0);
   }
 }
 
