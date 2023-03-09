@@ -23,6 +23,7 @@ mixin _$MessageChatDto {
   String get content => throw _privateConstructorUsedError;
   @ServerTimestampConverter()
   Timestamp get date => throw _privateConstructorUsedError;
+  bool? get hasRead => throw _privateConstructorUsedError;
   @DocumentReferenceConverter()
   DocumentReference<Object?> get sentFrom => throw _privateConstructorUsedError;
 
@@ -41,6 +42,7 @@ abstract class $MessageChatDtoCopyWith<$Res> {
   $Res call(
       {String content,
       @ServerTimestampConverter() Timestamp date,
+      bool? hasRead,
       @DocumentReferenceConverter() DocumentReference<Object?> sentFrom});
 }
 
@@ -59,6 +61,7 @@ class _$MessageChatDtoCopyWithImpl<$Res, $Val extends MessageChatDto>
   $Res call({
     Object? content = null,
     Object? date = null,
+    Object? hasRead = freezed,
     Object? sentFrom = null,
   }) {
     return _then(_value.copyWith(
@@ -70,6 +73,10 @@ class _$MessageChatDtoCopyWithImpl<$Res, $Val extends MessageChatDto>
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
               as Timestamp,
+      hasRead: freezed == hasRead
+          ? _value.hasRead
+          : hasRead // ignore: cast_nullable_to_non_nullable
+              as bool?,
       sentFrom: null == sentFrom
           ? _value.sentFrom
           : sentFrom // ignore: cast_nullable_to_non_nullable
@@ -89,6 +96,7 @@ abstract class _$$_MessageChatDtoCopyWith<$Res>
   $Res call(
       {String content,
       @ServerTimestampConverter() Timestamp date,
+      bool? hasRead,
       @DocumentReferenceConverter() DocumentReference<Object?> sentFrom});
 }
 
@@ -105,6 +113,7 @@ class __$$_MessageChatDtoCopyWithImpl<$Res>
   $Res call({
     Object? content = null,
     Object? date = null,
+    Object? hasRead = freezed,
     Object? sentFrom = null,
   }) {
     return _then(_$_MessageChatDto(
@@ -116,6 +125,10 @@ class __$$_MessageChatDtoCopyWithImpl<$Res>
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
               as Timestamp,
+      hasRead: freezed == hasRead
+          ? _value.hasRead
+          : hasRead // ignore: cast_nullable_to_non_nullable
+              as bool?,
       sentFrom: null == sentFrom
           ? _value.sentFrom
           : sentFrom // ignore: cast_nullable_to_non_nullable
@@ -130,6 +143,7 @@ class _$_MessageChatDto extends _MessageChatDto {
   _$_MessageChatDto(
       {required this.content,
       @ServerTimestampConverter() required this.date,
+      this.hasRead,
       @DocumentReferenceConverter() required this.sentFrom})
       : super._();
 
@@ -142,12 +156,14 @@ class _$_MessageChatDto extends _MessageChatDto {
   @ServerTimestampConverter()
   final Timestamp date;
   @override
+  final bool? hasRead;
+  @override
   @DocumentReferenceConverter()
   final DocumentReference<Object?> sentFrom;
 
   @override
   String toString() {
-    return 'MessageChatDto(content: $content, date: $date, sentFrom: $sentFrom)';
+    return 'MessageChatDto(content: $content, date: $date, hasRead: $hasRead, sentFrom: $sentFrom)';
   }
 
   @override
@@ -157,13 +173,15 @@ class _$_MessageChatDto extends _MessageChatDto {
             other is _$_MessageChatDto &&
             (identical(other.content, content) || other.content == content) &&
             (identical(other.date, date) || other.date == date) &&
+            (identical(other.hasRead, hasRead) || other.hasRead == hasRead) &&
             (identical(other.sentFrom, sentFrom) ||
                 other.sentFrom == sentFrom));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, content, date, sentFrom);
+  int get hashCode =>
+      Object.hash(runtimeType, content, date, hasRead, sentFrom);
 
   @JsonKey(ignore: true)
   @override
@@ -184,6 +202,7 @@ abstract class _MessageChatDto extends MessageChatDto {
           {required final String content,
           @ServerTimestampConverter()
               required final Timestamp date,
+          final bool? hasRead,
           @DocumentReferenceConverter()
               required final DocumentReference<Object?> sentFrom}) =
       _$_MessageChatDto;
@@ -197,6 +216,8 @@ abstract class _MessageChatDto extends MessageChatDto {
   @override
   @ServerTimestampConverter()
   Timestamp get date;
+  @override
+  bool? get hasRead;
   @override
   @DocumentReferenceConverter()
   DocumentReference<Object?> get sentFrom;

@@ -10,8 +10,9 @@ abstract class MessageChat implements _$MessageChat {
     required MessageContent messageContent,
     required User sentFrom,
     required Timestamp date,
+    required bool hasRead,
     required bool isLastMessageInColumn,
     required bool sentByMe,
   }  ) = _MessageChat;
-  factory MessageChat.empty()=>MessageChat(messageContent: MessageContent(""), sentFrom:User.empty(), date: Timestamp.now(),isLastMessageInColumn: false,sentByMe: false);
+  factory MessageChat.empty()=>MessageChat(messageContent: MessageContent(""), sentFrom:User.empty(), date: Timestamp.now(),isLastMessageInColumn: false,hasRead:false,sentByMe: false);
 }

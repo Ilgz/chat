@@ -13,18 +13,19 @@ abstract class MessageChatDto implements  _$MessageChatDto {
       {required String content,
       @ServerTimestampConverter()
           required Timestamp date,
+        bool? hasRead,
       @DocumentReferenceConverter()
           required DocumentReference sentFrom,
       }) = _MessageChatDto;
   factory MessageChatDto.fromJson(Map<String, dynamic> json) =>
       _$MessageChatDtoFromJson(json);
   factory MessageChatDto.fromDomain(MessageChat messageChat) => MessageChatDto(
-      content: messageChat.messageContent.getOrCrash(),date: messageChat.date,sentFrom:messageChat.sentFrom.reference);
+      content: messageChat.messageContent.getOrCrash(),date: messageChat.date,sentFrom:messageChat.sentFrom.reference,hasRead: messageChat.hasRead);
   factory MessageChatDto.fromFirestore(DocumentSnapshot doc) {
     return MessageChatDto.fromJson(doc.data()! as Map<String, dynamic>);
   }
   MessageChat toDomain() {
-    return MessageChat(messageContent: MessageContent(content), sentFrom:User.empty().copyWith(reference:sentFrom), date: date,isLastMessageInColumn: false,sentByMe: false);
+    return MessageChat(hasRead: hasRead??true,messageContent: MessageContent(content), sentFrom:User.empty().copyWith(reference:sentFrom), date: date,isLastMessageInColumn: false,sentByMe: false);
   }
 }
 

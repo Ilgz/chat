@@ -19,6 +19,7 @@ mixin _$MessageChat {
   MessageContent get messageContent => throw _privateConstructorUsedError;
   User get sentFrom => throw _privateConstructorUsedError;
   Timestamp get date => throw _privateConstructorUsedError;
+  bool get hasRead => throw _privateConstructorUsedError;
   bool get isLastMessageInColumn => throw _privateConstructorUsedError;
   bool get sentByMe => throw _privateConstructorUsedError;
 
@@ -37,6 +38,7 @@ abstract class $MessageChatCopyWith<$Res> {
       {MessageContent messageContent,
       User sentFrom,
       Timestamp date,
+      bool hasRead,
       bool isLastMessageInColumn,
       bool sentByMe});
 
@@ -59,6 +61,7 @@ class _$MessageChatCopyWithImpl<$Res, $Val extends MessageChat>
     Object? messageContent = null,
     Object? sentFrom = null,
     Object? date = null,
+    Object? hasRead = null,
     Object? isLastMessageInColumn = null,
     Object? sentByMe = null,
   }) {
@@ -75,6 +78,10 @@ class _$MessageChatCopyWithImpl<$Res, $Val extends MessageChat>
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
               as Timestamp,
+      hasRead: null == hasRead
+          ? _value.hasRead
+          : hasRead // ignore: cast_nullable_to_non_nullable
+              as bool,
       isLastMessageInColumn: null == isLastMessageInColumn
           ? _value.isLastMessageInColumn
           : isLastMessageInColumn // ignore: cast_nullable_to_non_nullable
@@ -107,6 +114,7 @@ abstract class _$$_MessageChatCopyWith<$Res>
       {MessageContent messageContent,
       User sentFrom,
       Timestamp date,
+      bool hasRead,
       bool isLastMessageInColumn,
       bool sentByMe});
 
@@ -128,6 +136,7 @@ class __$$_MessageChatCopyWithImpl<$Res>
     Object? messageContent = null,
     Object? sentFrom = null,
     Object? date = null,
+    Object? hasRead = null,
     Object? isLastMessageInColumn = null,
     Object? sentByMe = null,
   }) {
@@ -144,6 +153,10 @@ class __$$_MessageChatCopyWithImpl<$Res>
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
               as Timestamp,
+      hasRead: null == hasRead
+          ? _value.hasRead
+          : hasRead // ignore: cast_nullable_to_non_nullable
+              as bool,
       isLastMessageInColumn: null == isLastMessageInColumn
           ? _value.isLastMessageInColumn
           : isLastMessageInColumn // ignore: cast_nullable_to_non_nullable
@@ -163,6 +176,7 @@ class _$_MessageChat extends _MessageChat {
       {required this.messageContent,
       required this.sentFrom,
       required this.date,
+      required this.hasRead,
       required this.isLastMessageInColumn,
       required this.sentByMe})
       : super._();
@@ -174,13 +188,15 @@ class _$_MessageChat extends _MessageChat {
   @override
   final Timestamp date;
   @override
+  final bool hasRead;
+  @override
   final bool isLastMessageInColumn;
   @override
   final bool sentByMe;
 
   @override
   String toString() {
-    return 'MessageChat(messageContent: $messageContent, sentFrom: $sentFrom, date: $date, isLastMessageInColumn: $isLastMessageInColumn, sentByMe: $sentByMe)';
+    return 'MessageChat(messageContent: $messageContent, sentFrom: $sentFrom, date: $date, hasRead: $hasRead, isLastMessageInColumn: $isLastMessageInColumn, sentByMe: $sentByMe)';
   }
 
   @override
@@ -193,6 +209,7 @@ class _$_MessageChat extends _MessageChat {
             (identical(other.sentFrom, sentFrom) ||
                 other.sentFrom == sentFrom) &&
             (identical(other.date, date) || other.date == date) &&
+            (identical(other.hasRead, hasRead) || other.hasRead == hasRead) &&
             (identical(other.isLastMessageInColumn, isLastMessageInColumn) ||
                 other.isLastMessageInColumn == isLastMessageInColumn) &&
             (identical(other.sentByMe, sentByMe) ||
@@ -201,7 +218,7 @@ class _$_MessageChat extends _MessageChat {
 
   @override
   int get hashCode => Object.hash(runtimeType, messageContent, sentFrom, date,
-      isLastMessageInColumn, sentByMe);
+      hasRead, isLastMessageInColumn, sentByMe);
 
   @JsonKey(ignore: true)
   @override
@@ -215,6 +232,7 @@ abstract class _MessageChat extends MessageChat {
       {required final MessageContent messageContent,
       required final User sentFrom,
       required final Timestamp date,
+      required final bool hasRead,
       required final bool isLastMessageInColumn,
       required final bool sentByMe}) = _$_MessageChat;
   _MessageChat._() : super._();
@@ -225,6 +243,8 @@ abstract class _MessageChat extends MessageChat {
   User get sentFrom;
   @override
   Timestamp get date;
+  @override
+  bool get hasRead;
   @override
   bool get isLastMessageInColumn;
   @override

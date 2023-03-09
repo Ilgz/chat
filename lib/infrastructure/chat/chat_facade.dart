@@ -36,6 +36,7 @@ class ChatFacade implements IChatFacade {
         "messages": FieldValue.arrayUnion([
           MessageChatDto.fromDomain(messageChat.copyWith(
                   date: Timestamp.now(),
+                  hasRead: true,
                   sentFrom: messageChat.sentFrom.copyWith(
                       reference: FirebaseFirestore.instance.doc(userId))))
               .toJson()

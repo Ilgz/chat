@@ -28,6 +28,7 @@ class ProjectWatcherBloc
 
       },
           receiveProjects: (e) {
+        print(e.failureOrProjects.map((r) => r));
         emit(e.failureOrProjects.fold((f) => ProjectWatcherState.loadFailure(f),
             (notes) => ProjectWatcherState.loadSuccess(notes)));
       });
