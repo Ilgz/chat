@@ -154,7 +154,7 @@ class ChatFacade implements IChatFacade {
       for (var fcmToken in chat.chattingWith.fcmTokens){
         Map<String,dynamic> body={"to":fcmToken,"priority":"high","mutable_content":true,"notification":{
           "badge":32,
-          "title": messageChat.sentFrom.userName.getOrCrash(),
+          "title": (await getIt<IAuthFacade>().getSignedInUser()).userName.getOrCrash(),
           "body": messageChat.messageContent.getOrCrash()
         }};
         Map<String, String> requestHeaders = {

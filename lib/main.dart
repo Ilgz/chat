@@ -13,7 +13,9 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   if(!kIsWeb){
     final fbm = FirebaseMessaging.instance;
-    FirebaseMessaging.onMessage.listen((_){});
+    FirebaseMessaging.onMessage.listen((_){
+      
+    });
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
     });
   }

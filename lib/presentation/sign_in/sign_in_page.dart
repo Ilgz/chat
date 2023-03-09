@@ -170,7 +170,6 @@ class SignInPage extends StatelessWidget {
                                           invalidEmailAndPassword: (_) =>
                                               "Invalid email and password combination")))),
                               (r) {
-                                print("goTo");
                             context.read<UserWatcherBloc>().add(
                                   const UserWatcherEvent.startWatchAll(),
                                 ); context.read<ChatWatcherCubit>()
