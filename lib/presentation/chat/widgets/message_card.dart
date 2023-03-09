@@ -18,7 +18,7 @@ class MessageTile extends StatelessWidget {
             margin: const EdgeInsets.only(top: 8),
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
             decoration: BoxDecoration(
-              color: messageChat.sentByMe?Theme.of(context).primaryColor:Theme.of(context).cardColor,
+              color: messageChat.sentByMe?Theme.of(context).cardColor:Theme.of(context).primaryColor,
               borderRadius: BorderRadius.only(
                 topLeft: const Radius.circular(30),
                 topRight: const Radius.circular(30),
@@ -53,6 +53,10 @@ class MessageTile extends StatelessWidget {
                         .format(DateTime.fromMillisecondsSinceEpoch(messageChat.date.millisecondsSinceEpoch)),
                       style: Theme.of(context).textTheme.bodyText1?.copyWith(fontSize:12)
                     ),
+                    const SizedBox(width: 6),
+                    Visibility(
+                        visible:messageChat.sentByMe,
+                        child: Icon(Icons.done_all_outlined,color: messageChat.hasRead?Colors.blue:Theme.of(context).textTheme.bodyText1?.color,size: 16 ,))
                   ],
                 ),
               ],

@@ -174,4 +174,25 @@ class ChatFacade implements IChatFacade {
       }
     }
   }
+
+  @override
+  Future<Either<FirebaseFirestoreFailure, Unit>> markDirectMessageAsHasRead(Chat chat) async{
+    try {
+      final messagesNotSentByMe=chat.messages.where((message) => !message.sentByMe);
+      if(messagesNotSentByMe.isNotEmpty){
+        final lastMessage=messagesNotSentByMe.last;
+        final lastMessageHasRead=lastMessage.hasRead;
+        if(!lastMessageHasRead){
+         await  chat.documentReference.update({"messages":chat.messages.map((message) => MessageChatDto.fromDomain(message.copyWith(hasRead: true)).toJson()).toList()});
+        }
+      }
+    return right(unit);
+    } on FirebaseException catch (e) {
+    if (e.message!.contains('PERMISSION_DENIED')) {
+    return left(const FirebaseFirestoreFailure.insufficientPermission());
+    } else {
+    return left(const FirebaseFirestoreFailure.unexpected());
+    }
+    }
+  }
 }

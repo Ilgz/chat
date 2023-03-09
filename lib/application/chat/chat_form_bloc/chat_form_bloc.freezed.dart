@@ -20,6 +20,7 @@ mixin _$ChatFormEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(String messageContent) messageContentChanged,
     required TResult Function(Project project) sendProjectMessage,
+    required TResult Function(Chat chat) markDirectMessageAsHasRead,
     required TResult Function(Chat chat) sendDirectMessage,
   }) =>
       throw _privateConstructorUsedError;
@@ -27,6 +28,7 @@ mixin _$ChatFormEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String messageContent)? messageContentChanged,
     TResult? Function(Project project)? sendProjectMessage,
+    TResult? Function(Chat chat)? markDirectMessageAsHasRead,
     TResult? Function(Chat chat)? sendDirectMessage,
   }) =>
       throw _privateConstructorUsedError;
@@ -34,6 +36,7 @@ mixin _$ChatFormEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String messageContent)? messageContentChanged,
     TResult Function(Project project)? sendProjectMessage,
+    TResult Function(Chat chat)? markDirectMessageAsHasRead,
     TResult Function(Chat chat)? sendDirectMessage,
     required TResult orElse(),
   }) =>
@@ -43,6 +46,8 @@ mixin _$ChatFormEvent {
     required TResult Function(_MessageContentChanged value)
         messageContentChanged,
     required TResult Function(_SendProjectMessage value) sendProjectMessage,
+    required TResult Function(_MarkDirectMessageAsHasRead value)
+        markDirectMessageAsHasRead,
     required TResult Function(_SendDirectMessage value) sendDirectMessage,
   }) =>
       throw _privateConstructorUsedError;
@@ -50,6 +55,8 @@ mixin _$ChatFormEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_MessageContentChanged value)? messageContentChanged,
     TResult? Function(_SendProjectMessage value)? sendProjectMessage,
+    TResult? Function(_MarkDirectMessageAsHasRead value)?
+        markDirectMessageAsHasRead,
     TResult? Function(_SendDirectMessage value)? sendDirectMessage,
   }) =>
       throw _privateConstructorUsedError;
@@ -57,6 +64,8 @@ mixin _$ChatFormEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_MessageContentChanged value)? messageContentChanged,
     TResult Function(_SendProjectMessage value)? sendProjectMessage,
+    TResult Function(_MarkDirectMessageAsHasRead value)?
+        markDirectMessageAsHasRead,
     TResult Function(_SendDirectMessage value)? sendDirectMessage,
     required TResult orElse(),
   }) =>
@@ -149,6 +158,7 @@ class _$_MessageContentChanged implements _MessageContentChanged {
   TResult when<TResult extends Object?>({
     required TResult Function(String messageContent) messageContentChanged,
     required TResult Function(Project project) sendProjectMessage,
+    required TResult Function(Chat chat) markDirectMessageAsHasRead,
     required TResult Function(Chat chat) sendDirectMessage,
   }) {
     return messageContentChanged(messageContent);
@@ -159,6 +169,7 @@ class _$_MessageContentChanged implements _MessageContentChanged {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String messageContent)? messageContentChanged,
     TResult? Function(Project project)? sendProjectMessage,
+    TResult? Function(Chat chat)? markDirectMessageAsHasRead,
     TResult? Function(Chat chat)? sendDirectMessage,
   }) {
     return messageContentChanged?.call(messageContent);
@@ -169,6 +180,7 @@ class _$_MessageContentChanged implements _MessageContentChanged {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String messageContent)? messageContentChanged,
     TResult Function(Project project)? sendProjectMessage,
+    TResult Function(Chat chat)? markDirectMessageAsHasRead,
     TResult Function(Chat chat)? sendDirectMessage,
     required TResult orElse(),
   }) {
@@ -184,6 +196,8 @@ class _$_MessageContentChanged implements _MessageContentChanged {
     required TResult Function(_MessageContentChanged value)
         messageContentChanged,
     required TResult Function(_SendProjectMessage value) sendProjectMessage,
+    required TResult Function(_MarkDirectMessageAsHasRead value)
+        markDirectMessageAsHasRead,
     required TResult Function(_SendDirectMessage value) sendDirectMessage,
   }) {
     return messageContentChanged(this);
@@ -194,6 +208,8 @@ class _$_MessageContentChanged implements _MessageContentChanged {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_MessageContentChanged value)? messageContentChanged,
     TResult? Function(_SendProjectMessage value)? sendProjectMessage,
+    TResult? Function(_MarkDirectMessageAsHasRead value)?
+        markDirectMessageAsHasRead,
     TResult? Function(_SendDirectMessage value)? sendDirectMessage,
   }) {
     return messageContentChanged?.call(this);
@@ -204,6 +220,8 @@ class _$_MessageContentChanged implements _MessageContentChanged {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_MessageContentChanged value)? messageContentChanged,
     TResult Function(_SendProjectMessage value)? sendProjectMessage,
+    TResult Function(_MarkDirectMessageAsHasRead value)?
+        markDirectMessageAsHasRead,
     TResult Function(_SendDirectMessage value)? sendDirectMessage,
     required TResult orElse(),
   }) {
@@ -301,6 +319,7 @@ class _$_SendProjectMessage implements _SendProjectMessage {
   TResult when<TResult extends Object?>({
     required TResult Function(String messageContent) messageContentChanged,
     required TResult Function(Project project) sendProjectMessage,
+    required TResult Function(Chat chat) markDirectMessageAsHasRead,
     required TResult Function(Chat chat) sendDirectMessage,
   }) {
     return sendProjectMessage(project);
@@ -311,6 +330,7 @@ class _$_SendProjectMessage implements _SendProjectMessage {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String messageContent)? messageContentChanged,
     TResult? Function(Project project)? sendProjectMessage,
+    TResult? Function(Chat chat)? markDirectMessageAsHasRead,
     TResult? Function(Chat chat)? sendDirectMessage,
   }) {
     return sendProjectMessage?.call(project);
@@ -321,6 +341,7 @@ class _$_SendProjectMessage implements _SendProjectMessage {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String messageContent)? messageContentChanged,
     TResult Function(Project project)? sendProjectMessage,
+    TResult Function(Chat chat)? markDirectMessageAsHasRead,
     TResult Function(Chat chat)? sendDirectMessage,
     required TResult orElse(),
   }) {
@@ -336,6 +357,8 @@ class _$_SendProjectMessage implements _SendProjectMessage {
     required TResult Function(_MessageContentChanged value)
         messageContentChanged,
     required TResult Function(_SendProjectMessage value) sendProjectMessage,
+    required TResult Function(_MarkDirectMessageAsHasRead value)
+        markDirectMessageAsHasRead,
     required TResult Function(_SendDirectMessage value) sendDirectMessage,
   }) {
     return sendProjectMessage(this);
@@ -346,6 +369,8 @@ class _$_SendProjectMessage implements _SendProjectMessage {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_MessageContentChanged value)? messageContentChanged,
     TResult? Function(_SendProjectMessage value)? sendProjectMessage,
+    TResult? Function(_MarkDirectMessageAsHasRead value)?
+        markDirectMessageAsHasRead,
     TResult? Function(_SendDirectMessage value)? sendDirectMessage,
   }) {
     return sendProjectMessage?.call(this);
@@ -356,6 +381,8 @@ class _$_SendProjectMessage implements _SendProjectMessage {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_MessageContentChanged value)? messageContentChanged,
     TResult Function(_SendProjectMessage value)? sendProjectMessage,
+    TResult Function(_MarkDirectMessageAsHasRead value)?
+        markDirectMessageAsHasRead,
     TResult Function(_SendDirectMessage value)? sendDirectMessage,
     required TResult orElse(),
   }) {
@@ -373,6 +400,169 @@ abstract class _SendProjectMessage implements ChatFormEvent {
   @JsonKey(ignore: true)
   _$$_SendProjectMessageCopyWith<_$_SendProjectMessage> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_MarkDirectMessageAsHasReadCopyWith<$Res> {
+  factory _$$_MarkDirectMessageAsHasReadCopyWith(
+          _$_MarkDirectMessageAsHasRead value,
+          $Res Function(_$_MarkDirectMessageAsHasRead) then) =
+      __$$_MarkDirectMessageAsHasReadCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Chat chat});
+
+  $ChatCopyWith<$Res> get chat;
+}
+
+/// @nodoc
+class __$$_MarkDirectMessageAsHasReadCopyWithImpl<$Res>
+    extends _$ChatFormEventCopyWithImpl<$Res, _$_MarkDirectMessageAsHasRead>
+    implements _$$_MarkDirectMessageAsHasReadCopyWith<$Res> {
+  __$$_MarkDirectMessageAsHasReadCopyWithImpl(
+      _$_MarkDirectMessageAsHasRead _value,
+      $Res Function(_$_MarkDirectMessageAsHasRead) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? chat = null,
+  }) {
+    return _then(_$_MarkDirectMessageAsHasRead(
+      null == chat
+          ? _value.chat
+          : chat // ignore: cast_nullable_to_non_nullable
+              as Chat,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ChatCopyWith<$Res> get chat {
+    return $ChatCopyWith<$Res>(_value.chat, (value) {
+      return _then(_value.copyWith(chat: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_MarkDirectMessageAsHasRead implements _MarkDirectMessageAsHasRead {
+  _$_MarkDirectMessageAsHasRead(this.chat);
+
+  @override
+  final Chat chat;
+
+  @override
+  String toString() {
+    return 'ChatFormEvent.markDirectMessageAsHasRead(chat: $chat)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_MarkDirectMessageAsHasRead &&
+            (identical(other.chat, chat) || other.chat == chat));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, chat);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_MarkDirectMessageAsHasReadCopyWith<_$_MarkDirectMessageAsHasRead>
+      get copyWith => __$$_MarkDirectMessageAsHasReadCopyWithImpl<
+          _$_MarkDirectMessageAsHasRead>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String messageContent) messageContentChanged,
+    required TResult Function(Project project) sendProjectMessage,
+    required TResult Function(Chat chat) markDirectMessageAsHasRead,
+    required TResult Function(Chat chat) sendDirectMessage,
+  }) {
+    return markDirectMessageAsHasRead(chat);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String messageContent)? messageContentChanged,
+    TResult? Function(Project project)? sendProjectMessage,
+    TResult? Function(Chat chat)? markDirectMessageAsHasRead,
+    TResult? Function(Chat chat)? sendDirectMessage,
+  }) {
+    return markDirectMessageAsHasRead?.call(chat);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String messageContent)? messageContentChanged,
+    TResult Function(Project project)? sendProjectMessage,
+    TResult Function(Chat chat)? markDirectMessageAsHasRead,
+    TResult Function(Chat chat)? sendDirectMessage,
+    required TResult orElse(),
+  }) {
+    if (markDirectMessageAsHasRead != null) {
+      return markDirectMessageAsHasRead(chat);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_MessageContentChanged value)
+        messageContentChanged,
+    required TResult Function(_SendProjectMessage value) sendProjectMessage,
+    required TResult Function(_MarkDirectMessageAsHasRead value)
+        markDirectMessageAsHasRead,
+    required TResult Function(_SendDirectMessage value) sendDirectMessage,
+  }) {
+    return markDirectMessageAsHasRead(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_MessageContentChanged value)? messageContentChanged,
+    TResult? Function(_SendProjectMessage value)? sendProjectMessage,
+    TResult? Function(_MarkDirectMessageAsHasRead value)?
+        markDirectMessageAsHasRead,
+    TResult? Function(_SendDirectMessage value)? sendDirectMessage,
+  }) {
+    return markDirectMessageAsHasRead?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_MessageContentChanged value)? messageContentChanged,
+    TResult Function(_SendProjectMessage value)? sendProjectMessage,
+    TResult Function(_MarkDirectMessageAsHasRead value)?
+        markDirectMessageAsHasRead,
+    TResult Function(_SendDirectMessage value)? sendDirectMessage,
+    required TResult orElse(),
+  }) {
+    if (markDirectMessageAsHasRead != null) {
+      return markDirectMessageAsHasRead(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _MarkDirectMessageAsHasRead implements ChatFormEvent {
+  factory _MarkDirectMessageAsHasRead(final Chat chat) =
+      _$_MarkDirectMessageAsHasRead;
+
+  Chat get chat;
+  @JsonKey(ignore: true)
+  _$$_MarkDirectMessageAsHasReadCopyWith<_$_MarkDirectMessageAsHasRead>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -452,6 +642,7 @@ class _$_SendDirectMessage implements _SendDirectMessage {
   TResult when<TResult extends Object?>({
     required TResult Function(String messageContent) messageContentChanged,
     required TResult Function(Project project) sendProjectMessage,
+    required TResult Function(Chat chat) markDirectMessageAsHasRead,
     required TResult Function(Chat chat) sendDirectMessage,
   }) {
     return sendDirectMessage(chat);
@@ -462,6 +653,7 @@ class _$_SendDirectMessage implements _SendDirectMessage {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String messageContent)? messageContentChanged,
     TResult? Function(Project project)? sendProjectMessage,
+    TResult? Function(Chat chat)? markDirectMessageAsHasRead,
     TResult? Function(Chat chat)? sendDirectMessage,
   }) {
     return sendDirectMessage?.call(chat);
@@ -472,6 +664,7 @@ class _$_SendDirectMessage implements _SendDirectMessage {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String messageContent)? messageContentChanged,
     TResult Function(Project project)? sendProjectMessage,
+    TResult Function(Chat chat)? markDirectMessageAsHasRead,
     TResult Function(Chat chat)? sendDirectMessage,
     required TResult orElse(),
   }) {
@@ -487,6 +680,8 @@ class _$_SendDirectMessage implements _SendDirectMessage {
     required TResult Function(_MessageContentChanged value)
         messageContentChanged,
     required TResult Function(_SendProjectMessage value) sendProjectMessage,
+    required TResult Function(_MarkDirectMessageAsHasRead value)
+        markDirectMessageAsHasRead,
     required TResult Function(_SendDirectMessage value) sendDirectMessage,
   }) {
     return sendDirectMessage(this);
@@ -497,6 +692,8 @@ class _$_SendDirectMessage implements _SendDirectMessage {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_MessageContentChanged value)? messageContentChanged,
     TResult? Function(_SendProjectMessage value)? sendProjectMessage,
+    TResult? Function(_MarkDirectMessageAsHasRead value)?
+        markDirectMessageAsHasRead,
     TResult? Function(_SendDirectMessage value)? sendDirectMessage,
   }) {
     return sendDirectMessage?.call(this);
@@ -507,6 +704,8 @@ class _$_SendDirectMessage implements _SendDirectMessage {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_MessageContentChanged value)? messageContentChanged,
     TResult Function(_SendProjectMessage value)? sendProjectMessage,
+    TResult Function(_MarkDirectMessageAsHasRead value)?
+        markDirectMessageAsHasRead,
     TResult Function(_SendDirectMessage value)? sendDirectMessage,
     required TResult orElse(),
   }) {

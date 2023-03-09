@@ -79,7 +79,6 @@
 //     ReceivedAction? receivedAction = await AwesomeNotifications()
 //         .getInitialNotificationAction(removeFromActionEvents: true);
 //     if (receivedAction == null) return;
-//     print('Notification action launched app: $receivedAction');
 //   }
 //
 //   @pragma('vm:entry-point')

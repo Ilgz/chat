@@ -120,10 +120,10 @@ class ChatPage extends StatelessWidget {
                                     chat.documentReference.path ==
                                     initialChat.documentReference.path,
                                 orElse: () => initialChat);
+                            context.read<ChatFormBloc>().add(ChatFormEvent.markDirectMessageAsHasRead(chat));
                             final messages = chat.messages.reversed.toList();
                             if (messages.isNotEmpty) {
                               return ListView.separated(
-                                //controller: messageScrollController,
                                 padding: const EdgeInsets.all(10),
                                 reverse: true,
                                 itemBuilder: (context, index) {
