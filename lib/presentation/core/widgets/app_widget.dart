@@ -2,6 +2,7 @@ import 'package:chat/application/chat/chat_combiner_bloc/chat_combiner_cubit.dar
 import 'package:chat/application/chat/chat_searcher_bloc/chat_searcher_cubit.dart';
 import 'package:chat/application/chat/chat_watcher_bloc/chat_watcher_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:chat/application/auth/auth_bloc.dart';
 import 'package:chat/application/auth/profile_watcher/profile_watcher_cubit.dart';
@@ -45,13 +46,18 @@ class AppWidget extends StatelessWidget {
         child: BlocBuilder<ThemeSwitcherCubit, ThemeSwitcherState>(
           buildWhen: (p, c) => p.isDark != c.isDark,
           builder: (context, state) {
-            return MaterialApp.router(
-                routerConfig: goRouter,
-                title: "Chat",
-                debugShowCheckedModeBanner: false,
-                themeMode: state.isDark ? ThemeMode.dark : ThemeMode.light,
-                darkTheme: darkTheme,
-                theme: lightTheme);
+            return AnnotatedRegion<SystemUiOverlayStyle>(
+              value: SystemUiOverlayStyle(
+                statusBarColor:state.isDark?AppColorConstants.darkPrimaryColor:AppColorConstants.lightPrimaryColor, // set your desired status bar color here
+              ),
+              child: MaterialApp.router(
+                  routerConfig: goRouter,
+                  title: "Chat",
+                  debugShowCheckedModeBanner: false,
+                  themeMode: state.isDark ? ThemeMode.dark : ThemeMode.light,
+                  darkTheme: darkTheme,
+                  theme: lightTheme),
+            );
           },
         ));
   }
@@ -62,6 +68,7 @@ final lightTheme = ThemeData(
   brightness: Brightness.light,
   iconTheme: const IconThemeData(color: Colors.black),
   dividerColor: Colors.black,
+
   primaryColor: AppColorConstants.lightPrimaryColor,
   scaffoldBackgroundColor: AppColorConstants.lightScaffoldBackgroundColor,
   textTheme: TextTheme(

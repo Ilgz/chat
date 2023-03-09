@@ -28,7 +28,6 @@ class _CustomAppBarState extends State<CustomAppBar> {
         child: SizedBox(
           height: 46,
           child: AppBar(
-
               backgroundColor: Theme.of(context).primaryColor,
             actions: widget.actions,
             elevation: 0,
