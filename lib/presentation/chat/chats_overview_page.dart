@@ -38,12 +38,7 @@ Widget build(BuildContext context) {
                   (){
                   return BlocBuilder<ChatWatcherCubit,ChatWatcherState>(builder: (context,state){
                     return state.map(initial: (_)=>const SizedBox(), loadInProgress: (_)=>const Center(child: CircularProgressIndicator(),), loadSuccess: (state){
-                      List<Chat> chats = state.chats.toList();
-                      chats
-                          .sort((a, b) {
-                        final aTimeStamp=a.messages.isEmpty?a.date:a.messages.last.date;
-                        final bTimeStamp=b.messages.isEmpty?b.date:b.messages.last.date;
-                        return  bTimeStamp.compareTo(aTimeStamp);});
+                      final chats = state.chats;
                       if(chats.isNotEmpty){
                         return ListView.builder(
                             shrinkWrap: true,

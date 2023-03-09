@@ -74,8 +74,17 @@ class ChatFacade implements IChatFacade {
               messages: await getUsersForMessages(
                   chat.copyWith(messages: setMessagesInColumn(chat)))))
           .toList());
-      yield right(a);
+      yield right(_sortByDateAndCountUnreadMessages(a));
     }
+  }
+  List<Chat> _sortByDateAndCountUnreadMessages(List<Chat> chats){
+    List<Chat> newChats=chats.toList();
+    newChats
+        .sort((a, b) {
+      final aTimeStamp=a.messages.isEmpty?a.date:a.messages.last.date;
+      final bTimeStamp=b.messages.isEmpty?b.date:b.messages.last.date;
+      return  bTimeStamp.compareTo(aTimeStamp);});
+    return newChats;
   }
 
   List<MessageChat> setMessagesInColumn(Chat chat) {
