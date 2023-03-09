@@ -25,11 +25,20 @@ class DirectChatTile extends StatelessWidget {
       lastMessage.messageContent
               .getOrCrash(), maxLines: 1,style: Theme.of(context).textTheme.caption, overflow: TextOverflow.ellipsis,);
       }(),
-      trailing: Text(DateFormat.yMMMMd()
-          .format(DateTime.fromMillisecondsSinceEpoch(chat.messages.isEmpty
-          ? chat.date.millisecondsSinceEpoch
-          : chat.messages.last.date.millisecondsSinceEpoch)),
-        style: Theme.of(context).textTheme.caption,),
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(DateFormat.yMMMMd()
+              .format(DateTime.fromMillisecondsSinceEpoch(chat.messages.isEmpty
+              ? chat.date.millisecondsSinceEpoch
+              : chat.messages.last.date.millisecondsSinceEpoch)),
+            style: Theme.of(context).textTheme.caption,),
+          SizedBox(width: 10,),
+          if(chat.unreadMessages>0)...[
+            CircleAvatar(radius:10,child: Text(chat.unreadMessages.toString(),textAlign:TextAlign.center,style: TextStyle(color:Colors.white,fontSize: 12),),backgroundColor: Colors.green,)
+          ]
+        ],
+      ),
     );
   }
 }
