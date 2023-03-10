@@ -42,6 +42,9 @@ class ChatFacade implements IChatFacade {
               .toJson()
         ])
       });
+      for (var member in project.members) {
+        await _sendNotification(member.fcmTokens, project.projectName.getOrCrash(),"${(await getIt<IAuthFacade>().getSignedInUser()).userName.getOrCrash()}: ${messageChat.messageContent.getOrCrash()}");
+      }
       return right(unit);
     } on FirebaseException catch (e) {
       if (e.message!.contains('PERMISSION_DENIED')) {
@@ -164,18 +167,7 @@ class ChatFacade implements IChatFacade {
               .toJson()
         ])
       });
-      for (var fcmToken in chat.chattingWith.fcmTokens){
-        Map<String,dynamic> body={"to":fcmToken,"priority":"high","mutable_content":true,"notification":{
-          "badge":32,
-          "title": (await getIt<IAuthFacade>().getSignedInUser()).userName.getOrCrash(),
-          "body": messageChat.messageContent.getOrCrash()
-        }};
-        Map<String, String> requestHeaders = {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ${AppConstants.fcmApiToken}',
-        };
-    await http.post(Uri.parse(AppConstants.fcmServer),headers:requestHeaders,body: jsonEncode(body));
-    }
+      await _sendNotification(chat.chattingWith.fcmTokens, (await getIt<IAuthFacade>().getSignedInUser()).userName.getOrCrash(), messageChat.messageContent.getOrCrash());
 
       return right(unit);
     } on FirebaseException catch (e) {
@@ -185,6 +177,20 @@ class ChatFacade implements IChatFacade {
         return left(const FirebaseFirestoreFailure.unexpected());
       }
     }
+  }
+  Future<void> _sendNotification(List<String> fcmTokens,String title,String content)async{
+    for (var fcmToken in fcmTokens){
+      Map<String,dynamic> body={"to":fcmToken,"priority":"high","mutable_content":true,"notification":{
+      "badge":32,
+      "title": title,
+    "body": content
+    }};
+    Map<String, String> requestHeaders = {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer ${AppConstants.fcmApiToken}',
+    };
+    await http.post(Uri.parse(AppConstants.fcmServer),headers:requestHeaders,body: jsonEncode(body));
+  }
   }
 
   @override
