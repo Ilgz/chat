@@ -80,17 +80,26 @@ class SignInPage extends StatelessWidget {
                           TextFormField(
                             style: Theme.of(context).textTheme.bodyText1,
                             cursorColor: Theme.of(context).primaryColor,
-                            decoration: const InputDecoration(
+
+                            decoration: InputDecoration(
                                 labelText: 'Password',
                                 isDense: true,
                                 border: UnderlineInputBorder(),
+                                suffixIcon: IconButton(
+                                  icon: Icon(
+                                    state.showPassword ? Icons.visibility_off : Icons.visibility,
+                                  ),
+                                  onPressed: () {
+                                    context.read<SignInFormBloc>().add(SignInFormEvent.showPasswordChanged());
+                                  },
+                                ),
                                 contentPadding:
                                     EdgeInsets.symmetric(vertical: 5)),
                             autocorrect: false,
                             onChanged: (value) => context
                                 .read<SignInFormBloc>()
                                 .add(SignInFormEvent.passwordChanged(value)),
-                            obscureText: true,
+                            obscureText: state.showPassword,
                             validator: (_) => context
                                 .read<SignInFormBloc>()
                                 .state
