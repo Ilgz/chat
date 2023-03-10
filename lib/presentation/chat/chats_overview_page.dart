@@ -83,7 +83,7 @@ Widget build(BuildContext context) {
                           }
                         });
                   }else{
-                    return  const NoResultCard("No chat found", Icons.account_tree_outlined);
+                    return  const SizedBox();
                   }}(),
                 ],);
 
