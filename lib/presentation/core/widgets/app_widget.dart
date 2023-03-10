@@ -76,9 +76,12 @@ final lightTheme = ThemeData(
       fontSize: 14,
       color: Colors.grey.shade600,
     ),
+
   ),
+
   elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
+
           fixedSize: MaterialStateProperty.all(const Size(180, 40)),
           foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
           backgroundColor: MaterialStateProperty.all<Color>(

@@ -296,6 +296,7 @@ mixin _$AuthState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() loading,
     required TResult Function() authenticated,
     required TResult Function() unAuthenticated,
   }) =>
@@ -303,6 +304,7 @@ mixin _$AuthState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function()? loading,
     TResult? Function()? authenticated,
     TResult? Function()? unAuthenticated,
   }) =>
@@ -310,6 +312,7 @@ mixin _$AuthState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? loading,
     TResult Function()? authenticated,
     TResult Function()? unAuthenticated,
     required TResult orElse(),
@@ -318,6 +321,7 @@ mixin _$AuthState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
+    required TResult Function(_Loading value) loading,
     required TResult Function(Authenticated value) authenticated,
     required TResult Function(UnAuthenticated value) unAuthenticated,
   }) =>
@@ -325,6 +329,7 @@ mixin _$AuthState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
     TResult? Function(Authenticated value)? authenticated,
     TResult? Function(UnAuthenticated value)? unAuthenticated,
   }) =>
@@ -332,6 +337,7 @@ mixin _$AuthState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
+    TResult Function(_Loading value)? loading,
     TResult Function(Authenticated value)? authenticated,
     TResult Function(UnAuthenticated value)? unAuthenticated,
     required TResult orElse(),
@@ -399,6 +405,7 @@ class _$Initial with DiagnosticableTreeMixin implements Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() loading,
     required TResult Function() authenticated,
     required TResult Function() unAuthenticated,
   }) {
@@ -409,6 +416,7 @@ class _$Initial with DiagnosticableTreeMixin implements Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function()? loading,
     TResult? Function()? authenticated,
     TResult? Function()? unAuthenticated,
   }) {
@@ -419,6 +427,7 @@ class _$Initial with DiagnosticableTreeMixin implements Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? loading,
     TResult Function()? authenticated,
     TResult Function()? unAuthenticated,
     required TResult orElse(),
@@ -433,6 +442,7 @@ class _$Initial with DiagnosticableTreeMixin implements Initial {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
+    required TResult Function(_Loading value) loading,
     required TResult Function(Authenticated value) authenticated,
     required TResult Function(UnAuthenticated value) unAuthenticated,
   }) {
@@ -443,6 +453,7 @@ class _$Initial with DiagnosticableTreeMixin implements Initial {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
     TResult? Function(Authenticated value)? authenticated,
     TResult? Function(UnAuthenticated value)? unAuthenticated,
   }) {
@@ -453,6 +464,7 @@ class _$Initial with DiagnosticableTreeMixin implements Initial {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
+    TResult Function(_Loading value)? loading,
     TResult Function(Authenticated value)? authenticated,
     TResult Function(UnAuthenticated value)? unAuthenticated,
     required TResult orElse(),
@@ -466,6 +478,125 @@ class _$Initial with DiagnosticableTreeMixin implements Initial {
 
 abstract class Initial implements AuthState {
   factory Initial() = _$Initial;
+}
+
+/// @nodoc
+abstract class _$$_LoadingCopyWith<$Res> {
+  factory _$$_LoadingCopyWith(
+          _$_Loading value, $Res Function(_$_Loading) then) =
+      __$$_LoadingCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_LoadingCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$_Loading>
+    implements _$$_LoadingCopyWith<$Res> {
+  __$$_LoadingCopyWithImpl(_$_Loading _value, $Res Function(_$_Loading) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_Loading with DiagnosticableTreeMixin implements _Loading {
+  _$_Loading();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'AuthState.loading()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'AuthState.loading'));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_Loading);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() authenticated,
+    required TResult Function() unAuthenticated,
+  }) {
+    return loading();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function()? authenticated,
+    TResult? Function()? unAuthenticated,
+  }) {
+    return loading?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? authenticated,
+    TResult Function()? unAuthenticated,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(Authenticated value) authenticated,
+    required TResult Function(UnAuthenticated value) unAuthenticated,
+  }) {
+    return loading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(Authenticated value)? authenticated,
+    TResult? Function(UnAuthenticated value)? unAuthenticated,
+  }) {
+    return loading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(Authenticated value)? authenticated,
+    TResult Function(UnAuthenticated value)? unAuthenticated,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Loading implements AuthState {
+  factory _Loading() = _$_Loading;
 }
 
 /// @nodoc
@@ -513,6 +644,7 @@ class _$Authenticated with DiagnosticableTreeMixin implements Authenticated {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() loading,
     required TResult Function() authenticated,
     required TResult Function() unAuthenticated,
   }) {
@@ -523,6 +655,7 @@ class _$Authenticated with DiagnosticableTreeMixin implements Authenticated {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function()? loading,
     TResult? Function()? authenticated,
     TResult? Function()? unAuthenticated,
   }) {
@@ -533,6 +666,7 @@ class _$Authenticated with DiagnosticableTreeMixin implements Authenticated {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? loading,
     TResult Function()? authenticated,
     TResult Function()? unAuthenticated,
     required TResult orElse(),
@@ -547,6 +681,7 @@ class _$Authenticated with DiagnosticableTreeMixin implements Authenticated {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
+    required TResult Function(_Loading value) loading,
     required TResult Function(Authenticated value) authenticated,
     required TResult Function(UnAuthenticated value) unAuthenticated,
   }) {
@@ -557,6 +692,7 @@ class _$Authenticated with DiagnosticableTreeMixin implements Authenticated {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
     TResult? Function(Authenticated value)? authenticated,
     TResult? Function(UnAuthenticated value)? unAuthenticated,
   }) {
@@ -567,6 +703,7 @@ class _$Authenticated with DiagnosticableTreeMixin implements Authenticated {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
+    TResult Function(_Loading value)? loading,
     TResult Function(Authenticated value)? authenticated,
     TResult Function(UnAuthenticated value)? unAuthenticated,
     required TResult orElse(),
@@ -629,6 +766,7 @@ class _$UnAuthenticated
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() loading,
     required TResult Function() authenticated,
     required TResult Function() unAuthenticated,
   }) {
@@ -639,6 +777,7 @@ class _$UnAuthenticated
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function()? loading,
     TResult? Function()? authenticated,
     TResult? Function()? unAuthenticated,
   }) {
@@ -649,6 +788,7 @@ class _$UnAuthenticated
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? loading,
     TResult Function()? authenticated,
     TResult Function()? unAuthenticated,
     required TResult orElse(),
@@ -663,6 +803,7 @@ class _$UnAuthenticated
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
+    required TResult Function(_Loading value) loading,
     required TResult Function(Authenticated value) authenticated,
     required TResult Function(UnAuthenticated value) unAuthenticated,
   }) {
@@ -673,6 +814,7 @@ class _$UnAuthenticated
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
     TResult? Function(Authenticated value)? authenticated,
     TResult? Function(UnAuthenticated value)? unAuthenticated,
   }) {
@@ -683,6 +825,7 @@ class _$UnAuthenticated
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
+    TResult Function(_Loading value)? loading,
     TResult Function(Authenticated value)? authenticated,
     TResult Function(UnAuthenticated value)? unAuthenticated,
     required TResult orElse(),
