@@ -1,3 +1,4 @@
+import 'package:chat/domain/projects/project_failure.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -88,6 +89,14 @@ class LocalAuthFacade implements IAuthFacade {
     // TODO: implement getFcmToken
     throw UnimplementedError();
   }
+
+  @override
+  Future<Either<FirebaseFirestoreFailure, Unit>> updateActiveStatus(bool isOnline) {
+    // TODO: implement updateActiveStatus
+    throw UnimplementedError();
+  }
+
+
 
 
 }

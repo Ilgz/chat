@@ -3,6 +3,7 @@ import 'package:chat/domain/chat/chat.dart';
 import 'package:chat/presentation/chat/widgets/direct_chat_tile.dart';
 import 'package:chat/presentation/core/routes/router.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:chat/application/projects/project_watcher/project_watcher_bloc.dart';
 import 'package:chat/domain/projects/project.dart';
@@ -14,6 +15,18 @@ class ChatsOverviewPage extends StatelessWidget {
 const ChatsOverviewPage({Key? key}) : super(key: key);
 @override
 Widget build(BuildContext context) {
+  // SystemChannels.lifecycle.setMessageHandler((message) {
+  //   if (APIs.auth.currentUser != null) {
+  //     if (message.toString().contains('resume')) {
+  //       APIs.updateActiveStatus(true);
+  //     }
+  //     if (message.toString().contains('pause')) {
+  //       APIs.updateActiveStatus(false);
+  //     }
+  //   }
+  //
+  //   return Future.value(message);
+  // });
   return CustomScaffold(
     hasBackButton: false,
       appBarTitle: Text("Чат"),

@@ -34,9 +34,50 @@ class ChatPage extends StatelessWidget {
         });
       },
       child: CustomScaffold(
-          appBarTitle: Text(projectOrChat.fold(
-              (project) => project.projectName.getOrCrash(),
-              (chat) => chat.chattingWith.userName.getOrCrash())),
+        appBarTitle: Row(mainAxisSize:MainAxisSize.min,children: [
+          CircleAvatar(
+            backgroundColor: Colors.grey.shade400,
+            child: const Icon(Icons.person, color: Colors.white),
+          ),
+          const SizedBox(width: 10),
+          //user name & last seen time
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              //user name
+              Text(
+                projectOrChat.fold(
+                      (project) => project.projectName.getOrCrash(),
+                      (chat) => chat.chattingWith.userName.getOrCrash()),
+                  style: const TextStyle(
+                      fontSize: 16,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500)),
+
+              //for adding some space
+              const SizedBox(height: 2),
+
+              //last seen time of user
+              Text(
+                "Online",
+                  // list.isNotEmpty
+                  //     ? list[0].isOnline
+                  //     ? 'Online'
+                  //     : MyDateUtil.getLastActiveTime(
+                  //     context: context,
+                  //     lastActive: list[0].lastActive)
+                  //     : MyDateUtil.getLastActiveTime(
+                  //     context: context,
+                  //     lastActive: widget.user.lastActive),
+                  style: const TextStyle(
+                      fontSize: 13, color: Colors.white)),
+            ],
+          )
+        ],),
+          // appBarTitle: Text(projectOrChat.fold(
+          //     (project) => project.projectName.getOrCrash(),
+          //     (chat) => chat.chattingWith.userName.getOrCrash())) ,
           body: Column(
             children: [
               projectOrChat.fold((initialProject) {

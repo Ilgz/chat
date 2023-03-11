@@ -1,3 +1,4 @@
+import 'package:chat/domain/projects/project_failure.dart';
 import 'package:chat/infrastructure/notification/notification_controller.dart';
 import 'package:chat/injection.config.dart';
 import 'package:chat/injection.dart';
@@ -97,6 +98,26 @@ class FirebaseAuthFacade implements IAuthFacade {
      // return NotificationController().firebaseToken;
     }else{
       return "";
+    }
+  }
+
+  @override
+  Future<Either<FirebaseFirestoreFailure, Unit>>  updateActiveStatus(bool isOnline)async {
+    try {
+      final userOption = getIt<IAuthFacade>().getSignedInUserId();
+      final userRef =
+          _firebaseFirestore.doc("users/${userOption.getOrElse(() => throw NotAuthenticatedError())}");
+      userRef.update({
+        'is_online': isOnline,
+        'last_active': Timestamp.now(),
+      });
+      return right(unit);
+    } on FirebaseException catch (e) {
+      if (e.message!.contains('PERMISSION_DENIED')) {
+        return left(const FirebaseFirestoreFailure.insufficientPermission());
+      } else {
+        return left(const FirebaseFirestoreFailure.unexpected());
+      }
     }
   }
 }
