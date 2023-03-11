@@ -108,8 +108,8 @@ class FirebaseAuthFacade implements IAuthFacade {
       final userRef =
           _firebaseFirestore.doc("users/${userOption.getOrElse(() => throw NotAuthenticatedError())}");
       userRef.update({
-        'is_online': isOnline,
-        'last_active': Timestamp.now(),
+        'isOnline': isOnline,
+        'lastActive': Timestamp.now(),
       });
       return right(unit);
     } on FirebaseException catch (e) {

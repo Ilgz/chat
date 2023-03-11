@@ -3,8 +3,10 @@ import 'package:chat/application/chat/chat_watcher_bloc/chat_watcher_cubit.dart'
 import 'package:chat/application/projects/project_watcher/project_watcher_bloc.dart';
 import 'package:chat/domain/chat/chat.dart';
 import 'package:chat/domain/projects/project.dart';
+import 'package:chat/infrastructure/users/user_dto.dart';
 import 'package:chat/presentation/chat/widgets/chat_day_divider_card.dart';
 import 'package:chat/presentation/chat/widgets/message_card.dart';
+import 'package:chat/presentation/core/utils/my_date_util.dart';
 import 'package:chat/presentation/core/widgets/custom_scaffold.dart';
 import 'package:chat/presentation/core/widgets/failure_snackbar.dart';
 import 'package:chat/presentation/core/widgets/no_result_card.dart';
@@ -56,23 +58,25 @@ class ChatPage extends StatelessWidget {
                       color: Colors.white,
                       fontWeight: FontWeight.w500)),
 
-              //for adding some space
               const SizedBox(height: 2),
+              projectOrChat.fold((_) => SizedBox(), (chat) =>  StreamBuilder(
+                  stream: chat.chattingWith.reference.snapshots(),
+                  builder: (context, snapshot) {
+                    if(snapshot.hasData){
 
-              //last seen time of user
-              Text(
-                "Online",
-                  // list.isNotEmpty
-                  //     ? list[0].isOnline
-                  //     ? 'Online'
-                  //     : MyDateUtil.getLastActiveTime(
-                  //     context: context,
-                  //     lastActive: list[0].lastActive)
-                  //     : MyDateUtil.getLastActiveTime(
-                  //     context: context,
-                  //     lastActive: widget.user.lastActive),
-                  style: const TextStyle(
-                      fontSize: 13, color: Colors.white)),
+                      return Text(
+                          MyDateUtil.getLastActiveTime(
+                              context: context,
+                              lastActive:UserDto.fromFirestore(snapshot.data).toDomain().lastActive),
+                          style: const TextStyle(
+                              fontSize: 13, color: Colors.white));
+                    }else{
+                      return SizedBox();
+                    }
+
+                  }
+              ),)
+
             ],
           )
         ],),
