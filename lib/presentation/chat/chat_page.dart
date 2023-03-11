@@ -63,11 +63,11 @@ class ChatPage extends StatelessWidget {
                   stream: chat.chattingWith.reference.snapshots(),
                   builder: (context, snapshot) {
                     if(snapshot.hasData){
-
+                      final user=UserDto.fromFirestore(snapshot.data).toDomain();
                       return Text(
-                          MyDateUtil.getLastActiveTime(
+                          user.isOnline?"Online":MyDateUtil.getLastActiveTime(
                               context: context,
-                              lastActive:UserDto.fromFirestore(snapshot.data).toDomain().lastActive),
+                              lastActive:user.lastActive),
                           style: const TextStyle(
                               fontSize: 13, color: Colors.white));
                     }else{
