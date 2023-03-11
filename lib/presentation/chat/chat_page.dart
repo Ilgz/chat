@@ -34,6 +34,7 @@ class ChatPage extends StatelessWidget {
         });
       },
       child: CustomScaffold(
+        titleSpacing: 0,
         appBarTitle: Row(mainAxisSize:MainAxisSize.min,children: [
           CircleAvatar(
             backgroundColor: Colors.grey.shade400,

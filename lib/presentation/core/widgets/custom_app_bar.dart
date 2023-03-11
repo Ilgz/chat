@@ -6,12 +6,14 @@ class CustomAppBar extends AppBar {
   final IconData? leadingIconData;
   final bool hasBackButton;
   final List<Widget> actions;
+  final double? titleSpacing;
   CustomAppBar({
     Key? key,
     this.textTitle,
     this.actions=const [],
     this.textStyle,
     this.leadingIconData,
+    this.titleSpacing=16,
     this.hasBackButton=true
   }) : super(key: key);
 
@@ -28,6 +30,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
         child: SizedBox(
           height: 46,
           child: AppBar(
+              titleSpacing:widget.titleSpacing ,
               backgroundColor: Theme.of(context).primaryColor,
             actions: widget.actions,
             elevation: 0,

@@ -12,6 +12,7 @@ class CustomScaffold extends StatelessWidget {
   final List<Widget> actions;
   final Drawer? drawer;
   final bool hasBackButton;
+  final double? titleSpacing;
   const CustomScaffold({
     Key? key,
     required this.body,
@@ -23,6 +24,7 @@ class CustomScaffold extends StatelessWidget {
     this.isScrolling = false,
     this.hasBackButton=true,
     this.appBarTitle,
+    this.titleSpacing,
     this.drawer
   }) : super(key: key);
 
@@ -34,6 +36,7 @@ class CustomScaffold extends StatelessWidget {
           ? CustomAppBar(
         hasBackButton: hasBackButton,
               textTitle: appBarTitle,
+              titleSpacing: titleSpacing,
               actions: actions,
             )
           : null,
