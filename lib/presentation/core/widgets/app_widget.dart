@@ -1,3 +1,4 @@
+import 'package:chat/application/auth/profile_actor/profile_actor_cubit.dart';
 import 'package:chat/application/chat/chat_combiner_bloc/chat_combiner_cubit.dart';
 import 'package:chat/application/chat/chat_searcher_bloc/chat_searcher_cubit.dart';
 import 'package:chat/application/chat/chat_watcher_bloc/chat_watcher_cubit.dart';
@@ -22,6 +23,7 @@ class AppWidget extends StatelessWidget {
     return MultiBlocProvider(
         providers: [
           BlocProvider(create: (context) => getIt<ThemeSwitcherCubit>()..initializeTheme()),
+          BlocProvider(create: (context) => getIt<ProfileActorCubit>()),
           BlocProvider(
             create: (context) => getIt<ProjectWatcherBloc>()
               ..add(const ProjectWatcherEvent.startWatchAll()),

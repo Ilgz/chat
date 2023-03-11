@@ -1,3 +1,4 @@
+import 'package:chat/application/auth/profile_actor/profile_actor_cubit.dart';
 import 'package:chat/application/chat/chat_watcher_bloc/chat_watcher_cubit.dart';
 import 'package:chat/domain/chat/chat.dart';
 import 'package:chat/presentation/chat/widgets/direct_chat_tile.dart';
@@ -15,18 +16,15 @@ class ChatsOverviewPage extends StatelessWidget {
 const ChatsOverviewPage({Key? key}) : super(key: key);
 @override
 Widget build(BuildContext context) {
-  // SystemChannels.lifecycle.setMessageHandler((message) {
-  //   if (APIs.auth.currentUser != null) {
-  //     if (message.toString().contains('resume')) {
-  //       APIs.updateActiveStatus(true);
-  //     }
-  //     if (message.toString().contains('pause')) {
-  //       APIs.updateActiveStatus(false);
-  //     }
-  //   }
-  //
-  //   return Future.value(message);
-  // });
+  SystemChannels.lifecycle.setMessageHandler((message) {
+      if (message.toString().contains('resume')) {
+        context.read<ProfileActorCubit>().updateActiveStatus(true);
+      }
+      if (message.toString().contains('pause')) {
+        context.read<ProfileActorCubit>().updateActiveStatus(false);
+      }
+    return Future.value(message);
+  });
   return CustomScaffold(
     hasBackButton: false,
       appBarTitle: Text("Чат"),
