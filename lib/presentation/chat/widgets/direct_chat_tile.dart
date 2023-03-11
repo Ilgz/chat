@@ -1,4 +1,5 @@
 import 'package:chat/domain/chat/chat.dart';
+import 'package:chat/presentation/core/utils/my_date_util.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:chat/domain/projects/project.dart';
@@ -28,13 +29,12 @@ class DirectChatTile extends StatelessWidget {
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(DateFormat.yMMMMd()
-              .format(DateTime.fromMillisecondsSinceEpoch(chat.messages.isEmpty
-              ? chat.date.millisecondsSinceEpoch
-              : chat.messages.last.date.millisecondsSinceEpoch)),
+          Text(chat.messages.isEmpty
+              ? MyDateUtil.getLastMessageTime(context:context,timestamp:chat.date)
+              : MyDateUtil.getLastMessageTime(context: context, timestamp: chat.messages.last.date),
             style: Theme.of(context).textTheme.caption,),
-          SizedBox(width: 10,),
           if(chat.unreadMessages>0)...[
+            SizedBox(width: 10,),
             CircleAvatar(radius:10,child: Text(chat.unreadMessages.toString(),textAlign:TextAlign.center,style: TextStyle(color:Colors.white,fontSize: 12),),backgroundColor: Colors.green,)
           ]
         ],

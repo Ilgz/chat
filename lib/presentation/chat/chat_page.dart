@@ -59,7 +59,7 @@ class ChatPage extends StatelessWidget {
                       fontWeight: FontWeight.w500)),
 
               const SizedBox(height: 2),
-              projectOrChat.fold((_) => SizedBox(), (chat) =>  StreamBuilder(
+              projectOrChat.fold((_) => const SizedBox(), (chat) =>  StreamBuilder(
                   stream: chat.chattingWith.reference.snapshots(),
                   builder: (context, snapshot) {
                     if(snapshot.hasData){
@@ -71,7 +71,7 @@ class ChatPage extends StatelessWidget {
                           style: const TextStyle(
                               fontSize: 13, color: Colors.white));
                     }else{
-                      return SizedBox();
+                      return const SizedBox();
                     }
 
                   }

@@ -30,9 +30,9 @@ class MyDateUtil {
   //get last message time (used in chat user card)
   static String getLastMessageTime(
       {required BuildContext context,
-      required String time,
+      required Timestamp timestamp,
       bool showYear = false}) {
-    final DateTime sent = DateTime.fromMillisecondsSinceEpoch(int.parse(time));
+    final DateTime sent = DateTime.fromMillisecondsSinceEpoch(timestamp.millisecondsSinceEpoch);
     final DateTime now = DateTime.now();
 
     if (now.day == sent.day &&
