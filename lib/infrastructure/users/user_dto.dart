@@ -14,6 +14,10 @@ abstract class UserDto implements _$UserDto {
         required String email,
         required List<String> nameSearch,
         required List<String> fcmTokens,
+
+        @ServerTimestampConverter()
+        Timestamp? lastActive,
+        bool? isOnline,
         @DocumentReferenceConverter()
         @JsonKey(ignore: true)
         DocumentReference? reference,}) = _UserDto;
@@ -36,6 +40,6 @@ abstract class UserDto implements _$UserDto {
 
   User toDomain() {
     return User(
-        userName: UserName(name),emailAddress: EmailAddress(email),reference: reference!,fcmTokens: fcmTokens);
+        userName: UserName(name),emailAddress: EmailAddress(email),reference: reference!,fcmTokens: fcmTokens, isOnline:isOnline??false , lastActive: lastActive??Timestamp.fromMillisecondsSinceEpoch(0));
   }
 }

@@ -24,6 +24,9 @@ mixin _$UserDto {
   String get email => throw _privateConstructorUsedError;
   List<String> get nameSearch => throw _privateConstructorUsedError;
   List<String> get fcmTokens => throw _privateConstructorUsedError;
+  @ServerTimestampConverter()
+  Timestamp? get lastActive => throw _privateConstructorUsedError;
+  bool? get isOnline => throw _privateConstructorUsedError;
   @DocumentReferenceConverter()
   @JsonKey(ignore: true)
   DocumentReference<Object?>? get reference =>
@@ -44,6 +47,9 @@ abstract class $UserDtoCopyWith<$Res> {
       String email,
       List<String> nameSearch,
       List<String> fcmTokens,
+      @ServerTimestampConverter()
+          Timestamp? lastActive,
+      bool? isOnline,
       @DocumentReferenceConverter()
       @JsonKey(ignore: true)
           DocumentReference<Object?>? reference});
@@ -66,6 +72,8 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
     Object? email = null,
     Object? nameSearch = null,
     Object? fcmTokens = null,
+    Object? lastActive = freezed,
+    Object? isOnline = freezed,
     Object? reference = freezed,
   }) {
     return _then(_value.copyWith(
@@ -85,6 +93,14 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
           ? _value.fcmTokens
           : fcmTokens // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      lastActive: freezed == lastActive
+          ? _value.lastActive
+          : lastActive // ignore: cast_nullable_to_non_nullable
+              as Timestamp?,
+      isOnline: freezed == isOnline
+          ? _value.isOnline
+          : isOnline // ignore: cast_nullable_to_non_nullable
+              as bool?,
       reference: freezed == reference
           ? _value.reference
           : reference // ignore: cast_nullable_to_non_nullable
@@ -105,6 +121,9 @@ abstract class _$$_UserDtoCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
       String email,
       List<String> nameSearch,
       List<String> fcmTokens,
+      @ServerTimestampConverter()
+          Timestamp? lastActive,
+      bool? isOnline,
       @DocumentReferenceConverter()
       @JsonKey(ignore: true)
           DocumentReference<Object?>? reference});
@@ -124,6 +143,8 @@ class __$$_UserDtoCopyWithImpl<$Res>
     Object? email = null,
     Object? nameSearch = null,
     Object? fcmTokens = null,
+    Object? lastActive = freezed,
+    Object? isOnline = freezed,
     Object? reference = freezed,
   }) {
     return _then(_$_UserDto(
@@ -143,6 +164,14 @@ class __$$_UserDtoCopyWithImpl<$Res>
           ? _value._fcmTokens
           : fcmTokens // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      lastActive: freezed == lastActive
+          ? _value.lastActive
+          : lastActive // ignore: cast_nullable_to_non_nullable
+              as Timestamp?,
+      isOnline: freezed == isOnline
+          ? _value.isOnline
+          : isOnline // ignore: cast_nullable_to_non_nullable
+              as bool?,
       reference: freezed == reference
           ? _value.reference
           : reference // ignore: cast_nullable_to_non_nullable
@@ -159,6 +188,8 @@ class _$_UserDto extends _UserDto {
       required this.email,
       required final List<String> nameSearch,
       required final List<String> fcmTokens,
+      @ServerTimestampConverter() this.lastActive,
+      this.isOnline,
       @DocumentReferenceConverter() @JsonKey(ignore: true) this.reference})
       : _nameSearch = nameSearch,
         _fcmTokens = fcmTokens,
@@ -188,13 +219,18 @@ class _$_UserDto extends _UserDto {
   }
 
   @override
+  @ServerTimestampConverter()
+  final Timestamp? lastActive;
+  @override
+  final bool? isOnline;
+  @override
   @DocumentReferenceConverter()
   @JsonKey(ignore: true)
   final DocumentReference<Object?>? reference;
 
   @override
   String toString() {
-    return 'UserDto(name: $name, email: $email, nameSearch: $nameSearch, fcmTokens: $fcmTokens, reference: $reference)';
+    return 'UserDto(name: $name, email: $email, nameSearch: $nameSearch, fcmTokens: $fcmTokens, lastActive: $lastActive, isOnline: $isOnline, reference: $reference)';
   }
 
   @override
@@ -208,6 +244,10 @@ class _$_UserDto extends _UserDto {
                 .equals(other._nameSearch, _nameSearch) &&
             const DeepCollectionEquality()
                 .equals(other._fcmTokens, _fcmTokens) &&
+            (identical(other.lastActive, lastActive) ||
+                other.lastActive == lastActive) &&
+            (identical(other.isOnline, isOnline) ||
+                other.isOnline == isOnline) &&
             (identical(other.reference, reference) ||
                 other.reference == reference));
   }
@@ -220,6 +260,8 @@ class _$_UserDto extends _UserDto {
       email,
       const DeepCollectionEquality().hash(_nameSearch),
       const DeepCollectionEquality().hash(_fcmTokens),
+      lastActive,
+      isOnline,
       reference);
 
   @JsonKey(ignore: true)
@@ -242,6 +284,9 @@ abstract class _UserDto extends UserDto {
       required final String email,
       required final List<String> nameSearch,
       required final List<String> fcmTokens,
+      @ServerTimestampConverter()
+          final Timestamp? lastActive,
+      final bool? isOnline,
       @DocumentReferenceConverter()
       @JsonKey(ignore: true)
           final DocumentReference<Object?>? reference}) = _$_UserDto;
@@ -257,6 +302,11 @@ abstract class _UserDto extends UserDto {
   List<String> get nameSearch;
   @override
   List<String> get fcmTokens;
+  @override
+  @ServerTimestampConverter()
+  Timestamp? get lastActive;
+  @override
+  bool? get isOnline;
   @override
   @DocumentReferenceConverter()
   @JsonKey(ignore: true)

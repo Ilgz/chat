@@ -18,6 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$User {
   UserName get userName => throw _privateConstructorUsedError;
   EmailAddress get emailAddress => throw _privateConstructorUsedError;
+  bool get isOnline => throw _privateConstructorUsedError;
+  Timestamp get lastActive => throw _privateConstructorUsedError;
   List<String> get fcmTokens => throw _privateConstructorUsedError;
   DocumentReference<Object?> get reference =>
       throw _privateConstructorUsedError;
@@ -34,6 +36,8 @@ abstract class $UserCopyWith<$Res> {
   $Res call(
       {UserName userName,
       EmailAddress emailAddress,
+      bool isOnline,
+      Timestamp lastActive,
       List<String> fcmTokens,
       DocumentReference<Object?> reference});
 }
@@ -53,6 +57,8 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   $Res call({
     Object? userName = null,
     Object? emailAddress = null,
+    Object? isOnline = null,
+    Object? lastActive = null,
     Object? fcmTokens = null,
     Object? reference = null,
   }) {
@@ -65,6 +71,14 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.emailAddress
           : emailAddress // ignore: cast_nullable_to_non_nullable
               as EmailAddress,
+      isOnline: null == isOnline
+          ? _value.isOnline
+          : isOnline // ignore: cast_nullable_to_non_nullable
+              as bool,
+      lastActive: null == lastActive
+          ? _value.lastActive
+          : lastActive // ignore: cast_nullable_to_non_nullable
+              as Timestamp,
       fcmTokens: null == fcmTokens
           ? _value.fcmTokens
           : fcmTokens // ignore: cast_nullable_to_non_nullable
@@ -86,6 +100,8 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   $Res call(
       {UserName userName,
       EmailAddress emailAddress,
+      bool isOnline,
+      Timestamp lastActive,
       List<String> fcmTokens,
       DocumentReference<Object?> reference});
 }
@@ -101,6 +117,8 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
   $Res call({
     Object? userName = null,
     Object? emailAddress = null,
+    Object? isOnline = null,
+    Object? lastActive = null,
     Object? fcmTokens = null,
     Object? reference = null,
   }) {
@@ -113,6 +131,14 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
           ? _value.emailAddress
           : emailAddress // ignore: cast_nullable_to_non_nullable
               as EmailAddress,
+      isOnline: null == isOnline
+          ? _value.isOnline
+          : isOnline // ignore: cast_nullable_to_non_nullable
+              as bool,
+      lastActive: null == lastActive
+          ? _value.lastActive
+          : lastActive // ignore: cast_nullable_to_non_nullable
+              as Timestamp,
       fcmTokens: null == fcmTokens
           ? _value._fcmTokens
           : fcmTokens // ignore: cast_nullable_to_non_nullable
@@ -131,6 +157,8 @@ class _$_User implements _User {
   _$_User(
       {required this.userName,
       required this.emailAddress,
+      required this.isOnline,
+      required this.lastActive,
       required final List<String> fcmTokens,
       required this.reference})
       : _fcmTokens = fcmTokens;
@@ -139,6 +167,10 @@ class _$_User implements _User {
   final UserName userName;
   @override
   final EmailAddress emailAddress;
+  @override
+  final bool isOnline;
+  @override
+  final Timestamp lastActive;
   final List<String> _fcmTokens;
   @override
   List<String> get fcmTokens {
@@ -152,7 +184,7 @@ class _$_User implements _User {
 
   @override
   String toString() {
-    return 'User(userName: $userName, emailAddress: $emailAddress, fcmTokens: $fcmTokens, reference: $reference)';
+    return 'User(userName: $userName, emailAddress: $emailAddress, isOnline: $isOnline, lastActive: $lastActive, fcmTokens: $fcmTokens, reference: $reference)';
   }
 
   @override
@@ -164,6 +196,10 @@ class _$_User implements _User {
                 other.userName == userName) &&
             (identical(other.emailAddress, emailAddress) ||
                 other.emailAddress == emailAddress) &&
+            (identical(other.isOnline, isOnline) ||
+                other.isOnline == isOnline) &&
+            (identical(other.lastActive, lastActive) ||
+                other.lastActive == lastActive) &&
             const DeepCollectionEquality()
                 .equals(other._fcmTokens, _fcmTokens) &&
             (identical(other.reference, reference) ||
@@ -171,8 +207,8 @@ class _$_User implements _User {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, userName, emailAddress,
-      const DeepCollectionEquality().hash(_fcmTokens), reference);
+  int get hashCode => Object.hash(runtimeType, userName, emailAddress, isOnline,
+      lastActive, const DeepCollectionEquality().hash(_fcmTokens), reference);
 
   @JsonKey(ignore: true)
   @override
@@ -185,6 +221,8 @@ abstract class _User implements User {
   factory _User(
       {required final UserName userName,
       required final EmailAddress emailAddress,
+      required final bool isOnline,
+      required final Timestamp lastActive,
       required final List<String> fcmTokens,
       required final DocumentReference<Object?> reference}) = _$_User;
 
@@ -192,6 +230,10 @@ abstract class _User implements User {
   UserName get userName;
   @override
   EmailAddress get emailAddress;
+  @override
+  bool get isOnline;
+  @override
+  Timestamp get lastActive;
   @override
   List<String> get fcmTokens;
   @override
