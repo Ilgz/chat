@@ -1,8 +1,11 @@
 import 'package:chat/application/auth/profile_actor/profile_actor_cubit.dart';
 import 'package:chat/application/chat/chat_watcher_bloc/chat_watcher_cubit.dart';
 import 'package:chat/domain/chat/chat.dart';
+import 'package:chat/domain/core/locale_switcher/app_locale.dart';
 import 'package:chat/presentation/chat/widgets/direct_chat_tile.dart';
 import 'package:chat/presentation/core/routes/router.dart';
+import 'package:chat/presentation/core/strings.dart';
+import 'package:chat/presentation/core/widgets/app_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,6 +14,7 @@ import 'package:chat/domain/projects/project.dart';
 import 'package:chat/presentation/chat/widgets/group_chat_tile.dart';
 import 'package:chat/presentation/core/widgets/custom_scaffold.dart';
 import 'package:chat/presentation/core/widgets/no_result_card.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 
 class ChatsOverviewPage extends StatelessWidget {
 const ChatsOverviewPage({Key? key}) : super(key: key);
@@ -27,7 +31,7 @@ Widget build(BuildContext context) {
   });
   return CustomScaffold(
     hasBackButton: false,
-      appBarTitle: Text("Чат"),
+      appBarTitle: Text(AppLocale.chat.getString(context)),
       actions: [
         IconButton(onPressed: (){
           goToChatSearchPage(context);
@@ -59,7 +63,7 @@ Widget build(BuildContext context) {
                               final chat = chats[index];
                               if (chat.failureOption.isSome()) {
                                 return const Card(
-                                  child: Text("Error"),
+                                  child: Text(""),
                                 );
                               } else {
                                 return DirectChatTile(chat: chat,);
@@ -67,7 +71,7 @@ Widget build(BuildContext context) {
                               }
                             });
                       }else{
-                        return  const NoResultCard("No chat found", Icons.account_tree_outlined);
+                        return  const NoResultCard(AppStrings.noChatFound, Icons.account_tree_outlined);
                       }
                     }, loadFailure: (_)=>const SizedBox());
                   });}(),
@@ -87,7 +91,7 @@ Widget build(BuildContext context) {
                           final project = projects[index];
                           if (project.failureOption.isSome()&&!project.isNew) {
                             return const Card(
-                              child: Text("Error"),
+                              child: Text(""),
                             );
                           } else {
                             return GroupChatTile(project: project);

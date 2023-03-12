@@ -2,6 +2,9 @@ import 'package:chat/application/auth/profile_actor/profile_actor_cubit.dart';
 import 'package:chat/application/chat/chat_combiner_bloc/chat_combiner_cubit.dart';
 import 'package:chat/application/chat/chat_searcher_bloc/chat_searcher_cubit.dart';
 import 'package:chat/application/chat/chat_watcher_bloc/chat_watcher_cubit.dart';
+import 'package:chat/application/core/locale_switcher/locale_switcher_cubit.dart';
+import 'package:chat/domain/core/locale_switcher/app_locale.dart';
+import 'package:chat/presentation/core/enums/locale_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,14 +18,16 @@ import 'package:chat/application/users/user_watcher/user_watcher_bloc.dart';
 import 'package:chat/injection.dart';
 import 'package:chat/presentation/core/constants.dart';
 import 'package:chat/presentation/core/routes/router.dart';
-
+import 'package:flutter_localization/flutter_localization.dart';
 class AppWidget extends StatelessWidget {
   const AppWidget({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+
     return MultiBlocProvider(
         providers: [
           BlocProvider(create: (context) => getIt<ThemeSwitcherCubit>()..initializeTheme()),
+          BlocProvider(create: (context) => getIt<LocaleSwitcherCubit>()..initializeLocale()),
           BlocProvider(create: (context) => getIt<ProfileActorCubit>()),
           BlocProvider(
             create: (context) => getIt<ProjectWatcherBloc>()
@@ -48,11 +53,23 @@ class AppWidget extends StatelessWidget {
         child: BlocBuilder<ThemeSwitcherCubit, ThemeSwitcherState>(
           buildWhen: (p, c) => p.isDark != c.isDark,
           builder: (context, state) {
-            return AnnotatedRegion<SystemUiOverlayStyle>(
+            return BlocBuilder<LocaleSwitcherCubit, LocaleSwitcherState>(
+  builder: (context, localeSwitcherState) {
+    final FlutterLocalization localization = FlutterLocalization.instance;
+    localization.init(
+      mapLocales: [
+        MapLocale(LocaleEnum.EN.description, AppLocale.EN),
+        MapLocale(LocaleEnum.RU.description, AppLocale.RU),
+      ],
+      initLanguageCode: localeSwitcherState.localeEnum.description,
+    );
+    return AnnotatedRegion<SystemUiOverlayStyle>(
               value: SystemUiOverlayStyle(
                 statusBarColor:state.isDark?AppColorConstants.darkPrimaryColor:AppColorConstants.lightPrimaryColor, // set your desired status bar color here
               ),
               child: MaterialApp.router(
+                  supportedLocales: localization.supportedLocales,
+                  localizationsDelegates: localization.localizationsDelegates,
                   routerConfig: goRouter,
                   title: "Chat",
                   debugShowCheckedModeBanner: false,
@@ -60,6 +77,8 @@ class AppWidget extends StatelessWidget {
                   darkTheme: darkTheme,
                   theme: lightTheme),
             );
+  },
+);
           },
         ));
   }

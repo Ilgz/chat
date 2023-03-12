@@ -6,6 +6,7 @@ import 'package:chat/domain/projects/project.dart';
 import 'package:chat/infrastructure/users/user_dto.dart';
 import 'package:chat/presentation/chat/widgets/chat_day_divider_card.dart';
 import 'package:chat/presentation/chat/widgets/message_card.dart';
+import 'package:chat/presentation/core/strings.dart';
 import 'package:chat/presentation/core/utils/my_date_util.dart';
 import 'package:chat/presentation/core/widgets/custom_scaffold.dart';
 import 'package:chat/presentation/core/widgets/failure_snackbar.dart';
@@ -144,7 +145,7 @@ class ChatPage extends StatelessWidget {
                               );
                             } else {
                               return const NoResultCard(
-                                  "No messages yet", Icons.message_outlined);
+                                  AppStrings.noMessagesYet, Icons.message_outlined);
                             }
                           },
                           loadFailure: (state) {
@@ -212,7 +213,7 @@ class ChatPage extends StatelessWidget {
                               );
                             } else {
                               return const NoResultCard(
-                                  "No messages yet", Icons.message_outlined);
+                                  AppStrings.noMessagesYet, Icons.message_outlined);
                             }
                           },
                           loadFailure: (state) {
@@ -246,7 +247,7 @@ class ChatPage extends StatelessWidget {
                           controller: _controller,
                           style: Theme.of(context).textTheme.bodyText1,
                           decoration: const InputDecoration.collapsed(
-                            hintText: 'Type your message...',
+                            hintText: AppStrings.typeYourMessage,
                             hintStyle: TextStyle(color: Colors.grey),
                           ),
                           // focusNode: focusNode,

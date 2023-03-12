@@ -4,7 +4,6 @@ enum ProjectFilterType {
   participating,
 }
 extension FilterExtension on ProjectFilterType {
-
   String get description {
     switch (this) {
       case ProjectFilterType.all:

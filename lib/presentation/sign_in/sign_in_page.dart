@@ -7,6 +7,7 @@ import 'package:chat/application/projects/project_watcher/project_watcher_bloc.d
 import 'package:chat/application/users/user_watcher/user_watcher_bloc.dart';
 import 'package:chat/injection.dart';
 import 'package:chat/presentation/core/routes/router.dart';
+import 'package:chat/presentation/core/strings.dart';
 import 'package:chat/presentation/core/widgets/custom_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -43,7 +44,7 @@ class SignInPage extends StatelessWidget {
                           ),
                           Center(
                               child: Text(
-                            "Login",
+                            AppStrings.login,
                             style: Theme.of(context).textTheme.titleLarge,
                           )),
                           const SizedBox(
@@ -53,7 +54,7 @@ class SignInPage extends StatelessWidget {
                             style: Theme.of(context).textTheme.bodyText1,
                             cursorColor: Theme.of(context).primaryColor,
                             decoration: const InputDecoration(
-                                labelText: 'Email',
+                                labelText: AppStrings.email,
                                 isDense: true,
                                 border: UnderlineInputBorder(),
                                 contentPadding:
@@ -67,7 +68,7 @@ class SignInPage extends StatelessWidget {
                                 .fold(
                                     (f) => f.maybeMap(
                                         invalidEmail: (value) =>
-                                            'Invalid email',
+                                            AppStrings.invalidEmail,
                                         orElse: () => null),
                                     (r) => null),
                             onChanged: (value) => context
@@ -82,7 +83,7 @@ class SignInPage extends StatelessWidget {
                             cursorColor: Theme.of(context).primaryColor,
 
                             decoration: InputDecoration(
-                                labelText: 'Password',
+                                labelText: AppStrings.password,
                                 isDense: true,
                                 border: UnderlineInputBorder(),
                                 suffixIcon: IconButton(
@@ -108,7 +109,7 @@ class SignInPage extends StatelessWidget {
                                 .fold(
                                     (f) => f.maybeMap(
                                         shortPassword: (value) =>
-                                            'Short password',
+                                            AppStrings.shortPassword,
                                         orElse: () => null),
                                     (r) => null),
                           ),
@@ -134,7 +135,7 @@ class SignInPage extends StatelessWidget {
                                           valueColor: AlwaysStoppedAnimation(
                                               Colors.white),
                                         ))
-                                    : const Text("Sign in")),
+                                    : const Text(AppStrings.login)),
                           ),
                           const SizedBox(
                             height: 24,
@@ -143,12 +144,12 @@ class SignInPage extends StatelessWidget {
                             child: RichText(
                               text: TextSpan(children: [
                                 const TextSpan(
-                                    text: 'Don\'t have account ? ',
+                                    text: AppStrings.doNotHaveAnAccount,
                                     style: TextStyle(color: Colors.grey)),
                                 WidgetSpan(
                                     child: InkWell(
                                   child: const Text(
-                                    'Sign up',
+                                    AppStrings.signUp,
                                     style: TextStyle(color: Colors.green),
                                   ),
                                   onTap: () {
@@ -173,11 +174,11 @@ class SignInPage extends StatelessWidget {
                                       content: Text(failure.map(
                                           remoteError: (remoteError) =>
                                               remoteError.errorName,
-                                          serverError: (_) => "Server error",
+                                          serverError: (_) => AppStrings.serverError,
                                           emailAlreadyInUse: (_) =>
-                                              "Email already in use",
+                                              AppStrings.emailAlreadyInUse,
                                           invalidEmailAndPassword: (_) =>
-                                              "Invalid email and password combination")))),
+                                              AppStrings.invalidEmailAndPasswordCombination)))),
                               (r) {
                             context.read<UserWatcherBloc>().add(
                                   const UserWatcherEvent.startWatchAll(),

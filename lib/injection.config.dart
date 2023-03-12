@@ -15,15 +15,17 @@ import 'package:chat/application/auth/sign_in_form/sign_in_form_bloc.dart'
 import 'package:chat/application/auth/sign_up_form/sign_up_form_bloc.dart'
     as _i25;
 import 'package:chat/application/chat/chat_combiner_bloc/chat_combiner_cubit.dart'
-    as _i35;
+    as _i38;
 import 'package:chat/application/chat/chat_form_bloc/chat_form_bloc.dart'
     as _i30;
 import 'package:chat/application/chat/chat_searcher_bloc/chat_searcher_cubit.dart'
     as _i3;
 import 'package:chat/application/chat/chat_watcher_bloc/chat_watcher_cubit.dart'
     as _i31;
+import 'package:chat/application/core/locale_switcher/locale_switcher_cubit.dart'
+    as _i36;
 import 'package:chat/application/core/theme_switcher/theme_switcher_cubit.dart'
-    as _i34;
+    as _i37;
 import 'package:chat/application/projects/project_actor/project_actor_cubit.dart'
     as _i19;
 import 'package:chat/application/projects/project_filter/project_filter_bloc.dart'
@@ -40,15 +42,19 @@ import 'package:chat/application/users/user_watcher/user_watcher_bloc.dart'
     as _i28;
 import 'package:chat/domain/auth/i_auth_facade.dart' as _i9;
 import 'package:chat/domain/chat/i_chat_facade.dart' as _i11;
-import 'package:chat/domain/core/theme_switcher/i_theme_switcher_facade.dart'
+import 'package:chat/domain/core/locale_switcher/i_locale_switcher_facade.dart'
     as _i32;
+import 'package:chat/domain/core/theme_switcher/i_theme_switcher_facade.dart'
+    as _i34;
 import 'package:chat/domain/projects/i_project_repository.dart' as _i13;
 import 'package:chat/domain/users/i_user_repository.dart' as _i15;
 import 'package:chat/infrastructure/auth/firebase_auth_facade.dart' as _i10;
 import 'package:chat/infrastructure/chat/chat_facade.dart' as _i12;
-import 'package:chat/infrastructure/core/app_injectable_module.dart' as _i36;
-import 'package:chat/infrastructure/core/theme_switcher/theme_switcher_facade.dart'
+import 'package:chat/infrastructure/core/app_injectable_module.dart' as _i39;
+import 'package:chat/infrastructure/core/locale_switcher/locale_switcher_facade.dart'
     as _i33;
+import 'package:chat/infrastructure/core/theme_switcher/theme_switcher_facade.dart'
+    as _i35;
 import 'package:chat/infrastructure/projects/project_repository.dart' as _i14;
 import 'package:chat/infrastructure/users/user_repository.dart' as _i16;
 import 'package:cloud_firestore/cloud_firestore.dart' as _i6;
@@ -131,11 +137,15 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i30.ChatFormBloc(gh<_i11.IChatFacade>()));
     gh.lazySingleton<_i31.ChatWatcherCubit>(
         () => _i31.ChatWatcherCubit(gh<_i11.IChatFacade>()));
-    gh.lazySingleton<_i32.IThemeSwitcherFacade>(
-        () => _i33.ThemeSwitcherFacade(gh<_i23.SharedPreferences>()));
-    gh.factory<_i34.ThemeSwitcherCubit>(
-        () => _i34.ThemeSwitcherCubit(gh<_i32.IThemeSwitcherFacade>()));
-    gh.factory<_i35.ChatCombinerCubit>(() => _i35.ChatCombinerCubit(
+    gh.lazySingleton<_i32.ILocaleSwitcherFacade>(
+        () => _i33.LocaleSwitcherFacade(gh<_i23.SharedPreferences>()));
+    gh.lazySingleton<_i34.IThemeSwitcherFacade>(
+        () => _i35.ThemeSwitcherFacade(gh<_i23.SharedPreferences>()));
+    gh.factory<_i36.LocaleSwitcherCubit>(
+        () => _i36.LocaleSwitcherCubit(gh<_i32.ILocaleSwitcherFacade>()));
+    gh.factory<_i37.ThemeSwitcherCubit>(
+        () => _i37.ThemeSwitcherCubit(gh<_i34.IThemeSwitcherFacade>()));
+    gh.factory<_i38.ChatCombinerCubit>(() => _i38.ChatCombinerCubit(
           gh<_i31.ChatWatcherCubit>(),
           gh<_i28.UserWatcherBloc>(),
         ));
@@ -143,4 +153,4 @@ extension GetItInjectableX on _i1.GetIt {
   }
 }
 
-class _$AppInjectableProdModule extends _i36.AppInjectableProdModule {}
+class _$AppInjectableProdModule extends _i39.AppInjectableProdModule {}

@@ -2,6 +2,7 @@ import 'package:chat/application/auth/auth_bloc.dart';
 import 'package:chat/application/auth/profile_watcher/profile_watcher_cubit.dart';
 import 'package:chat/application/projects/project_watcher/project_watcher_bloc.dart';
 import 'package:chat/presentation/core/routes/router.dart';
+import 'package:chat/presentation/core/strings.dart';
 import 'package:chat/presentation/core/widgets/custom_scaffold.dart';
 import 'package:chat/presentation/profile/widgets/theme_switcher.dart';
 import 'package:chat/presentation/users/users_overview/widgets/user_icon.dart';
@@ -20,7 +21,7 @@ class ProfilePage extends StatelessWidget {
           width: 10,
         )
       ],
-      appBarTitle: Text("Профиль"),
+      appBarTitle: Text(AppStrings.profile),
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
           state.maybeMap(
@@ -92,7 +93,7 @@ class ProfilePage extends StatelessWidget {
                                                             Colors.white),
                                                   )),
                                               orElse: () =>
-                                                  const Text("Sign out"));
+                                                  const Text(AppStrings.signOut));
                                         }());
                                   },
                                 ),
