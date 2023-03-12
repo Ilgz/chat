@@ -63,7 +63,6 @@ class AppWidget extends StatelessWidget {
           buildWhen: (p, c) => p.isDark != c.isDark,
           builder: (context, state) {
             return BlocBuilder<LocaleSwitcherCubit, LocaleSwitcherState>(
-              // buildWhen: (p,c)=>p.flutterLocalization!=c.localeEnum,
               builder: (context, localeSwitcherState) {
                 if (localeSwitcherState.flutterLocalization != null) {
                   return AnnotatedRegion<SystemUiOverlayStyle>(

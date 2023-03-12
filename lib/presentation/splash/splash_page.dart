@@ -1,5 +1,6 @@
 import 'package:chat/application/auth/auth_bloc.dart';
 import 'package:chat/presentation/core/routes/router.dart';
+import 'package:chat/presentation/core/widgets/custom_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,7 +18,7 @@ class SplashPage extends StatelessWidget {
             loading: (_) {});
       },
       child: const Scaffold(
-        body: Center(child: CircularProgressIndicator()),
+        body: CustomProgressIndicator(),
       ),
     );
   }
