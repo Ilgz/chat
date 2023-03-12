@@ -1,8 +1,10 @@
+import 'package:chat/domain/core/locale_switcher/app_locale.dart';
 import 'package:chat/presentation/core/utils/my_date_util.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:chat/domain/projects/project.dart';
 import 'package:chat/presentation/core/routes/router.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 import 'package:intl/intl.dart';
 
 class GroupChatTile extends StatelessWidget {
@@ -23,7 +25,7 @@ class GroupChatTile extends StatelessWidget {
       subtitle: () {
         final lastMessage=project.messages.isNotEmpty?project.messages.last:null;
         return Text(
-          lastMessage==null ? "Group was created" : "${lastMessage.sentByMe ? "You" :lastMessage.sentFrom.userName.getOrCrash()}: ${lastMessage.messageContent
+          lastMessage==null ? AppLocale.groupWasCreated.getString(context) : "${lastMessage.sentByMe ? "You" :lastMessage.sentFrom.userName.getOrCrash()}: ${lastMessage.messageContent
               .getOrCrash()}", maxLines: 1,style: Theme.of(context).textTheme.caption, overflow: TextOverflow.ellipsis,);
       }(),
       trailing: Text(project.messages.isEmpty

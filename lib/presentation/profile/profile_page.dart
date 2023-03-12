@@ -1,6 +1,7 @@
 import 'package:chat/application/auth/auth_bloc.dart';
 import 'package:chat/application/auth/profile_watcher/profile_watcher_cubit.dart';
 import 'package:chat/application/projects/project_watcher/project_watcher_bloc.dart';
+import 'package:chat/domain/core/locale_switcher/app_locale.dart';
 import 'package:chat/presentation/core/routes/router.dart';
 import 'package:chat/presentation/core/strings.dart';
 import 'package:chat/presentation/core/widgets/custom_scaffold.dart';
@@ -8,6 +9,7 @@ import 'package:chat/presentation/profile/widgets/theme_switcher.dart';
 import 'package:chat/presentation/users/users_overview/widgets/user_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -21,7 +23,7 @@ class ProfilePage extends StatelessWidget {
           width: 10,
         )
       ],
-      appBarTitle: Text(AppStrings.profile),
+      appBarTitle: Text(AppLocale.profile.getString(context)),
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
           state.maybeMap(
@@ -93,7 +95,7 @@ class ProfilePage extends StatelessWidget {
                                                             Colors.white),
                                                   )),
                                               orElse: () =>
-                                                  const Text(AppStrings.signOut));
+                                                  Text(AppLocale.signOut.getString(context)));
                                         }());
                                   },
                                 ),

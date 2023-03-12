@@ -20,9 +20,30 @@ mixin AppLocale {
       'usernameMustBeMinimum3Characters';
   static const String chat = 'chat';
   static const String noChatFound = 'noChatFound';
+  static const String noUserFound = 'noUserFound';
   static const String noMessagesYet = 'noMessagesYet';
   static const String typeYourMessage = 'typeYourMessage';
   static const String profile = 'profile';
+  static const String online = 'online';
+  static const String groupWasCreated = 'Group was created';
+  static const String lastSeenTodayAt = 'Last seen today at';
+  static const String lastSeenYesterdayAt = 'Last seen yesterday at';
+  static const String lastSeenALongTimeAgo = 'Last seen a long time ago';
+  static const String jan = 'Jan';
+  static const String feb = 'Feb';
+  static const String mar = 'Mar';
+  static const String apr = 'Apr';
+  static const String may = 'May';
+  static const String jun = 'Jun';
+  static const String jul = 'Jul';
+  static const String aug = 'Aug';
+  static const String sept = 'Sept';
+  static const String oct = 'Oct';
+  static const String nov = 'Nov';
+  static const String dec = 'Dec';
+  static const String light = 'Light';
+  static const String dark = 'Dark';
+  static const String search = 'Search...';
 
   static const Map<String, dynamic> EN = {
     serverError: 'Server error',
@@ -49,7 +70,28 @@ mixin AppLocale {
     noMessagesYet: 'No messages yet',
     typeYourMessage: 'Type your message...',
     profile: 'Profile',
-  };
+    noUserFound: 'No user found',
+    online:"Online",
+    groupWasCreated:"Group was created",
+    lastSeenTodayAt: 'Last seen today at',
+    lastSeenYesterdayAt: 'Last seen yesterday at',
+    lastSeenALongTimeAgo: 'Last seen a long time ago',
+    jan: 'Jan',
+    feb: 'Feb',
+    mar: 'Mar',
+    apr: 'Apr',
+    may: 'May',
+    jun: 'Jun',
+    jul: 'Jul',
+    aug: 'Aug',
+    sept: 'Sept',
+    oct: 'Oct',
+    nov: 'Nov',
+    dec: 'Dec',
+    light: 'Light',
+    dark: 'Dark',
+   search: 'Search...'
+};
 
   static const Map<String, dynamic> RU = {
     serverError: 'Ошибка сервера',
@@ -72,9 +114,31 @@ mixin AppLocale {
     usernameMustBeMinimum3Characters:
         'Имя пользователя должно содержать минимум 3 символа',
     chat: 'Чат',
-    noChatFound: 'Чаты не найдены',
+    noChatFound: 'Чат не найден',
     noMessagesYet: 'Нет сообщений',
     typeYourMessage: 'Введите сообщение...',
-    profile: 'Профиль'
+    profile: 'Профиль',
+    noUserFound: 'Пользователь не найден',
+    online:"Онлайн",
+    groupWasCreated:"Группа была создана",
+    lastSeenTodayAt: 'Был(а) в сети сегодня в',
+    lastSeenYesterdayAt: 'Был(а) в сети вчера в',
+    lastSeenALongTimeAgo: 'Был(а) в сети давно',
+    jan: 'янв',
+    feb: 'фев',
+    mar: 'мар',
+    apr: 'апр',
+    may: 'май',
+    jun: 'июн',
+    jul: 'июл',
+    aug: 'авг',
+    sept: 'сен',
+    oct: 'окт',
+    nov: 'ноя',
+    dec: 'дек',
+    light: 'Светлая',
+    dark: 'Тёмная',
+    search: 'Поиск...'
+
   };
 }

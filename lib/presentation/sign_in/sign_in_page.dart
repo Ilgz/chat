@@ -5,12 +5,14 @@ import 'package:chat/application/chat/chat_combiner_bloc/chat_combiner_cubit.dar
 import 'package:chat/application/chat/chat_watcher_bloc/chat_watcher_cubit.dart';
 import 'package:chat/application/projects/project_watcher/project_watcher_bloc.dart';
 import 'package:chat/application/users/user_watcher/user_watcher_bloc.dart';
+import 'package:chat/domain/core/locale_switcher/app_locale.dart';
 import 'package:chat/injection.dart';
 import 'package:chat/presentation/core/routes/router.dart';
 import 'package:chat/presentation/core/strings.dart';
 import 'package:chat/presentation/core/widgets/custom_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -44,7 +46,7 @@ class SignInPage extends StatelessWidget {
                           ),
                           Center(
                               child: Text(
-                            AppStrings.login,
+                            AppLocale.login.getString(context),
                             style: Theme.of(context).textTheme.titleLarge,
                           )),
                           const SizedBox(
@@ -53,8 +55,8 @@ class SignInPage extends StatelessWidget {
                           TextFormField(
                             style: Theme.of(context).textTheme.bodyText1,
                             cursorColor: Theme.of(context).primaryColor,
-                            decoration: const InputDecoration(
-                                labelText: AppStrings.email,
+                            decoration:  InputDecoration(
+                                labelText: AppLocale.email.getString(context),
                                 isDense: true,
                                 border: UnderlineInputBorder(),
                                 contentPadding:
@@ -68,7 +70,7 @@ class SignInPage extends StatelessWidget {
                                 .fold(
                                     (f) => f.maybeMap(
                                         invalidEmail: (value) =>
-                                            AppStrings.invalidEmail,
+                                            AppLocale.invalidEmail.getString(context),
                                         orElse: () => null),
                                     (r) => null),
                             onChanged: (value) => context
@@ -83,7 +85,7 @@ class SignInPage extends StatelessWidget {
                             cursorColor: Theme.of(context).primaryColor,
 
                             decoration: InputDecoration(
-                                labelText: AppStrings.password,
+                                labelText: AppLocale.password.getString(context),
                                 isDense: true,
                                 border: UnderlineInputBorder(),
                                 suffixIcon: IconButton(
@@ -109,7 +111,7 @@ class SignInPage extends StatelessWidget {
                                 .fold(
                                     (f) => f.maybeMap(
                                         shortPassword: (value) =>
-                                            AppStrings.shortPassword,
+                                            AppLocale.shortPassword.getString(context),
                                         orElse: () => null),
                                     (r) => null),
                           ),
@@ -135,7 +137,7 @@ class SignInPage extends StatelessWidget {
                                           valueColor: AlwaysStoppedAnimation(
                                               Colors.white),
                                         ))
-                                    : const Text(AppStrings.login)),
+                                    :  Text(AppLocale.login.getString(context))),
                           ),
                           const SizedBox(
                             height: 24,
@@ -143,13 +145,13 @@ class SignInPage extends StatelessWidget {
                           Center(
                             child: RichText(
                               text: TextSpan(children: [
-                                const TextSpan(
-                                    text: AppStrings.doNotHaveAnAccount,
+                                 TextSpan(
+                                    text: AppLocale.doNotHaveAnAccount.getString(context),
                                     style: TextStyle(color: Colors.grey)),
                                 WidgetSpan(
                                     child: InkWell(
-                                  child: const Text(
-                                    AppStrings.signUp,
+                                  child:  Text(
+                                    AppLocale.signUp.getString(context),
                                     style: TextStyle(color: Colors.green),
                                   ),
                                   onTap: () {
@@ -174,11 +176,11 @@ class SignInPage extends StatelessWidget {
                                       content: Text(failure.map(
                                           remoteError: (remoteError) =>
                                               remoteError.errorName,
-                                          serverError: (_) => AppStrings.serverError,
+                                          serverError: (_) => AppLocale.serverError.getString(context),
                                           emailAlreadyInUse: (_) =>
-                                              AppStrings.emailAlreadyInUse,
+                                              AppLocale.emailAlreadyInUse.getString(context),
                                           invalidEmailAndPassword: (_) =>
-                                              AppStrings.invalidEmailAndPasswordCombination)))),
+                                              AppLocale.invalidEmailAndPasswordCombination.getString(context))))),
                               (r) {
                             context.read<UserWatcherBloc>().add(
                                   const UserWatcherEvent.startWatchAll(),

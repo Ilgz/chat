@@ -1,5 +1,7 @@
+import 'package:chat/domain/core/locale_switcher/app_locale.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 
 class MyDateUtil {
   // for getting formatted time from milliSecondsSinceEpochs String
@@ -23,8 +25,8 @@ class MyDateUtil {
     }
 
     return now.year == sent.year
-        ? '$formattedTime - ${sent.day} ${_getMonth(sent)}'
-        : '$formattedTime - ${sent.day} ${_getMonth(sent)} ${sent.year}';
+        ? '$formattedTime - ${sent.day} ${_getMonth(sent,context)}'
+        : '$formattedTime - ${sent.day} ${_getMonth(sent,context)} ${sent.year}';
   }
 
   //get last message time (used in chat user card)
@@ -42,8 +44,8 @@ class MyDateUtil {
     }
 
     return showYear
-        ? '${sent.day} ${_getMonth(sent)} ${sent.year}'
-        : '${sent.day} ${_getMonth(sent)}';
+        ? '${sent.day} ${_getMonth(sent,context)} ${sent.year}'
+        : '${sent.day} ${_getMonth(sent,context)}';
   }
 
   //get formatted last active time of user in chat screen
@@ -56,45 +58,42 @@ class MyDateUtil {
     if (time.day == now.day &&
         time.month == now.month &&
         time.year == time.year) {
-      return 'Last seen today at $formattedTime';
+      return '${AppLocale.lastSeenTodayAt.getString(context)} $formattedTime';
     }
 
     if ((now.difference(time).inHours / 24).round() == 1) {
-      return 'Last seen yesterday at $formattedTime';
+      return '${AppLocale.lastSeenYesterdayAt.getString(context)} $formattedTime';
     }
-
-    String month = _getMonth(time);
-
-    return 'Last seen a long time ago';
+    return AppLocale.lastSeenALongTimeAgo.getString(context);
   }
 
   // get month name from month no. or index
-  static String _getMonth(DateTime date) {
+  static String _getMonth(DateTime date,BuildContext context) {
     switch (date.month) {
       case 1:
-        return 'Jan';
+        return AppLocale.jan.getString(context);
       case 2:
-        return 'Feb';
+        return AppLocale.feb.getString(context);
       case 3:
-        return 'Mar';
+        return AppLocale.mar.getString(context);
       case 4:
-        return 'Apr';
+        return AppLocale.apr.getString(context);
       case 5:
-        return 'May';
+        return AppLocale.may.getString(context);
       case 6:
-        return 'Jun';
+        return AppLocale.jun.getString(context);
       case 7:
-        return 'Jul';
+        return AppLocale.jul.getString(context);
       case 8:
-        return 'Aug';
+        return AppLocale.aug.getString(context);
       case 9:
-        return 'Sept';
+        return AppLocale.sept.getString(context);
       case 10:
-        return 'Oct';
+        return AppLocale.oct.getString(context);
       case 11:
-        return 'Nov';
+        return AppLocale.nov.getString(context);
       case 12:
-        return 'Dec';
+        return AppLocale.dec.getString(context);
     }
     return 'NA';
   }

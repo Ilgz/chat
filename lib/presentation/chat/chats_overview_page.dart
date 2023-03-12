@@ -71,7 +71,7 @@ Widget build(BuildContext context) {
                               }
                             });
                       }else{
-                        return  const NoResultCard(AppStrings.noChatFound, Icons.account_tree_outlined);
+                        return  NoResultCard(AppLocale.noChatFound.getString(context), Icons.account_tree_outlined);
                       }
                     }, loadFailure: (_)=>const SizedBox());
                   });}(),

@@ -5,12 +5,14 @@ import 'package:chat/application/chat/chat_combiner_bloc/chat_combiner_cubit.dar
 import 'package:chat/application/chat/chat_watcher_bloc/chat_watcher_cubit.dart';
 import 'package:chat/application/projects/project_watcher/project_watcher_bloc.dart';
 import 'package:chat/application/users/user_watcher/user_watcher_bloc.dart';
+import 'package:chat/domain/core/locale_switcher/app_locale.dart';
 import 'package:chat/injection.dart';
 import 'package:chat/presentation/core/routes/router.dart';
 import 'package:chat/presentation/core/strings.dart';
 import 'package:chat/presentation/core/widgets/custom_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 
 class SignUpPage extends StatelessWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -44,7 +46,7 @@ class SignUpPage extends StatelessWidget {
                           ),
                           Center(
                               child: Text(
-                            AppStrings.signUp,
+                            AppLocale.signUp.getString(context),
                             style: Theme.of(context).textTheme.titleLarge,
                           )),
                           const SizedBox(
@@ -53,8 +55,8 @@ class SignUpPage extends StatelessWidget {
                           TextFormField(
                             style: Theme.of(context).textTheme.bodyText1,
                             cursorColor: Theme.of(context).primaryColor,
-                            decoration: const InputDecoration(
-                                labelText: AppStrings.username,
+                            decoration:  InputDecoration(
+                                labelText: AppLocale.username.getString(context),
                                 isDense: true,
                                 border: UnderlineInputBorder(),
                                 contentPadding:
@@ -68,7 +70,7 @@ class SignUpPage extends StatelessWidget {
                                 .fold(
                                     (f) => f.maybeMap(
                                         shortLength: (value) =>
-                                        AppStrings.usernameMustBeMinimum3Characters,
+                                        AppLocale.usernameMustBeMinimum3Characters.getString(context),
                                         empty: (value) => 'Empty value',
                                         orElse: () => null),
                                     (r) => null),
@@ -82,8 +84,8 @@ class SignUpPage extends StatelessWidget {
                           TextFormField(
                             style: Theme.of(context).textTheme.bodyText1,
                             cursorColor: Theme.of(context).primaryColor,
-                            decoration: const InputDecoration(
-                                labelText: AppStrings.email,
+                            decoration:  InputDecoration(
+                                labelText: AppLocale.email.getString(context),
                                 isDense: true,
                                 border: UnderlineInputBorder(),
                                 contentPadding:
@@ -97,7 +99,7 @@ class SignUpPage extends StatelessWidget {
                                 .fold(
                                     (f) => f.maybeMap(
                                         invalidEmail: (value) =>
-                                            AppStrings.invalidEmail,
+                                            AppLocale.invalidEmail.getString(context),
                                         orElse: () => null),
                                     (r) => null),
                             onChanged: (value) => context
@@ -110,8 +112,8 @@ class SignUpPage extends StatelessWidget {
                           TextFormField(
                             style: Theme.of(context).textTheme.bodyText1,
                             cursorColor: Theme.of(context).primaryColor,
-                            decoration: const InputDecoration(
-                                labelText: AppStrings.password,
+                            decoration:  InputDecoration(
+                                labelText: AppLocale.password.getString(context),
                                 isDense: true,
                                 border: UnderlineInputBorder(),
                                 contentPadding:
@@ -129,15 +131,15 @@ class SignUpPage extends StatelessWidget {
                                 .fold(
                                     (f) => f.maybeMap(
                                         shortPassword: (value) =>
-                                            AppStrings.shortPassword,
+                                            AppLocale.shortPassword.getString(context),
                                         orElse: () => null),
                                     (r) => null),
                           ),
                           TextFormField(
                             style: Theme.of(context).textTheme.bodyText1,
                             cursorColor: Theme.of(context).primaryColor,
-                            decoration: const InputDecoration(
-                                labelText: AppStrings.confirmPassword,
+                            decoration:  InputDecoration(
+                                labelText: AppLocale.confirmPassword.getString(context),
                                 isDense: true,
                                 border: UnderlineInputBorder(),
                                 contentPadding:
@@ -151,9 +153,9 @@ class SignUpPage extends StatelessWidget {
                                 .value
                                 .fold(
                                     (f) => f.maybeMap(
-                                        empty: (value) => AppStrings.emptyValue,
+                                        empty: (value) => AppLocale.emptyValue.getString(context),
                                         passwordsDoNotMatch: (value) =>
-                                            AppStrings.passwordsDoNotMatch,
+                                            AppLocale.passwordsDoNotMatch.getString(context),
                                         orElse: () => null),
                                     (r) => null),
                             onChanged: (value) => context
@@ -184,7 +186,7 @@ class SignUpPage extends StatelessWidget {
                                           valueColor: AlwaysStoppedAnimation(
                                               Colors.white),
                                         ))
-                                    : const Text(AppStrings.signUp)),
+                                    :  Text(AppLocale.signUp.getString(context))),
                           ),
                           const SizedBox(
                             height: 24,
@@ -192,13 +194,13 @@ class SignUpPage extends StatelessWidget {
                           Center(
                             child: RichText(
                               text: TextSpan(children: [
-                                const TextSpan(
-                                    text: AppStrings.alreadyHaveAnAccount,
+                                 TextSpan(
+                                    text: AppLocale.alreadyHaveAnAccount.getString(context),
                                     style: TextStyle(color: Colors.grey)),
                                 WidgetSpan(
                                     child: InkWell(
-                                  child: const Text(
-                                  AppStrings.login,
+                                  child:  Text(
+                                  AppLocale.login.getString(context),
                                     style: TextStyle(color: Colors.green),
                                   ),
                                   onTap: () {
@@ -223,9 +225,9 @@ class SignUpPage extends StatelessWidget {
                                       content: Text(failure.map(
                                           remoteError: (remoteError) =>
                                               remoteError.errorName,
-                                          serverError: (_) => AppStrings.serverError,
+                                          serverError: (_) => AppLocale.serverError.getString(context),
                                           emailAlreadyInUse: (_) =>
-                                              AppStrings.emailAlreadyInUse,
+                                              AppLocale.emailAlreadyInUse.getString(context),
                                           invalidEmailAndPassword: (_)=>"")))),
                               (r) {
                             context.read<UserWatcherBloc>().add(

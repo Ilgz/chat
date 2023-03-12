@@ -68,20 +68,5 @@ class MessageTile extends StatelessWidget {
       ],
     );
   }
-  String formatDate(DateTime date) {
-    var now = DateTime.now();
-    var diff = now.difference(date);
-    if (diff.inSeconds <= 0 || diff.inSeconds > 0 && diff.inSeconds < 60) {
-      return "Just now";
-    } else if (diff.inMinutes > 0 && diff.inMinutes < 60) {
-      return "${diff.inMinutes} minutes ago";
-    } else if (diff.inHours >= 1 && diff.inHours < 24) {
-      return "${diff.inHours} hours ago";
-    } else if (diff.inDays >= 1 && diff.inDays < 7) {
-      return "${diff.inDays} days ago";
-    } else {
-      return DateFormat("dd MMM").format(date);
-    }
-  }
 
 }
