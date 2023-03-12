@@ -17,6 +17,7 @@ class ChatSearchBar extends StatelessWidget {
           height: 40,
           child: Center(
             child: TextField(
+
               autofocus: true,
               controller: TextEditingController(text: state.query),
               onChanged: (text) {
