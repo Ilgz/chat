@@ -5,8 +5,8 @@ import 'package:chat/domain/chat/chat.dart';
 import 'package:chat/domain/core/locale_switcher/app_locale.dart';
 import 'package:chat/domain/projects/project.dart';
 import 'package:chat/infrastructure/users/user_dto.dart';
-import 'package:chat/presentation/chat/widgets/chat_day_divider_card.dart';
-import 'package:chat/presentation/chat/widgets/message_card.dart';
+import 'package:chat/presentation/chat/widgets/chat_date_divider_card.dart';
+import 'package:chat/presentation/chat/widgets/message_tile.dart';
 import 'package:chat/presentation/core/strings.dart';
 import 'package:chat/presentation/core/utils/my_date_util.dart';
 import 'package:chat/presentation/core/widgets/custom_scaffold.dart';
@@ -113,7 +113,7 @@ class ChatPage extends StatelessWidget {
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       if (index == messages.length - 1) ...[
-                                        ChatDayDividerCard(
+                                        ChatDateDividerCard(
                                             date: messages[index].date.toDate())
                                       ],
                                       MessageTile(
@@ -134,7 +134,7 @@ class ChatPage extends StatelessWidget {
                                         Padding(
                                             padding: const EdgeInsets.only(
                                                 top: 10.0),
-                                            child: ChatDayDividerCard(
+                                            child: ChatDateDividerCard(
                                                 date: messages[index]
                                                     .date
                                                     .toDate())),
@@ -181,7 +181,7 @@ class ChatPage extends StatelessWidget {
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       if (index == messages.length - 1) ...[
-                                        ChatDayDividerCard(
+                                        ChatDateDividerCard(
                                             date: messages[index].date.toDate())
                                       ],
                                       MessageTile(
@@ -202,7 +202,7 @@ class ChatPage extends StatelessWidget {
                                         Padding(
                                             padding: const EdgeInsets.only(
                                                 top: 10.0),
-                                            child: ChatDayDividerCard(
+                                            child: ChatDateDividerCard(
                                                 date: messages[index]
                                                     .date
                                                     .toDate())),

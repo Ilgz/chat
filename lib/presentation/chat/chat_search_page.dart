@@ -3,7 +3,7 @@ import 'package:chat/application/chat/chat_searcher_bloc/chat_searcher_cubit.dar
 import 'package:chat/application/users/user_watcher/user_watcher_bloc.dart';
 import 'package:chat/domain/chat/chat.dart';
 import 'package:chat/domain/core/locale_switcher/app_locale.dart';
-import 'package:chat/presentation/chat/widgets/chat_searchbar.dart';
+import 'package:chat/presentation/chat/widgets/chat_search_bar.dart';
 import 'package:chat/presentation/chat/widgets/direct_chat_tile.dart';
 import 'package:chat/presentation/core/widgets/custom_scaffold.dart';
 import 'package:chat/presentation/core/widgets/no_result_card.dart';

@@ -7,9 +7,9 @@ import 'package:chat/presentation/core/routes/router.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:intl/intl.dart';
 
-class GroupChatTile extends StatelessWidget {
+class ProjectChatTile extends StatelessWidget {
 
-  const GroupChatTile({Key? key, required this.project}) : super(key: key);
+  const ProjectChatTile({Key? key, required this.project}) : super(key: key);
   final Project project;
   @override
   Widget build(BuildContext context) {

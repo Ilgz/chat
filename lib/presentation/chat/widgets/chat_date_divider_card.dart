@@ -3,8 +3,8 @@ import 'package:chat/presentation/core/enums/locale_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-class ChatDayDividerCard extends StatelessWidget {
-  const ChatDayDividerCard({Key? key,required this.date}) : super(key: key);
+class ChatDateDividerCard extends StatelessWidget {
+  const ChatDateDividerCard({Key? key,required this.date}) : super(key: key);
   final DateTime date;
   @override
   Widget build(BuildContext context) {

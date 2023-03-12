@@ -49,7 +49,7 @@ class ProjectRepository implements IProjectRepository {
           .map((project)  async => project.copyWith(messages: await getUsersForMessages(project.copyWith(messages: setMessagesInColumn(project)))))
           .toList());
 
-      yield right(a);
+      yield right(_sortByDate(a));
     }
   }
 
@@ -81,7 +81,17 @@ class ProjectRepository implements IProjectRepository {
     List<User> memberList = await getUsersFromReference(projectDto.members);
     User owner = (await getUsersFromReference(projectDto.members)).first;
     final project = projectDto.toDomain(owner, memberList);
+
     return project;
+  }
+  List<Project> _sortByDate(List<Project> projects){
+    List<Project> newProjects=projects.toList();
+    newProjects
+        .sort((a, b) {
+      final aTimeStamp=a.messages.isEmpty?a.date:a.messages.last.date;
+      final bTimeStamp=b.messages.isEmpty?b.date:b.messages.last.date;
+      return  bTimeStamp.compareTo(aTimeStamp);});
+    return newProjects;
   }
 
   Future<List<User>> getUsersFromReference(

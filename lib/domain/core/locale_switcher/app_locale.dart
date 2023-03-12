@@ -14,6 +14,7 @@ mixin AppLocale {
   static const String alreadyHaveAnAccount = 'alreadyHaveAnAccount';
   static const String emailAlreadyInUse = 'emailAlreadyInUse';
   static const String passwordsDoNotMatch = 'passwordsDoNotMatch';
+  static const String unexpectedError = 'Unexpected error.';
   static const String invalidEmailAndPasswordCombination =
       'invalidEmailAndPasswordCombination';
   static const String usernameMustBeMinimum3Characters =
@@ -44,6 +45,8 @@ mixin AppLocale {
   static const String light = 'Light';
   static const String dark = 'Dark';
   static const String search = 'Search...';
+  static const String pleaseContactSupport = 'Please, contact support.';
+  static const String needHelp = 'I need help.';
 
   static const Map<String, dynamic> EN = {
     serverError: 'Server error',
@@ -90,7 +93,12 @@ mixin AppLocale {
     dec: 'Dec',
     light: 'Light',
     dark: 'Dark',
-   search: 'Search...'
+   search: 'Search...',
+  unexpectedError: 'Unexpected error.',
+   pleaseContactSupport :'Please, contact support.',
+  needHelp :'I need help.'
+
+
 };
 
   static const Map<String, dynamic> RU = {
@@ -138,7 +146,11 @@ mixin AppLocale {
     dec: 'дек',
     light: 'Светлая',
     dark: 'Тёмная',
-    search: 'Поиск...'
+    search: 'Поиск...',
+    unexpectedError: 'Непредвиденная ошибка.',
+    pleaseContactSupport :'Пожалуйтса, обратитесь в службу поддержки.',
+    needHelp :'Мне нужна помощь.'
+
 
   };
 }
