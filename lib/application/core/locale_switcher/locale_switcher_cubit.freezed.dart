@@ -17,6 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$LocaleSwitcherState {
   LocaleEnum get localeEnum => throw _privateConstructorUsedError;
+  FlutterLocalization? get flutterLocalization =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $LocaleSwitcherStateCopyWith<LocaleSwitcherState> get copyWith =>
@@ -29,7 +31,7 @@ abstract class $LocaleSwitcherStateCopyWith<$Res> {
           LocaleSwitcherState value, $Res Function(LocaleSwitcherState) then) =
       _$LocaleSwitcherStateCopyWithImpl<$Res, LocaleSwitcherState>;
   @useResult
-  $Res call({LocaleEnum localeEnum});
+  $Res call({LocaleEnum localeEnum, FlutterLocalization? flutterLocalization});
 }
 
 /// @nodoc
@@ -46,12 +48,17 @@ class _$LocaleSwitcherStateCopyWithImpl<$Res, $Val extends LocaleSwitcherState>
   @override
   $Res call({
     Object? localeEnum = null,
+    Object? flutterLocalization = freezed,
   }) {
     return _then(_value.copyWith(
       localeEnum: null == localeEnum
           ? _value.localeEnum
           : localeEnum // ignore: cast_nullable_to_non_nullable
               as LocaleEnum,
+      flutterLocalization: freezed == flutterLocalization
+          ? _value.flutterLocalization
+          : flutterLocalization // ignore: cast_nullable_to_non_nullable
+              as FlutterLocalization?,
     ) as $Val);
   }
 }
@@ -64,7 +71,7 @@ abstract class _$$_LocaleSwitcherStateCopyWith<$Res>
       __$$_LocaleSwitcherStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({LocaleEnum localeEnum});
+  $Res call({LocaleEnum localeEnum, FlutterLocalization? flutterLocalization});
 }
 
 /// @nodoc
@@ -79,12 +86,17 @@ class __$$_LocaleSwitcherStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? localeEnum = null,
+    Object? flutterLocalization = freezed,
   }) {
     return _then(_$_LocaleSwitcherState(
       null == localeEnum
           ? _value.localeEnum
           : localeEnum // ignore: cast_nullable_to_non_nullable
               as LocaleEnum,
+      freezed == flutterLocalization
+          ? _value.flutterLocalization
+          : flutterLocalization // ignore: cast_nullable_to_non_nullable
+              as FlutterLocalization?,
     ));
   }
 }
@@ -92,14 +104,16 @@ class __$$_LocaleSwitcherStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_LocaleSwitcherState implements _LocaleSwitcherState {
-  _$_LocaleSwitcherState(this.localeEnum);
+  _$_LocaleSwitcherState(this.localeEnum, this.flutterLocalization);
 
   @override
   final LocaleEnum localeEnum;
+  @override
+  final FlutterLocalization? flutterLocalization;
 
   @override
   String toString() {
-    return 'LocaleSwitcherState(localeEnum: $localeEnum)';
+    return 'LocaleSwitcherState(localeEnum: $localeEnum, flutterLocalization: $flutterLocalization)';
   }
 
   @override
@@ -108,11 +122,13 @@ class _$_LocaleSwitcherState implements _LocaleSwitcherState {
         (other.runtimeType == runtimeType &&
             other is _$_LocaleSwitcherState &&
             (identical(other.localeEnum, localeEnum) ||
-                other.localeEnum == localeEnum));
+                other.localeEnum == localeEnum) &&
+            (identical(other.flutterLocalization, flutterLocalization) ||
+                other.flutterLocalization == flutterLocalization));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, localeEnum);
+  int get hashCode => Object.hash(runtimeType, localeEnum, flutterLocalization);
 
   @JsonKey(ignore: true)
   @override
@@ -123,11 +139,13 @@ class _$_LocaleSwitcherState implements _LocaleSwitcherState {
 }
 
 abstract class _LocaleSwitcherState implements LocaleSwitcherState {
-  factory _LocaleSwitcherState(final LocaleEnum localeEnum) =
-      _$_LocaleSwitcherState;
+  factory _LocaleSwitcherState(final LocaleEnum localeEnum,
+      final FlutterLocalization? flutterLocalization) = _$_LocaleSwitcherState;
 
   @override
   LocaleEnum get localeEnum;
+  @override
+  FlutterLocalization? get flutterLocalization;
   @override
   @JsonKey(ignore: true)
   _$$_LocaleSwitcherStateCopyWith<_$_LocaleSwitcherState> get copyWith =>

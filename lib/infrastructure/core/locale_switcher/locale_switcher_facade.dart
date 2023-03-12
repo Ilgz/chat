@@ -15,16 +15,16 @@ class LocaleSwitcherFacade implements ILocaleSwitcherFacade {
   LocaleEnum getLocale() {
     final String localeString =
         sharedPreferences.getString(AppConstants.locale) ??
-            LocaleEnum.RU.description;
+            LocaleEnum.RU.code;
     return LocaleEnum.values.firstWhere(
-        (locale) => locale.description == localeString,
+        (locale) => locale.code == localeString,
         orElse: () => LocaleEnum.RU);
   }
 
   @override
   Future<Unit> switchSelectedLocale(LocaleEnum localeEnum) async {
     await sharedPreferences.setString(
-        AppConstants.locale, localeEnum.description);
+        AppConstants.locale, localeEnum.code);
     return unit;
   }
 }

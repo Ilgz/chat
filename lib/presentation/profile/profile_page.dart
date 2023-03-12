@@ -5,6 +5,7 @@ import 'package:chat/domain/core/locale_switcher/app_locale.dart';
 import 'package:chat/presentation/core/routes/router.dart';
 import 'package:chat/presentation/core/strings.dart';
 import 'package:chat/presentation/core/widgets/custom_scaffold.dart';
+import 'package:chat/presentation/profile/widgets/locale_switcher.dart';
 import 'package:chat/presentation/profile/widgets/theme_switcher.dart';
 import 'package:chat/presentation/users/users_overview/widgets/user_icon.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,8 @@ class ProfilePage extends StatelessWidget {
     return CustomScaffold(
       actions: const [
         ThemeSwitcher(),
+        SizedBox(width: 20,),
+        LocaleSwitcher(),
         SizedBox(
           width: 10,
         )

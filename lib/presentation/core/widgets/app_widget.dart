@@ -54,22 +54,17 @@ class AppWidget extends StatelessWidget {
           buildWhen: (p, c) => p.isDark != c.isDark,
           builder: (context, state) {
             return BlocBuilder<LocaleSwitcherCubit, LocaleSwitcherState>(
+             // buildWhen: (p,c)=>p.flutterLocalization!=c.localeEnum,
   builder: (context, localeSwitcherState) {
-    final FlutterLocalization localization = FlutterLocalization.instance;
-    localization.init(
-      mapLocales: [
-        MapLocale(LocaleEnum.EN.description, AppLocale.EN),
-        MapLocale(LocaleEnum.RU.description, AppLocale.RU),
-      ],
-      initLanguageCode: localeSwitcherState.localeEnum.description,
-    );
+    if(localeSwitcherState.flutterLocalization!=null){
+
     return AnnotatedRegion<SystemUiOverlayStyle>(
               value: SystemUiOverlayStyle(
                 statusBarColor:state.isDark?AppColorConstants.darkPrimaryColor:AppColorConstants.lightPrimaryColor, // set your desired status bar color here
               ),
               child: MaterialApp.router(
-                  supportedLocales: localization.supportedLocales,
-                  localizationsDelegates: localization.localizationsDelegates,
+                  supportedLocales: localeSwitcherState.flutterLocalization!.supportedLocales,
+                  localizationsDelegates: localeSwitcherState.flutterLocalization!.localizationsDelegates,
                   routerConfig: goRouter,
                   title: "Chat",
                   debugShowCheckedModeBanner: false,
@@ -77,6 +72,10 @@ class AppWidget extends StatelessWidget {
                   darkTheme: darkTheme,
                   theme: lightTheme),
             );
+    }
+    else{
+      return Center(child: CircularProgressIndicator());
+    }
   },
 );
           },
@@ -86,6 +85,10 @@ class AppWidget extends StatelessWidget {
 
 // Light mode
 final lightTheme = ThemeData(
+  colorScheme: ColorScheme.fromSeed(
+    seedColor: AppColorConstants.lightPrimaryColor,
+    primary: AppColorConstants.lightPrimaryColor, //<-- SEE HERE
+  ),
   brightness: Brightness.light,
   iconTheme: const IconThemeData(color: Colors.black),
   dividerColor: Colors.black,
@@ -117,6 +120,10 @@ final lightTheme = ThemeData(
 
 // Dark mode
 final darkTheme = ThemeData(
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: AppColorConstants.darkPrimaryColor,
+      primary: AppColorConstants.darkPrimaryColor, //<-- SEE HERE
+    ),
     brightness: Brightness.dark,
     primaryColor: AppColorConstants.darkPrimaryColor,
     dividerColor: Colors.white70,

@@ -12,7 +12,7 @@ class ChatDayDividerCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(4.0),
         child: Text(
-          DateFormat.yMMMMd(context.read<LocaleSwitcherCubit>().state.localeEnum.description).format(
+          DateFormat.yMMMMd(context.read<LocaleSwitcherCubit>().state.flutterLocalization?.currentLocale?.languageCode).format(
               date),
           style: Theme.of(context).textTheme.bodyText1?.copyWith(fontSize: 12)
         ),
