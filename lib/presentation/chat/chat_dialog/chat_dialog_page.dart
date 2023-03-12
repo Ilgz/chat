@@ -5,9 +5,8 @@ import 'package:chat/domain/chat/chat.dart';
 import 'package:chat/domain/core/locale_switcher/app_locale.dart';
 import 'package:chat/domain/projects/project.dart';
 import 'package:chat/infrastructure/users/user_dto.dart';
-import 'package:chat/presentation/chat/widgets/chat_date_divider_card.dart';
-import 'package:chat/presentation/chat/widgets/message_tile.dart';
-import 'package:chat/presentation/core/strings.dart';
+import 'package:chat/presentation/chat/chat_dialog/widgets/chat_date_divider_card.dart';
+import 'package:chat/presentation/chat/chat_dialog/widgets/message_tile.dart';
 import 'package:chat/presentation/core/utils/my_date_util.dart';
 import 'package:chat/presentation/core/widgets/custom_scaffold.dart';
 import 'package:chat/presentation/core/widgets/failure_snackbar.dart';
@@ -15,11 +14,11 @@ import 'package:chat/presentation/core/widgets/no_result_card.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 
-class ChatPage extends StatelessWidget {
-  const ChatPage({Key? key, required this.projectOrChat}) : super(key: key);
+class ChatDialogPage extends StatelessWidget {
+  const ChatDialogPage({Key? key, required this.projectOrChat})
+      : super(key: key);
   final Either<Project, Chat> projectOrChat;
   @override
   Widget build(BuildContext context) {
@@ -39,50 +38,56 @@ class ChatPage extends StatelessWidget {
         });
       },
       child: CustomScaffold(
-        titleSpacing: 0,
-        appBarTitle: Row(mainAxisSize:MainAxisSize.min,children: [
-          CircleAvatar(
-            backgroundColor: Colors.grey.shade400,
-            child: const Icon(Icons.person, color: Colors.white),
-          ),
-          const SizedBox(width: 10),
-          //user name & last seen time
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
+          titleSpacing: 0,
+          appBarTitle: Row(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              //user name
-              Text(
-                projectOrChat.fold(
-                      (project) => project.projectName.getOrCrash(),
-                      (chat) => chat.chattingWith.userName.getOrCrash()),
-                  style: const TextStyle(
-                      fontSize: 16,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500)),
+              CircleAvatar(
+                backgroundColor: Colors.grey.shade400,
+                child: const Icon(Icons.person, color: Colors.white),
+              ),
+              const SizedBox(width: 10),
+              //user name & last seen time
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  //user name
+                  Text(
+                      projectOrChat.fold(
+                          (project) => project.projectName.getOrCrash(),
+                          (chat) => chat.chattingWith.userName.getOrCrash()),
+                      style: const TextStyle(
+                          fontSize: 16,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500)),
 
-              const SizedBox(height: 2),
-              projectOrChat.fold((_) => const SizedBox(), (chat) =>  StreamBuilder(
-                  stream: chat.chattingWith.reference.snapshots(),
-                  builder: (context, snapshot) {
-                    if(snapshot.hasData){
-                      final user=UserDto.fromFirestore(snapshot.data).toDomain();
-                      return Text(
-                          user.isOnline?AppLocale.online.getString(context):MyDateUtil.getLastActiveTime(
-                              context: context,
-                              lastActive:user.lastActive),
-                          style: const TextStyle(
-                              fontSize: 13, color: Colors.white));
-                    }else{
-                      return const SizedBox();
-                    }
-
-                  }
-              ),)
-
+                  const SizedBox(height: 2),
+                  projectOrChat.fold(
+                    (_) => const SizedBox(),
+                    (chat) => StreamBuilder(
+                        stream: chat.chattingWith.reference.snapshots(),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            final user =
+                                UserDto.fromFirestore(snapshot.data).toDomain();
+                            return Text(
+                                user.isOnline
+                                    ? AppLocale.online.getString(context)
+                                    : MyDateUtil.getLastActiveTime(
+                                        context: context,
+                                        lastActive: user.lastActive),
+                                style: const TextStyle(
+                                    fontSize: 13, color: Colors.white));
+                          } else {
+                            return const SizedBox();
+                          }
+                        }),
+                  )
+                ],
+              )
             ],
-          )
-        ],),
+          ),
           // appBarTitle: Text(projectOrChat.fold(
           //     (project) => project.projectName.getOrCrash(),
           //     (chat) => chat.chattingWith.userName.getOrCrash())) ,
@@ -146,8 +151,9 @@ class ChatPage extends StatelessWidget {
                                 //controller: listScrollController,
                               );
                             } else {
-                              return  NoResultCard(
-                                  AppLocale.noMessagesYet.getString(context), Icons.message_outlined);
+                              return NoResultCard(
+                                  AppLocale.noMessagesYet.getString(context),
+                                  Icons.message_outlined);
                             }
                           },
                           loadFailure: (state) {
@@ -170,7 +176,8 @@ class ChatPage extends StatelessWidget {
                                     chat.documentReference.path ==
                                     initialChat.documentReference.path,
                                 orElse: () => initialChat);
-                            context.read<ChatFormBloc>().add(ChatFormEvent.markDirectMessageAsHasRead(chat));
+                            context.read<ChatFormBloc>().add(
+                                ChatFormEvent.markDirectMessageAsHasRead(chat));
                             final messages = chat.messages.reversed.toList();
                             if (messages.isNotEmpty) {
                               return ListView.separated(
@@ -214,8 +221,9 @@ class ChatPage extends StatelessWidget {
                                 //controller: listScrollController,
                               );
                             } else {
-                              return  NoResultCard(
-                                  AppLocale.noMessagesYet.getString(context), Icons.message_outlined);
+                              return NoResultCard(
+                                  AppLocale.noMessagesYet.getString(context),
+                                  Icons.message_outlined);
                             }
                           },
                           loadFailure: (state) {
@@ -244,12 +252,14 @@ class ChatPage extends StatelessWidget {
                                 .add(ChatFormEvent.messageContentChanged(text));
                           },
                           onSubmitted: (text) {
-                            _sendMessage(context,_controller,_focus,projectOrChat);
+                            _sendMessage(
+                                context, _controller, _focus, projectOrChat);
                           },
                           controller: _controller,
                           style: Theme.of(context).textTheme.bodyText1,
-                          decoration:  InputDecoration.collapsed(
-                            hintText: AppLocale.typeYourMessage.getString(context),
+                          decoration: InputDecoration.collapsed(
+                            hintText:
+                                AppLocale.typeYourMessage.getString(context),
                             hintStyle: TextStyle(color: Colors.grey),
                           ),
                           // focusNode: focusNode,
@@ -261,7 +271,8 @@ class ChatPage extends StatelessWidget {
                         child: IconButton(
                           icon: const Icon(Icons.send),
                           onPressed: () {
-                            _sendMessage(context,_controller,_focus,projectOrChat);
+                            _sendMessage(
+                                context, _controller, _focus, projectOrChat);
                           },
                           color: Theme.of(context).primaryColor,
                         ),
@@ -275,12 +286,15 @@ class ChatPage extends StatelessWidget {
     );
   }
 
-  void _sendMessage(BuildContext context,TextEditingController controller,FocusNode focusNode,Either<Project,Chat> projectOrChat) {
-    projectOrChat.fold((project) =>  context
-        .read<ChatFormBloc>()
-        .add(ChatFormEvent.sendProjectMessage(project)), (chat) => context
-        .read<ChatFormBloc>()
-        .add(ChatFormEvent.sendDirectMessage(chat)));
+  void _sendMessage(BuildContext context, TextEditingController controller,
+      FocusNode focusNode, Either<Project, Chat> projectOrChat) {
+    projectOrChat.fold(
+        (project) => context
+            .read<ChatFormBloc>()
+            .add(ChatFormEvent.sendProjectMessage(project)),
+        (chat) => context
+            .read<ChatFormBloc>()
+            .add(ChatFormEvent.sendDirectMessage(chat)));
 
     controller.clear();
     focusNode.unfocus();

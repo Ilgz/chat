@@ -1,8 +1,11 @@
 import 'package:chat/application/auth/profile_actor/profile_actor_cubit.dart';
+import 'package:chat/application/chat/chat_watcher_bloc/chat_watcher_cubit.dart';
 import 'package:chat/domain/core/locale_switcher/app_locale.dart';
 import 'package:chat/presentation/chat/widgets/direct_chat_list.dart';
 import 'package:chat/presentation/chat/widgets/project_chat_list.dart';
 import 'package:chat/presentation/core/routes/router.dart';
+import 'package:chat/presentation/core/widgets/critical_failure_card.dart';
+import 'package:chat/presentation/core/widgets/custom_progress_indicator.dart';
 import 'package:chat/presentation/core/widgets/custom_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -32,7 +35,17 @@ class ChatsOverviewPage extends StatelessWidget {
       ],
       isScrolling: true,
       body: Column(
-        children: const [DirectChatList(), ProjectChatList()],
+        children:  [BlocBuilder<ChatWatcherCubit, ChatWatcherState>(
+            builder: (context, state) {
+              return state.map(
+                  initial: (_) => const SizedBox(),
+                  loadInProgress: (_) => const CustomProgressIndicator(),
+                  loadSuccess: (state) {
+                    final chats = state.chats;
+                    return DirectChatList(chats: chats,);
+                  },
+                  loadFailure: (_) =>const CriticalFailureCard());
+            }),  const ProjectChatList()],
       ),
     );
   }

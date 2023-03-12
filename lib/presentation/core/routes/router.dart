@@ -1,8 +1,8 @@
 import 'package:chat/domain/chat/chat.dart';
 import 'package:chat/domain/projects/project.dart';
-import 'package:chat/presentation/chat/chat_page.dart';
-import 'package:chat/presentation/chat/chat_search_page.dart';
-import 'package:chat/presentation/chat/chats_overview_page.dart';
+import 'package:chat/presentation/chat/chat_dialog/chat_dialog_page.dart';
+import 'package:chat/presentation/chat/chat_overview/chat_overview_page.dart';
+import 'package:chat/presentation/chat/chat_search/chat_search_page.dart';
 import 'package:chat/presentation/core/constants.dart';
 import 'package:chat/presentation/profile/profile_page.dart';
 import 'package:chat/presentation/sign_in/sign_in_page.dart';
@@ -45,7 +45,7 @@ final goRouter =
             return null;
           },
           pageBuilder: (context, state) => NoTransitionPage(
-            child: ChatPage(
+            child: ChatDialogPage(
               projectOrChat: state.extra as Either<Project, Chat>,
             ),
           ),

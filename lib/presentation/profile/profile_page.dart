@@ -1,13 +1,10 @@
 import 'package:chat/application/auth/auth_bloc.dart';
-import 'package:chat/application/auth/profile_watcher/profile_watcher_cubit.dart';
-import 'package:chat/application/projects/project_watcher/project_watcher_bloc.dart';
 import 'package:chat/domain/core/locale_switcher/app_locale.dart';
 import 'package:chat/presentation/core/routes/router.dart';
-import 'package:chat/presentation/core/strings.dart';
 import 'package:chat/presentation/core/widgets/custom_scaffold.dart';
 import 'package:chat/presentation/profile/widgets/locale_switcher.dart';
+import 'package:chat/presentation/profile/widgets/profile_body.dart';
 import 'package:chat/presentation/profile/widgets/theme_switcher.dart';
-import 'package:chat/presentation/users/users_overview/widgets/user_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localization/flutter_localization.dart';
@@ -20,7 +17,9 @@ class ProfilePage extends StatelessWidget {
     return CustomScaffold(
       actions: const [
         ThemeSwitcher(),
-        SizedBox(width: 20,),
+        SizedBox(
+          width: 20,
+        ),
         LocaleSwitcher(),
         SizedBox(
           width: 10,
@@ -28,93 +27,14 @@ class ProfilePage extends StatelessWidget {
       ],
       appBarTitle: Text(AppLocale.profile.getString(context)),
       body: BlocListener<AuthBloc, AuthState>(
-        listener: (context, state) {
-          state.maybeMap(
-              unAuthenticated: (_) {
-                goToSignInPage(context);
-              },
-              orElse: () {});
-        },
-        child: BlocBuilder<ProfileWatcherCubit, ProfileWatcherState>(
-          builder: (context, state) {
-            return state.map(
-                initial: (_) => const SizedBox(),
-                loading: (_) =>
-                    const Center(child: CircularProgressIndicator()),
-                getSignedInUserSuccess: (state) {
-                  final user = state.user;
-                  return BlocBuilder<ProjectWatcherBloc, ProjectWatcherState>(
-                    builder: (context, state) {
-                      return state.map(
-                          initial: (_) => const SizedBox(),
-                          loadInProgress: (_) =>
-                              const Center(child: CircularProgressIndicator()),
-                          loadSuccess: (state) {
-                            return Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                const SizedBox(
-                                  height: 50,
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    UserIcon(
-                                      user.userName.getOrCrash(),
-                                      size: 70,
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 10.0,
-                                ),
-                                Text(user.emailAddress.getOrCrash(),
-                                    style:
-                                        Theme.of(context).textTheme.titleLarge),
-                                const SizedBox(
-                                  height: 20.0,
-                                ),
-                                BlocBuilder<AuthBloc, AuthState>(
-                                  builder: (context, state) {
-                                    return ElevatedButton(
-                                        style: Theme.of(context)
-                                            .elevatedButtonTheme
-                                            .style,
-                                        onPressed: () {
-                                          context
-                                              .read<AuthBloc>()
-                                              .add(AuthEvent.signedOut());
-                                        },
-                                        child: () {
-                                        return  state.maybeMap(
-                                              loading: (_) => const SizedBox(
-                                                  height: 20,
-                                                  width: 20,
-                                                  child:
-                                                      CircularProgressIndicator(
-                                                    valueColor:
-                                                        AlwaysStoppedAnimation(
-                                                            Colors.white),
-                                                  )),
-                                              orElse: () =>
-                                                  Text(AppLocale.signOut.getString(context)));
-                                        }());
-                                  },
-                                ),
-                              ],
-                            );
-                          },
-                          loadFailure: (state) {
-                            return SizedBox();
-                          });
-                    },
-                  );
+          listener: (context, state) {
+            state.maybeMap(
+                unAuthenticated: (_) {
+                  goToSignInPage(context);
                 },
-                getSignedInUserFailure: (_) => const SizedBox());
+                orElse: () {});
           },
-        ),
-      ),
+          child: const ProfileBody()),
     );
   }
 }

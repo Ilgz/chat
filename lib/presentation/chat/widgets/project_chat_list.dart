@@ -17,7 +17,7 @@ class ProjectChatList extends StatelessWidget {
       builder: (context, state) {
         return state.map(
             initial: (_) => const SizedBox(),
-            loadInProgress: (_) => const CustomProgressIndicator(),
+            loadInProgress: (_) => const SizedBox(),
             loadSuccess: (state) {
               return () {
                 List<Project> projects = state.projects.toList();

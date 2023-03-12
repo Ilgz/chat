@@ -92,6 +92,7 @@ class ProjectRepository implements IProjectRepository {
       final bTimeStamp=b.messages.isEmpty?b.date:b.messages.last.date;
       return  bTimeStamp.compareTo(aTimeStamp);});
     return newProjects;
+
   }
 
   Future<List<User>> getUsersFromReference(
