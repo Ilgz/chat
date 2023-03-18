@@ -24,4 +24,5 @@ class ChatWatcherCubit extends Cubit<ChatWatcherState> {
   (chats) => ChatWatcherState.loadSuccess(chats)));
   }
 
+
 }

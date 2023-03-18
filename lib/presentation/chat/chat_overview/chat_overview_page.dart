@@ -7,10 +7,12 @@ import 'package:chat/presentation/core/routes/router.dart';
 import 'package:chat/presentation/core/widgets/critical_failure_card.dart';
 import 'package:chat/presentation/core/widgets/custom_progress_indicator.dart';
 import 'package:chat/presentation/core/widgets/custom_scaffold.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localization/flutter_localization.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class ChatsOverviewPage extends StatelessWidget {
   const ChatsOverviewPage({Key? key}) : super(key: key);
@@ -18,6 +20,7 @@ class ChatsOverviewPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _registerAppLifecycleCallbacks(context);
+    setLastMessage(context);
     return CustomScaffold(
       hasBackButton: false,
       appBarTitle: Text(AppLocale.chat.getString(context)),
@@ -49,7 +52,28 @@ class ChatsOverviewPage extends StatelessWidget {
       ),
     );
   }
+  void setLastMessage(BuildContext context)async{
+    if(!kIsWeb){
+      final remoteMessage = await FirebaseMessaging.instance.getInitialMessage();
+      if(remoteMessage!=null){
+        print(remoteMessage.data.toString());
+        goToProfilePage(context);
+      }else{
+        print("problema");
+      }
+      FirebaseMessaging.onMessage.listen((_){
 
+      });
+      // FirebaseMessaging.onBackgroundMessage((message) async{
+      //   print("background");
+      // });
+      FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+        print("Ilgiz");
+        print(message.data);
+        //goToProfilePage(context);
+      });
+    }
+  }
   void _registerAppLifecycleCallbacks(BuildContext context) {
     SystemChannels.lifecycle.setMessageHandler((message) {
       if (message.toString().contains('resume')) {

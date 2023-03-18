@@ -14,9 +14,11 @@ import 'package:chat/injection.dart';
 import 'package:chat/presentation/core/constants.dart';
 import 'package:chat/presentation/core/routes/router.dart';
 import 'package:chat/presentation/core/theme.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class AppWidget extends StatelessWidget {
   const AppWidget({Key? key}) : super(key: key);
