@@ -43,7 +43,7 @@ class ChatFacade implements IChatFacade {
         ])
       });
       for (var member in project.members) {
-        await _sendNotification(member.fcmTokens, project.projectName.getOrCrash(),"${(await getIt<IAuthFacade>().getSignedInUser()).userName.getOrCrash()}: ${messageChat.messageContent.getOrCrash()}");
+        await _sendNotification(member.fcmTokens, project.projectName.getOrCrash(),"${(await getIt<IAuthFacade>().getSignedInUser()).userName.getOrCrash()}: ${messageChat.messageContent.getOrCrash()}","");
       }
       return right(unit);
     } on FirebaseException catch (e) {
@@ -167,7 +167,7 @@ class ChatFacade implements IChatFacade {
               .toJson()
         ])
       });
-      await _sendNotification(chat.chattingWith.fcmTokens, (await getIt<IAuthFacade>().getSignedInUser()).userName.getOrCrash(), messageChat.messageContent.getOrCrash());
+      await _sendNotification(chat.chattingWith.fcmTokens, (await getIt<IAuthFacade>().getSignedInUser()).userName.getOrCrash(), messageChat.messageContent.getOrCrash(),chat.documentReference.id);
 
       return right(unit);
     } on FirebaseException catch (e) {
@@ -178,13 +178,15 @@ class ChatFacade implements IChatFacade {
       }
     }
   }
-  Future<void> _sendNotification(List<String> fcmTokens,String title,String content)async{
+  Future<void> _sendNotification(List<String> fcmTokens,String title,String content,String id)async{
     for (var fcmToken in fcmTokens){
       Map<String,dynamic> body={"to":fcmToken,"priority":"high","mutable_content":true,"notification":{
       "badge":32,
       "title": title,
     "body": content
-    }};
+    },"data":{
+        "chat_id": id
+      }};
     Map<String, String> requestHeaders = {
     'Content-Type': 'application/json',
     'Authorization': 'Bearer ${AppConstants.fcmApiToken}',
