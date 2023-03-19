@@ -1,9 +1,12 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:chat/domain/chat/chat.dart';
 import 'package:chat/domain/chat/i_chat_facade.dart';
 import 'package:chat/domain/projects/i_project_repository.dart';
 import 'package:chat/domain/projects/project_failure.dart';
 import 'package:dartz/dartz.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
@@ -21,8 +24,10 @@ class ChatWatcherCubit extends Cubit<ChatWatcherState> {
   }
   void receiveChats (Either<FirebaseFirestoreFailure, List<Chat>> chats) {
   emit(chats.fold((f) => ChatWatcherState.loadFailure(f),
-  (chats) => ChatWatcherState.loadSuccess(chats)));
+  (chats) {
+    return ChatWatcherState.loadSuccess(chats);}));
   }
+
 
 
 }

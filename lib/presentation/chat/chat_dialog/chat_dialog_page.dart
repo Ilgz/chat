@@ -1,7 +1,9 @@
-import 'package:chat/application/chat/chat_form_bloc/chat_form_bloc.dart';
+import 'package:chat/application/chat/chat_actor_bloc/chat_actor_cubit.dart';
 import 'package:chat/application/chat/chat_watcher_bloc/chat_watcher_cubit.dart';
 import 'package:chat/application/projects/project_watcher/project_watcher_bloc.dart';
 import 'package:chat/domain/chat/chat.dart';
+import 'package:chat/domain/chat/message_chat.dart';
+import 'package:chat/domain/chat/value_objects.dart';
 import 'package:chat/domain/core/locale_switcher/app_locale.dart';
 import 'package:chat/domain/projects/project.dart';
 import 'package:chat/infrastructure/users/user_dto.dart';
@@ -24,18 +26,12 @@ class ChatDialogPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final _focus = FocusNode();
     final _controller = TextEditingController();
-    return BlocListener<ChatFormBloc, ChatFormState>(
+    return BlocListener<ChatActorCubit, ChatActorState>(
       listener: (context, state) {
-        state.sendMessageFailureSuccessOption.fold(() {}, (either) {
-          either.fold((failure) {
-            ScaffoldMessenger.of(context)
-                .showSnackBar(FailureSnackBar(failure: failure));
-          }, (_) {
-            // messageScrollController.animateTo(0,
-            //     duration: const Duration(milliseconds: 200),
-            //     curve: Curves.bounceInOut);
-          });
-        });
+        state.maybeMap(sendMessageFailure:(failure){
+          ScaffoldMessenger.of(context)
+              .showSnackBar(FailureSnackBar(failure: failure.chatFailure));
+        },orElse: (){});
       },
       child: CustomScaffold(
           titleSpacing: 0,
@@ -176,8 +172,7 @@ class ChatDialogPage extends StatelessWidget {
                                     chat.documentReference.path ==
                                     initialChat.documentReference.path,
                                 orElse: () => initialChat);
-                            context.read<ChatFormBloc>().add(
-                                ChatFormEvent.markDirectMessageAsHasRead(chat));
+                            context.read<ChatActorCubit>().markDirectMessageAsHasRead(chat);
                             final messages = chat.messages.reversed.toList();
                             if (messages.isNotEmpty) {
                               return ListView.separated(
@@ -246,11 +241,6 @@ class ChatDialogPage extends StatelessWidget {
                         child: TextField(
                           cursorColor: Theme.of(context).primaryColor,
                           focusNode: _focus,
-                          onChanged: (text) {
-                            context
-                                .read<ChatFormBloc>()
-                                .add(ChatFormEvent.messageContentChanged(text));
-                          },
                           onSubmitted: (text) {
                             _sendMessage(
                                 context, _controller, _focus, projectOrChat);
@@ -288,15 +278,15 @@ class ChatDialogPage extends StatelessWidget {
 
   void _sendMessage(BuildContext context, TextEditingController controller,
       FocusNode focusNode, Either<Project, Chat> projectOrChat) {
-    projectOrChat.fold(
-        (project) => context
-            .read<ChatFormBloc>()
-            .add(ChatFormEvent.sendProjectMessage(project)),
-        (chat) => context
-            .read<ChatFormBloc>()
-            .add(ChatFormEvent.sendDirectMessage(chat)));
+    if(controller.text.isNotEmpty){
+      projectOrChat.fold(
+              (project) => context
+              .read<ChatActorCubit>().sendProjectMessage(project,MessageChat.empty().copyWith(messageContent: MessageContent(controller.text))),
+              (chat) => context
+              .read<ChatActorCubit>().sendDirectMessage(chat,MessageChat.empty().copyWith(messageContent: MessageContent(controller.text))));
+      controller.clear();
+      focusNode.unfocus();
+    }
 
-    controller.clear();
-    focusNode.unfocus();
   }
 }
